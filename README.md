@@ -1,4 +1,5 @@
-ezeShaderSuite
+ezeShaderSuite 3delight
 ==============
 
-ezeShaderSuite 3delight
+Please Read: 
+
