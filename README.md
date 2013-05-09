@@ -4,7 +4,7 @@ ezeShaderSuite 3delight
 Please Read: 
 ---------------
 
-I want to help!
+Want to Contribute?
 ---------------
 Awesome! please do, get in contact with me for committing.
 
