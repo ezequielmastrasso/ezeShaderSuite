@@ -17,3 +17,18 @@ may only be distributed to others under the same freedoms granted to you herein,
 retain this notice and agreement, and the modifications noted. I also ask that you make
 such modifications available to me and to the online community as a whole through a public
 forum.
+
+changeLog
+---------------
+ezeSurface:
+  -energy conserving (diffuse, spec, refl and refr balance)
+  -diffuse models simplified, only 1 diffuse model (cook torrance)
+  *-specular models simplified, only 2 models (cook torrance and ward)
+  *-texture code calls improved and merged with ezeHair shader ones
+  *-reflections performance improvements
+  *-more opacity controls
+  *-refractions
+  *-
+ezeIndirect:
+  *-finished coding to have a full raytrace solution if ptc based workflow is unchecked
+  *-
