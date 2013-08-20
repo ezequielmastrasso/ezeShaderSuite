@@ -10,29 +10,20 @@ surface ezeSurface (
     #pragma annotation "grouping" "bakePassName;"
 
     string ptcFile= "<project>/3delight/<scene>/<scene>_sceneGeom.#.ptc";
-    string bakeSpace= "world";
+    string bakeSpace= "world"; 
     float radiusscale=1.77;
     #pragma annotation "grouping" "bake/ptcFile;"
     #pragma annotation "grouping" "bake/bakeSpace;"
     #pragma annotation "grouping" "bake/radiusscale;"
 
-    float diffuseModel=5;
-    //0 lcorenNayar
-    float lcorenNayarRoughness= .5;
-    //1 lcSeeliger
-    //2 lcDiffuseWrap
-    float lcDiffuseWrap= .5;
-    float lcDiffuseWrapGamma=1;
-    //3 lcDiffuseBias
-    float lcDiffuseBias= .5;
-    //4 anisophongdiff
-    float anisophongdiffKs=0;
-    //5 orenNayar2
-    float orenNayar2Sigma=.1;
+    
+   
 
+
+    float invertNormals=1;
     float Kd=1;
     float Kid=1;
-    float Ka=0;
+    
     color KdColor=1;
     string diffuse="";
     string diffuseFilter="gaussian";
@@ -45,13 +36,14 @@ surface ezeSurface (
     string diffuseVarName="2k";
     float diffuseUseAnimMap=0;
     string diffuseFileExt="tdl";
+    float conserveEnergy=1;
 
 
-    #pragma annotation diffuseModel "gadgettype=optionmenu:lcorenNayar:lcSeeliger:lcDiffuseWrap:lcDiffuseBias:anisophongdiff:orenNayar2;label=diffuseModel;"
-    #pragma annotation "grouping" "Diffuse/diffuseModel;"
+
     #pragma annotation "grouping" "Diffuse/Kd;"
     #pragma annotation "grouping" "Diffuse/Kid;"
-    #pragma annotation "grouping" "Diffuse/Ka;"
+    #pragma annotation "grouping" "Diffuse/conserveEnergy;"
+    #pragma annotation "grouping" "Diffuse/lcorenNayarRoughness;"
     #pragma annotation "grouping" "Diffuse/KdColor;"
     #pragma annotation "grouping" "Diffuse/maps/diffuse;"
     #pragma annotation diffuseFilter "gadgettype=optionmenu:gaussian:box:triangle:catmull-rom:;"
@@ -69,12 +61,7 @@ surface ezeSurface (
     #pragma annotation diffuseUseAnimMap "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "Diffuse/maps/udim/diffuseFileExt;"
     #pragma annotation diffuseFileExt "gadgettype=optionmenu:tdl:tif:;"
-    #pragma annotation "grouping" "Diffuse/lcorenNayar/lcorenNayarRoughness;"
-    #pragma annotation "grouping" "Diffuse/lcDiffuseWrap/lcDiffuseWrap;"
-    #pragma annotation "grouping" "Diffuse/lcDiffuseWrap/lcDiffuseWrapGamma;"
-    #pragma annotation "grouping" "Diffuse/lcDiffuseBias/lcDiffuseBias;"
-    #pragma annotation "grouping" "Diffuse/anisophongdiff/anisophongdiffKs;"
-    #pragma annotation "grouping" "Diffuse/orenNayar2/orenNayar2Sigma;"
+
 
 
     string bump=""; //bump textureMap
@@ -114,20 +101,20 @@ surface ezeSurface (
     float Ks=1;
     color KsColor=1;
 
-    float primarySpecularModel=6;
-    float primarySpecularRoughness=.2;
-    //6 lcSpecGlossy
-    float primaryLcSpecGlossySharpness=1;
-    //aschlick
-    float primaryAschlickIor=1.8;
-    float primaryAschlickIsotropy=.2;
-    float primaryAschlickDir=2;
-    float primaryAschlickRoughness=.2;
-    #pragma annotation primarySpecularModel "gadgettype=optionmenu:standard:Wardisotropy:LocIllumWardAnisotropic:schlickspec:aschlick:anisophongspec:lcSpecGlossy;label=specular;"
+    float primarySpecularModel=0;
+    float lcorenNayarRoughness= .5;
+    float IOR = 1.3;
+    float roughness = .2;
+    float gaussConstant = 100;
+
+    #pragma annotation primarySpecularModel "gadgettype=optionmenu:CookTorrance:Wardisotropy;label=specular;"
     #pragma annotation "grouping" "Specular/primarySpecularModel;"
     #pragma annotation "grouping" "Specular/Ks;"
     #pragma annotation "grouping" "Specular/KsColor;"
-    #pragma annotation "grouping" "Specular/primarySpecularRoughness;"
+    #pragma annotation "grouping" "Specular/roughness;"
+    #pragma annotation "grouping" "Specular/IOR;"
+    
+    #pragma annotation "grouping" "Specular/gaussConstant;"
     #pragma annotation "grouping" "Specular/maps/specular;"
     #pragma annotation specularFilter "gadgettype=optionmenu:gaussian:box:triangle:catmull-rom:;"
     #pragma annotation "grouping" "Specular/maps/specularFilter;"
@@ -143,11 +130,6 @@ surface ezeSurface (
     #pragma annotation specularUseAnimMap "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "Specular/maps/udim/specularFileExt;"
     #pragma annotation specularFileExt "gadgettype=optionmenu:tdl:tif:;"
-    #pragma annotation "grouping" "Specular/LcSpecGlossy/primaryLcSpecGlossySharpness;"
-    #pragma annotation "grouping" "Specular/Aschlick/primaryAschlickIor;"
-    #pragma annotation "grouping" "Specular/Aschlick/primaryAschlickIsotropy;"
-    #pragma annotation "grouping" "Specular/Aschlick/primaryAschlickDir;"
-    #pragma annotation "grouping" "Specular/Aschlick/primaryAschlickRoughness;"
 
 
 
@@ -275,6 +257,9 @@ surface ezeSurface (
     color reflectionColor = 1;
     string traceSet="";
 
+
+    float maxdist=20;
+
     float brdf_fresnel = 1;
     float brdf_0_degree_refl = 0.8;
     float brdf_90_degree_refl = 1;
@@ -316,11 +301,24 @@ surface ezeSurface (
 
 
 {
+  if (invertNormals==1){
+                N=-N;
+                }
+  
   normal Nn = normalize(N);
   vector LN;
-  normal Nf = faceforward(Nn, I);
+  //normal Nf = faceforward(Nn, I);
   vector V = normalize(-I);
   vector In=normalize (I);
+
+  vector Vn = normalize(-I);
+  float F;
+  float Ktransmit ;
+  float m = roughness;
+  fresnel( normalize(I), Nn, 1/IOR, F, Ktransmit);
+  float NdotV = Nn.Vn;
+
+
 
   uniform string raytype = "unknown";
   rayinfo( "type", raytype );
@@ -406,25 +404,21 @@ surface ezeSurface (
    vector basisy = normalize((basisz ^ dPdv) ^ basisz);
 
    o_outNormal = normal(xcomp(n) * basisx + ycomp(n) * basisy + zcomp(n) * basisz);
-   Nf = normalize(o_outNormal);
-   Nb_diff = Nf;
+   N = normalize(o_outNormal);
+   Nb_diff = N;
    o_outNb_diff = mix(normalize(Norig),o_outNormal,1);
    Nb_diff = normalize(o_outNb_diff);
 
 
   //set the angle to pass to illuminate according to the diffuseModel
-  float angle=PI/2;
-  float wrp;
 
-  if (diffuseModel==2){
-      //2 lcDiffuseWrap
-      wrp = 1-0.5*lcDiffuseWrap;
-      angle = acos(wrp*2-1);  //wrap angle
-  }
+
+
 
   color spec=0;
-  illuminance (P, Nb_diff,angle) {
-    color diffuse=0;
+  color diffuse=0;
+  illuminance( P, Nn, PI/2 ){
+    
     string category="";
     lightsource ( "__category", category );
     float nondiffuse = 0;
@@ -436,87 +430,21 @@ surface ezeSurface (
     //-------------------------------------------------------------------------------------------//
     //--------------------------------------DIFFUSE----------------------------------------------//
     //-------------------------------------------------------------------------------------------//
+        float sigma2 = lcorenNayarRoughness * lcorenNayarRoughness;
+        float A = 1 - 0.5 * sigma2 / (sigma2 + 0.33);
+        float B = 0.45 * sigma2 / (sigma2 + 0.09);
+        vector V = normalize(-I);
+        float theta_r = acos (V.Nn); //angle between V and N
+        vector V_perp_N = normalize(V-N*(V.Nn)); //part of V perpendicular to N
+        vector Ln = normalize(L);
+        float cos_theta_i = Ln.Nn;
+        float cos_phi_diff = V_perp_N . normalize(Ln - Nn * cos_theta_i);
+        float theta_i = acos (cos_theta_i);
+        float alpha = max(theta_i, theta_r);
+        float beta  = min(theta_i, theta_r);
 
-        if (diffuseModel==0){
-          //0 lcorenNayar
-
-            float sigma2 = lcorenNayarRoughness * lcorenNayarRoughness;
-            float A = 1 - 0.5 * sigma2 / (sigma2 + 0.33);
-            float B = 0.45 * sigma2 / (sigma2 + 0.09);
-            vector V = normalize(-I);
-            float theta_r = acos (V.Nn); //angle between V and N
-            vector V_perp_N = normalize(V-N*(V.Nn)); //part of V perpendicular to N
-            vector Ln = normalize(L);
-            float cos_theta_i = Ln.Nn;
-            float cos_phi_diff = V_perp_N . normalize(Ln - Nn * cos_theta_i);
-            float theta_i = acos (cos_theta_i);
-            float alpha = max(theta_i, theta_r);
-            float beta  = min(theta_i, theta_r);
-            diffuse += Cl * cos_theta_i * (A + B * max(0,cos_phi_diff) * sin(alpha) * tan(beta));
-        }
-        else if (diffuseModel==1){
-          //1 lcSeeliger
-          normal Nn = normalize(N);
-          vector Ln = normalize(L);
-          diffuse += Cl*max(0,(Nn.Ln)/((Nn.Ln)+(Nn.V)));
-        }
-        else if (diffuseModel==2){
-          //2 lcDiffuseWrap
-          vector Ln = normalize(L);
-          float dif = 0;
-          float dotp = 0.5*(1+Ln.Nn);
-          if(dotp<=wrp)
-          {
-            dif = pow((wrp-dotp)/(wrp), lcDiffuseWrapGamma);
-          }else{
-            dif = pow((dotp-wrp)/(1-wrp), lcDiffuseWrapGamma);
-          }
-          diffuse += Cl*dif;
-        }
-        else if (diffuseModel==3){
-          //3 lcDiffuseBias
-          vector Ln = normalize(L);
-          float cos_theta_i = Ln.Nn;
-          diffuse+= Cl*pow(lcDiffuseBias,-(log(cos_theta_i)/log(2)));
-        }
-        else if (diffuseModel==4){
-          //4 anisophongdiff
-          vector Vf = -In, Ln;
-          float ndotv = Nf.Vf, ndotl;
-          Ln = normalize(L);
-          ndotl = Nf.Ln;
-          diffuse += Cl  * (28 * Kd / (23*PI)) *
-                  (anisophongdiffKs) * (1-pow(1-ndotl/2,5)) * (1-pow(1-ndotv/2,5)) * ndotl;
-        }
-        else if (diffuseModel==5){
-          //5 orenNayar2
-          float theta_r, theta_i, cos_theta_i;
-          float alpha, beta, sigma2, cos_phi_diff;
-          color lightC = 0;
-          color L1, L2;
-          vector IN=normalize (I);
-          vector Eye = -IN;
-          theta_r = acos (Eye . Nf);
-          sigma2 = orenNayar2Sigma*orenNayar2Sigma;
-          float C1, C2, C3;
-          LN = normalize(L);
-          cos_theta_i = LN . Nf;
-          cos_phi_diff = normalize(Eye-Nf*(Eye.Nf)) . normalize(LN - Nf*(LN.Nf));
-          theta_i = acos (cos_theta_i);
-          alpha = max (theta_i, theta_r);
-          beta = min (theta_i, theta_r);
-          C1 = 1 - 0.5 * sigma2/(sigma2+0.33);
-          C2 = 0.45 * sigma2 / (sigma2 + 0.09);
-          if (cos_phi_diff >= 0)
-                  C2 *= sin(alpha);
-          else C2 *= (sin(alpha) - pow(2*beta/PI,3));
-          C3 = 0.125 * sigma2 / (sigma2+0.09) * pow ((4*alpha*beta)/(PI*PI),2);
-          L1 = Cs * (cos_theta_i * (C1 + cos_phi_diff * C2 * tan(beta) +
-                                    (1 - abs(cos_phi_diff)) * C3 * tan((alpha+beta)/2)));
-          L2 = (Cs * Cs) * (0.17 * cos_theta_i * sigma2/(sigma2+0.13) *
-                            (1 - cos_phi_diff*(4*beta*beta)/(PI*PI)));
-          diffuse += (L1 + L2) * Cl;
-        }
+        diffuse += Cl * cos_theta_i * (A + B * max(0,cos_phi_diff) * sin(alpha) * tan(beta));
+       
 
         if( raytype == "subsurface" ){
                     aov_diffuse += (diffuse = (1-nonsubsurface))*(1-nondiffuse);
@@ -535,7 +463,7 @@ surface ezeSurface (
     //-------------------------------------------------------------------------------------------//
 
     if(nonspecular < 1){
-
+        //COOK
         vector  up = (0,1,0), //Up in Y
                 newup,
                 right = (0,0,0);
@@ -544,7 +472,7 @@ surface ezeSurface (
         color   highlightcol = color (1,1,1);
         newup = vector rotate(point up, radians(specularMaskRot), point(0,0,1), point(0,0,0)); //Rotation code for spec highlight
         up = newup;
-        vector Ln = normalize(L); //light incidence vector
+        
         vector H = normalize (Ln + V); //Specular highlight vector
         right = reflect(up^H,Nn); //vector tangentially right from the surface
         up = reflect(H^right,Nn); //vector tangentially up from the surface
@@ -556,9 +484,22 @@ surface ezeSurface (
         lightsource("__nonspecularmask", nonspecularmask); //Turns the specular on/off
 
         if (primarySpecularModel==0){
+                vector H = normalize(Vn+Ln);
+                float NdotH = Nn.H;
+                float NdotL = Nn.Ln;
+                float VdotH = Vn.H;
+                alpha = acos(NdotH);
+                
+                //attenuation by microfacet self-shadowing
+                float G = min(1, (2*NdotH*NdotV/VdotH), (2*NdotH*NdotL/VdotH)); 
+                
+                //Probability microfacets are orientated towards F
+                float D = gaussConstant*exp(-(alpha*alpha)/(m*m));  
+                
+                spec += Cl*(F*D*G)/(PI*NdotV);
                 }
-        else if (primarySpecularModel==1){
-          //1 Wardisotropy
+        if (primarySpecularModel==1){
+            //1 Wardisotropy
           ////////////////////////////////////////////////////////////////////////////////
           // Variation on Greg Ward's isotropic specular /////////////////////////////////
           // Note that you can just pass identical values to x and y anisotropy, in the //
@@ -566,73 +507,19 @@ surface ezeSurface (
           // extra expense. //////////////////////////////////////////////////////////////
           ////////////////////////////////////////////////////////////////////////////////
           vector Vf = -In, Ln, Hn;
-          float ndotv = Nf.Vf, ndotl, ndoth, tandelta2;
-          float m2 = primarySpecularRoughness * primarySpecularRoughness;
+          float ndotv = N.Vf, ndotl, ndoth, tandelta2;
+          float m2 = roughness * roughness;
           Ln = normalize(L);
-          ndotl = Nf.Ln;
+          ndotl = N.Ln;
           Hn = normalize(Ln + Vf);
-          ndoth = Nf.Hn;
+          ndoth = N.Hn;
           tandelta2 = SQR( sqrt( max(0, 1 - SQR(ndoth))) / ndoth );
           spec+=Cl  * ndotl * ( exp(-tandelta2/m2) /(4 * m2 * sqrt( ndotl * ndotv )) );
 
-        }
-        else if (primarySpecularModel==2){
-            //2 LocIllumWardAnisotropic
 
         }
-        else if (primarySpecularModel==3){
-            //3 schlickspec
-            vector Vf = -In, Ln, Rn;
-            float Nr = 1 / (primarySpecularRoughness * primarySpecularRoughness);
-            float rdotv, coeff;
-            Ln = normalize(L);
-            Rn = normalize( reflect( -Ln, Nf));
-
-            rdotv = max( 0, Rn.Vf);
-            coeff = rdotv / (Nr - Nr * rdotv + rdotv);
-
-            spec += Cl * coeff * (Nf.Ln);
-
-                }
-        else if (primarySpecularModel==4){
-            //4 aschlick
-            normal Nn=normalize(N);
-            vector In=normalize (I);
-            normal Nf = faceforward( Nn, In );
-            vector Vf = -In, Ln, Hn;
-            vector dirVector=primaryAschlickDir;
-            vector xdir = normalize(Nf ^ dirVector);
-
-            float costheta = Vf.Nf, cospsi, cosbeta;
-            float G, A, Z, D;
-            color C = color(0);
-            Ln = normalize(L);
-            Hn = normalize(Vf + Ln);
-            cospsi = Ln.Nf;
-            cosbeta = Hn.xdir;
-            G = sgeoattenuation( costheta, primaryAschlickRoughness) *
-                sgeoattenuation( cospsi, primaryAschlickRoughness );
-            // anisotropy
-            A = angledependence( cosbeta, primaryAschlickIsotropy );
-            Z = zenithdependence( Nf.Hn, primaryAschlickRoughness );
-            D = Z * A * G / (4 * cospsi * costheta) * cospsi;
-            C += Cl * D;
-            float F = schlickfresnel( Nf, Vf, primaryAschlickIor );
-            spec+= clamp(F*C, color(0), color(1));
-        }
-        else if (primarySpecularModel==5){
-            //5 anisophongspec
-
-                }
-        else if (primarySpecularModel==6){
-            //6 lcSpecGlossy
-            float w = .18 * (1-primaryLcSpecGlossySharpness);
-            vector H = normalize(normalize(L)+V);
-            spec += Cl * smoothstep (.72-w, .72+w, pow(max(0,Nn.H), 1/primarySpecularRoughness));
-            //aov_specular += mix(spec, highlightcol*spec,1-nonspecularmask);
-                        }
         if (useSpecularMask){
-        aov_specular+= mix(spec, highlightcol*spec,1-nonspecularmask)*(1-nonspecular);
+          aov_specular+= mix(spec, highlightcol*spec,1-nonspecularmask)*(1-nonspecular);
         }
         else{
           aov_specular+=spec;
@@ -641,7 +528,7 @@ surface ezeSurface (
 
 
   }
-
+  spec = spec/PI;
 
 
     //-------------------------------------------------------------------------------------------//
@@ -652,8 +539,9 @@ surface ezeSurface (
 
 aov_surfaceColor=diffuseColor;
 aov_specular=aov_specular*Ks*KsColor*specularColor;
+
 aov_diffuse=aov_diffuse*Kd;
-aov_ambient=Ka;
+
 //DONT SSS or anything IF SUBSURFACE PASS or not final pass
 if( raytype == "subsurface" || passName==bakePassName)
   {
@@ -707,10 +595,12 @@ else {
     color Cr = 0;
     color Chit = 0;
 
-    vector R = normalize(reflect(I,Nf));
+    vector R = normalize(reflect(I,N));
     float hits = 0;
+    float _transm=1;
+    color white=1;
     if (Kr>0){
-    gather("illuminance", P, R, radians(cone_angle),samples,"surface:Ci",Chit)
+    gather("illuminance", P, R, radians(cone_angle),samples,"surface:Ci",Chit,"maxdist", maxdist)
     {
         Cr+=Chit;
     }
@@ -724,7 +614,7 @@ else {
               // Automatic mode.
               float eta = (In . Nn < 0.0) ? 1.0 / refraction_ior : refraction_ior;
               float kr, kt;
-              fresnel( In, Nf, eta, kr, kt);
+              fresnel( In, N, eta, kr, kt);
               Cr *= kr;
             }
             else
@@ -734,21 +624,25 @@ else {
               mix(
                       brdf_0_degree_refl,
                       brdf_90_degree_refl,
-                      pow(1-abs(V . Nf), brdf_curve));
+                      pow(1-abs(V . N), brdf_curve));
             }
 
     Cr*=Kr;
     aov_subsurface=sssColor;
     aov_indirect=aov_indirect*Kid;
-    color tmp=aov_ambient+aov_indirect;
-    //Ci=mix(aov_hair_diffuse,aov_hair_ambient,aov_hair_ambient);
 
-    Ci=aov_diffuse+tmp;
-    Ci=mix(Ci,aov_subsurface,clamp(aov_subsurface,0,1));
     Oi=Oi*OiColor;
-    Ci=Ci*Oi;
-    Ci=mix(Ci*aov_surfaceColor, aov_specular, clamp(aov_specular,0,1));
-    Ci=Ci+Cr;
+    
+
+    if (conserveEnergy==1){
+        diffuse *= 1.0 - min(Ks*KsColor*specularColor*spec, 1.0);
+        diffuse *= 1.0 - min(Cr, 1.0);
+        diffuse *= 1.0 - min(aov_subsurface, 1.0);
+        //diffuse *= 1.0 - min(Oi, 1.0);
+    }
+    Ci=(Kd*diffuseColor*diffuse*Oi) + aov_indirect + (Ks*KsColor*specularColor*spec) + Cr +aov_subsurface; 
+    
+    
 }
 
 }
