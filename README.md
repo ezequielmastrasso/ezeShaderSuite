@@ -4,6 +4,8 @@ ezeShaderSuite 3delight
 Please Read: 
 ---------------
 
+##Check the Develop Branch for the latests tested commits!
+
 Want to Contribute?
 ---------------
 Awesome! please do, get in contact with me for committing.
