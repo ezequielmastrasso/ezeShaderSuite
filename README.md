@@ -22,16 +22,24 @@ changeLog
 ---------------
 ### v1.XXX
 #### ezeSurface:<br />
-  -energy conserving (diffuse, spec, refl and refr balance)<br />
+  -energy conserving (diffuse, sss, spec, refl and refr balance)<br />
   -diffuse models simplified, only 1 diffuse model (cook torrance)<br />
   *-specular models simplified, only 2 models (cook torrance and ward)<br />
   *-texture code calls improved and merged with ezeHair shader ones<br />
   *-reflections performance improvements<br />
   *-more opacity controls<br />
   *-refractions<br />
-  *-<br />
+  *-ward anisotropy<br />
+  *-specular reflections based on BRDF<br />
+  *-reflection and refraccion end color<br />
+  *-reflection and refraccion end color use environment map<br />
+  **-back light<br />
+  *-
+  **-diffuse/spec/reflection balance mode option<br />
+  **-indirect spots to control indirect diffuse effects<br />
+  
 #### ezeIndirect:<br />
-  *-finished coding to have a full raytrace solution if ptc based workflow is unchecked<br />
-  *-<br />
+  *-full raytrace solution if ptc based workflow is unchecked added<br />
+  
 
 ### v1.21 
