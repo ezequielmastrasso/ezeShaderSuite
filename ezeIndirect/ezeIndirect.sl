@@ -8,7 +8,7 @@
 #pragma annotation envMap "gadgettype=inputfile;label=Environment File;hint=Use a .tdl environment map made from tdlmake. It will be used if ray doesn't hit a surface.;"
 #pragma annotation falloffmode "gadgettype=intslider;min=0;max=1;label=Falloff Mode;hint=0 is exponential. 1 is polynomial."
 #pragma annotation falloff "gadgettype=floatslider;min=0;max=10;label=Falloff Exponent;hint=Specifies the rate at which the falloff will take place. Higher exponents will lead to more contrasty effects.;"
-#pragma annotation hitsides "gadgettype=optionmenu:front:back:both;label=Hitsides;hint=Specifies which side(s) of the point cloud’s samples will produce the effect.;"
+#pragma annotation hitsides "gadgettype=optionmenu:front:back:both;label=Hitsides;hint=Specifies which side(s) of the point cloudâ€™s samples will produce the effect.;"
 #pragma annotation clamp "gadgettype=checkbox;label=Clamp;hint=If set to 1, attempts to reduce the excessive occlusion caused by the point-based algorithm, at the cost of speed.;"
 #pragma annotation sortbleeding "gadgettype=checkbox;label=Sort Bleeding;hint=If set to 1 and clamp is also set to 1, this forces the color bleeding computations to take the ordering of surfaces into account. It is recommanded to set this parameter to 1.;"
 #pragma annotation envMapSpace "gadgettype=textfield;label=Env Coordinate System;hint=The coordinate system used by the environment map.;"
@@ -16,13 +16,14 @@
 #pragma annotation sceneGeomPTC "gadgettype=inputfile;label=Scene Radiosity PTC;hint=Specifies the name of a point cloud file to be used to compute the occlusion and color bleeding.;"
 #pragma annotation SceneIndirectPTC "gadgettype=inputfile;label=Scene Indirect PTC;hint=Input point cloud used for computing final result. You could choose a brickmap you created out of final point cloud file for reusing.;"
 #pragma annotation aoMaxSolidAngle "gadgettype=floatslider;min=0;max=1;label=Max Solid Angle;hint=Larger values gives faster results, smaller values gives more accurate result.;"
+  
 
 
 light ezeIndirect(
     #pragma annotation bakeWorkflow "gadgettype=checkbox;label=bakeWorkflow;"
     #pragma annotation "grouping" "baked/bakeWorkflow;"
     #pragma annotation "grouping" "baked/bakeIndirectPass;"
-#pragma annotation "grouping" "baked/bakeIndirectPassName;"
+    #pragma annotation "grouping" "baked/bakeIndirectPassName;"
     float bakeWorkflow=1;
     string bakeIndirectPassName="bakeIndirectPass";
 
@@ -52,18 +53,21 @@ light ezeIndirect(
     #pragma annotation "grouping" "ptc/sceneGeomPTC;"
     #pragma annotation "grouping" "ptc/SceneIndirectPTC;"
     #pragma annotation "grouping" "ptc/filterScale;"
-#pragma annotation "grouping" "ptc/sceneGeomPTC_Space;"
+    #pragma annotation "grouping" "ptc/sceneGeomPTC_Space;"
 
     float samples=128;
+    float samplebase=1;
     float coneAngle=.9;
     float bias = 0;
     float maxdist= 20;
+    float maxError=.1;
 
     float falloffmode = 1;
     float falloff = 2;
     string hitsides = "front";
     float clamp = 1;
     float sortbleeding = 1;
+    float useOcclusion=1;
 
     string sceneGeomPTC= "<project>/3delight/<scene>/ptc/<scene>_geometry.#.ptc"; string sceneGeomPTC_Space= "world";
     float aoMaxSolidAngle= .1;
@@ -93,45 +97,59 @@ light ezeIndirect(
     normal Nshad = normalize(Ns);
     string passName = "";
     option ("user:delight_renderpass_name",passName);
-
+    color bla=1;
+    
 
     uniform string raytype = "unknown";
     rayinfo( "type", raytype );
     illuminate( Ps + Nshad )
     {
-    if( raytype != "subsurface" ){
-      if(passName == bakeIndirectPassName || bakeWorkflow==0)
-          {
-          //if useIndirectSpots
-          //getLight wrapValue else diffuseWrap to 90`
-          //ilumminante(){
-          //    diffuse calls with Wrap!!!
-          //}
-          Cl= indirectdiffuse( Pshad, Nshad, samples, "samplebase", 64,"coneangle", coneAngle*PI/2, "coordsystem",
-          sceneGeomPTC_Space, "filename", sceneGeomPTC, "pointbased", 1, "maxsolidangle", aoMaxSolidAngle,
-              "clamp", clamp, "hitsides", hitsides, "falloffmode", falloffmode,
-              "falloff", falloff, "environmentspace", envMapSpace, "sortbleeding", sortbleeding, "maxdist", maxdist,"bias", bias );
+        //if bakeWorkflow and in bakeIndirect Pass
+        //  raytrace and bake to file
+        //else if akeWorkflow==1 and passname not bakeIndirectPassName
+        //  ptc raytrace
+        //else
+        //  full raytrace
+        if( raytype != "subsurface" ){
+            if (bakeWorkflow==1 && passName == bakeIndirectPassName){
+                Cl= indirectdiffuse( Pshad, Nshad, samples, "samplebase", 64,"coneangle", coneAngle*PI/2, "coordsystem",
+                    sceneGeomPTC_Space, "filename", sceneGeomPTC, "pointbased", 1, "maxsolidangle", aoMaxSolidAngle,
+                    "clamp", clamp, "hitsides", hitsides, "falloffmode", falloffmode,
+                    "falloff", falloff, "environmentspace", envMapSpace, "sortbleeding", sortbleeding, "maxdist", maxdist,"bias", bias );
+                bake3d(SceneIndirectPTC, "", Pshad, Nshad, "_radiosity", Cl, "interpolate", 1,
+                    "coordsystem", sceneGeomPTC_Space);
+                Cl *= intensity;
+            }
+            else if(bakeWorkflow==1 && passName != bakeIndirectPassName){
+                color result=0;
+                point Pshad= Ps;
+                normal Nshad = normalize(Ns);
+                texture3d( SceneIndirectPTC, Pshad, Nshad, "_radiosity", result,
+                    "coordsystem",  sceneGeomPTC_Space, "filterscale", filterScale);
+                Cl = result*intensity;
+            }
+            else{
+                float occlusion=0;
+                Cl= indirectdiffuse( Pshad, Nshad, samples, "samplebase", samplebase,"coneangle", coneAngle*PI/2,  
+                    "falloffmode", falloffmode, "occlusion", occlusion,
+                    "falloff", falloff, "maxdist", maxdist,"bias", bias );
+                if (useOcclusion==1){
+                    Cl=Cl*(1-occlusion);  
+                }
 
-          bake3d(SceneIndirectPTC, "", Pshad, Nshad, "_radiosity", Cl, "interpolate", 1,
-            "coordsystem", sceneGeomPTC_Space);
-          Cl *= intensity;
-
-          }
-      else
-          {
-          color result=0;
-          point Pshad= Ps;
-          normal Nshad = normalize(Ns);
-          texture3d( SceneIndirectPTC, Pshad, Nshad, "_radiosity", result,"coordsystem",  sceneGeomPTC_Space, "filterscale", filterScale);
-          Cl = result*intensity;
+                Cl *= intensity;
+            }
           
-          }
+
+        }
+
     }
-    }
-    color tmp=ctransform("rgb","hsv",Cl);
-    tmp=tmp*(1, saturation, 1);
-    tmp=ctransform("hsv","rgb",tmp);
-    Cl=tmp;
+    //saturation multiply
+
+    Cl=ctransform( "hsv",
+                    "rgb",
+                    ctransform("rgb", "hsv",Cl)       *(1, saturation, 1)
+                );
     outputchannel( "aov_indirect", Cl );
 
 }
