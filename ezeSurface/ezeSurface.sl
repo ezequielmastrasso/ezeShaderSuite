@@ -1,6 +1,32 @@
 #include <../ezeInclude/ezeCommon.sl>
 
-//TODO: developing stopped, Rewriting needed, needs to be simplified, Arnold insipired.
+    /*
+    TODO:
+
+
+    params to add:
+    --------------
+    fresnel affects diffuse
+    backlight
+    specular ward anisotropy parameter
+    diffuse bump only check box
+
+
+    features to add:
+    --------------
+    sssCutOut (black and white map)
+    sssThreshold
+      ---if (sssMap>sssThreshold && sssCutOut>.5)
+    indirect specular
+    internal reflection
+    reflection depth
+    reflection exit color or reflection environment map
+    normal mapping
+    emission
+    bounce factor
+
+
+    */
 
 
 surface ezeSurface (
@@ -15,10 +41,6 @@ surface ezeSurface (
     #pragma annotation "grouping" "bake/ptcFile;"
     #pragma annotation "grouping" "bake/bakeSpace;"
     #pragma annotation "grouping" "bake/radiusscale;"
-
-    
-   
-
 
     float invertNormals=1;
     float Kd=1;
@@ -257,7 +279,6 @@ surface ezeSurface (
     color reflectionColor = 1;
     string traceSet="";
 
-
     float maxdist=20;
 
     float brdf_fresnel = 1;
@@ -265,6 +286,7 @@ surface ezeSurface (
     float brdf_90_degree_refl = 1;
     float brdf_curve = 2;
     float refraction_ior = 1.3;
+
 
     #pragma annotation "grouping" "reflection/Kr;"
     #pragma annotation "grouping" "reflection/samples;"
@@ -357,26 +379,25 @@ surface ezeSurface (
   //-------------------------------------------------------------------------------------------//
   //----------------------------------------BUMP-----------------------------------------------//
   //-------------------------------------------------------------------------------------------//
-  //TODO: add diffuse bump only check box
 
-   normal Nb_diff;
+  normal Nb_diff;
 
-   normal Norig = faceforward(normalize(N),I);
-   extern vector dPdu, dPdv;
-   normal o_outNormal;
-   normal o_outNb_diff;
-   normal o_outNb_spec;
-   //float bumpValue = texture ( bump, "filter", "gaussian"  );
-   float bumpValue=0;
+  normal Norig = faceforward(normalize(N),I);
+  extern vector dPdu, dPdv;
+  normal o_outNormal;
+  normal o_outNb_diff;
+  normal o_outNb_spec;
+  //float bumpValue = texture ( bump, "filter", "gaussian"  );
+  float bumpValue=0;
 
-   //SPECULAR COLOR
-   if (bumpUseUdim==0){
+  //SPECULAR COLOR
+  if (bumpUseUdim==0){
      //if texture specified, use it
      if( specular != "" ){
        bumpValue=texture( bump, s, t, "filter", bumpFilter);
      }
    }
-   else{
+  else{
      if( bumpTexName != "" ){
          bumpValue=textureFloatUDim(bumpUseUdim,
              bumpMaxU,
@@ -389,6 +410,7 @@ surface ezeSurface (
              bumpFilter);
      }
    }
+
 
    float depth = abs(bumpDepth);
    float offset = clamp(bumpValue * bumpDepth, -depth, depth);
@@ -410,13 +432,11 @@ surface ezeSurface (
    Nb_diff = normalize(o_outNb_diff);
 
 
-  //set the angle to pass to illuminate according to the diffuseModel
-
-
-
-
+  
   color spec=0;
   color diffuse=0;
+
+
   illuminance( P, Nn, PI/2 ){
     
     string category="";
@@ -427,6 +447,8 @@ surface ezeSurface (
     lightsource("__nonspecular",nonspecular);
     float nonsubsurface = 0;
     lightsource("__nonsubsurface",nonsubsurface);
+
+
     //-------------------------------------------------------------------------------------------//
     //--------------------------------------DIFFUSE----------------------------------------------//
     //-------------------------------------------------------------------------------------------//
@@ -442,8 +464,9 @@ surface ezeSurface (
         float theta_i = acos (cos_theta_i);
         float alpha = max(theta_i, theta_r);
         float beta  = min(theta_i, theta_r);
-
+        //-------------------------------------------------------------------------------------//
         diffuse += Cl * cos_theta_i * (A + B * max(0,cos_phi_diff) * sin(alpha) * tan(beta));
+        //-------------------------------------------------------------------------------------//
        
 
         if( raytype == "subsurface" ){
@@ -514,7 +537,10 @@ surface ezeSurface (
           Hn = normalize(Ln + Vf);
           ndoth = N.Hn;
           tandelta2 = SQR( sqrt( max(0, 1 - SQR(ndoth))) / ndoth );
+
+          //-------------------------------------------------------------------------------------//
           spec+=Cl  * ndotl * ( exp(-tandelta2/m2) /(4 * m2 * sqrt( ndotl * ndotv )) );
+          //-------------------------------------------------------------------------------------//
 
 
         }
@@ -537,13 +563,13 @@ surface ezeSurface (
 
 
 
-aov_surfaceColor=diffuseColor;
-aov_specular=aov_specular*Ks*KsColor*specularColor;
+  aov_surfaceColor=diffuseColor;
+  aov_specular=aov_specular*Ks*KsColor*specularColor;
 
-aov_diffuse=aov_diffuse*Kd;
+  aov_diffuse=aov_diffuse*Kd;
 
-//DONT SSS or anything IF SUBSURFACE PASS or not final pass
-if( raytype == "subsurface" || passName==bakePassName)
+  //DONT SSS or anything IF SUBSURFACE PASS or not final pass
+  if( raytype == "subsurface" || passName==bakePassName)
   {
     Ci=aov_diffuse;
     Ci=Ci*aov_surfaceColor;
@@ -599,14 +625,16 @@ else {
     float hits = 0;
     float _transm=1;
     color white=1;
-    if (Kr>0){
-    gather("illuminance", P, R, radians(cone_angle),samples,"surface:Ci",Chit,"maxdist", maxdist)
-    {
-        Cr+=Chit;
-    }
-    Cr /= samples > 0 ? samples : 1;
 
-    Cr*=reflectionColor;
+    if (Kr>0){
+      gather("illuminance", P, R, radians(cone_angle),samples,"surface:Ci",Chit,"maxdist", maxdist){
+          Cr+=Chit;
+      }
+      Cr /= samples > 0 ? samples : 1;
+
+      //-------------------------------------------------------------------------------------//
+      Cr*=reflectionColor;
+      //-------------------------------------------------------------------------------------//
     }
 
     if (brdf_fresnel == 1)
@@ -638,9 +666,13 @@ else {
         diffuse *= 1.0 - min(Ks*KsColor*specularColor*spec, 1.0);
         diffuse *= 1.0 - min(Cr, 1.0);
         diffuse *= 1.0 - min(aov_subsurface, 1.0);
+        //add Oi to energy conserving
         //diffuse *= 1.0 - min(Oi, 1.0);
     }
+
+    //-------------------------------------------------------------------------------------//
     Ci=(Kd*diffuseColor*diffuse*Oi) + aov_indirect + (Ks*KsColor*specularColor*spec) + Cr +aov_subsurface; 
+    //-------------------------------------------------------------------------------------//
     
     
 }
