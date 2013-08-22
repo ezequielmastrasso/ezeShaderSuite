@@ -16,47 +16,50 @@
 #pragma annotation sceneGeomPTC "gadgettype=inputfile;label=Scene Radiosity PTC;hint=Specifies the name of a point cloud file to be used to compute the occlusion and color bleeding.;"
 #pragma annotation SceneIndirectPTC "gadgettype=inputfile;label=Scene Indirect PTC;hint=Input point cloud used for computing final result. You could choose a brickmap you created out of final point cloud file for reusing.;"
 #pragma annotation aoMaxSolidAngle "gadgettype=floatslider;min=0;max=1;label=Max Solid Angle;hint=Larger values gives faster results, smaller values gives more accurate result.;"
-  
+
 
 
 light ezeIndirect(
     #pragma annotation bakeWorkflow "gadgettype=checkbox;label=bakeWorkflow;"
-    #pragma annotation "grouping" "baked/bakeWorkflow;"
-    #pragma annotation "grouping" "baked/bakeIndirectPass;"
-    #pragma annotation "grouping" "baked/bakeIndirectPassName;"
-    float bakeWorkflow=1;
-    string bakeIndirectPassName="bakeIndirectPass";
+    #pragma annotation "grouping" "bakeWorkflow;"
+    float bakeWorkflow=0;
 
-    #pragma annotation "grouping" "main/intensity;"
-    #pragma annotation "grouping" "main/saturation;"
-    #pragma annotation "grouping" "main/__category;"
-    #pragma annotation "grouping" "main/envMap;"
-    #pragma annotation "grouping" "main/envMapSpace;"
+    #pragma annotation "grouping" "intensity;"
+    #pragma annotation "grouping" "saturation;"
+    #pragma annotation "grouping" "__category;"
+    #pragma annotation "grouping" "envMap;"
+    #pragma annotation "grouping" "envMapSpace;"
     float intensity= 1;
     float saturation=1;
+    string __category = "envLight";
     string envMapSpace= "world";
 
-    #pragma annotation "grouping" "quality/samples;"
-    #pragma annotation "grouping" "quality/coneAngle;"
-    #pragma annotation "grouping" "quality/bias;"
-    #pragma annotation "grouping" "quality/maxdist;"
-    #pragma annotation "grouping" "quality/falloffmode;"
-    #pragma annotation "grouping" "quality/falloff;"
-    #pragma annotation "grouping" "quality/hitsides;"
-    #pragma annotation "grouping" "quality/clamp;"
-    #pragma annotation "grouping" "quality/sortbleeding;"
-    #pragma annotation "grouping" "quality/aoMaxSolidAngle;"
+    #pragma annotation "grouping" "ptcBased/bakeIndirectPassName;"
+    
+    string bakeIndirectPassName="bakeIndirectPass";
+    
 
-    #pragma annotation "grouping" "quality/bakeIndirectPass;"
-    #pragma annotation "grouping" "quality/bakeIndirectPass;"
+    #pragma annotation "grouping" "samples;"
+    #pragma annotation "grouping" "samplebase;"
+    #pragma annotation "grouping" "coneAngle;"
+    #pragma annotation "grouping" "bias;"
+    #pragma annotation "grouping" "maxdist;"
+    #pragma annotation "grouping" "falloffmode;"
+    #pragma annotation "grouping" "falloff;"
+    #pragma annotation "grouping" "hitsides;"
 
-    #pragma annotation "grouping" "ptc/sceneGeomPTC;"
-    #pragma annotation "grouping" "ptc/SceneIndirectPTC;"
-    #pragma annotation "grouping" "ptc/filterScale;"
-    #pragma annotation "grouping" "ptc/sceneGeomPTC_Space;"
+    #pragma annotation "grouping" "ptcBased/clamp;"
+    #pragma annotation "grouping" "ptcBased/sortbleeding;"
+    #pragma annotation "grouping" "ptcBased/aoMaxSolidAngle;"
+
+
+    #pragma annotation "grouping" "ptcBased/sceneGeomPTC;"
+    #pragma annotation "grouping" "ptcBased/SceneIndirectPTC;"
+    #pragma annotation "grouping" "ptcBased/filterScale;"
+    #pragma annotation "grouping" "ptcBased/sceneGeomPTC_Space;"
 
     float samples=128;
-    float samplebase=1;
+    float samplebase=32;
     float coneAngle=.9;
     float bias = 0;
     float maxdist= 20;
@@ -77,14 +80,17 @@ light ezeIndirect(
     #pragma annotation useIndirectSpots "gadgettype=checkbox;label=useIndirectSpots;"
     #pragma annotation "grouping" "indirectSpots_notImplementedYet/useIndirectSpots;"
     #pragma annotation "grouping" "indirectSpots_notImplementedYet/indirectSpotsCategory;"
+
     float useIndirectSpots=0;
     string indirectSpotsCategory="indirectSpots";
-    string __category = "envLight";
+    
+
     #pragma annotation __nonspecular "hide=true;"
     #pragma annotation __nondiffuse "hide=true;"
     #pragma annotation __nonscatter "hide=true;"
     #pragma annotation __nonsubsurface "hide=true;"
     #pragma annotation __nontranslucence "hide=true;"
+
     uniform float  __nonspecular = 1;
     uniform float  __nondiffuse = 0;
     uniform float  __nonscatter = 1;
