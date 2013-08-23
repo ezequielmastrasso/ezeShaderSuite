@@ -1,0 +1,681 @@
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.8.23)  24 APR 2013 00:40
+entering extended mode
+**ezeShaderSuiteDocs.tex
+(D:\devStructure\rsl\src\3delight\ezeDocumentation\ezeShaderSuiteDocs.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2009-06-19, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, lao, latin, lat
+vian, lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerm
+an, ngerman-x-2009-06-19, nynorsk, oriya, panjabi, pinyin, polish, portuguese, 
+romanian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swis
+sgerman, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, u
+senglishmax, welsh, loaded.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\report.cls"
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size12.clo"
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count88
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(D:\devStructure\rsl\src\3delight\ezeDocumentation\ezeShaderSuiteDocs.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count89
+\scratchdimen=\dimen105
+\scratchbox=\box26
+\nofMPsegments=\count90
+\nofMParguments=\count91
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count92
+\MPscratchDim=\dimen106
+\MPnumerator=\count93
+\makeMPintoPDFobject=\count94
+\everyMPtoPDFconversion=\toks16
+) <shadersDocumentationImages/ezeCover.jpg, id=1, 1505.625pt x 1907.125pt>
+File: shadersDocumentationImages/ezeCover.jpg Graphic file (type jpg)
+
+<use shadersDocumentationImages/ezeCover.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeCover.jpg used on input 
+line 13.
+(pdftex.def)             Requested size: 632.3582pt x 800.98705pt.
+ [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <D:/devStructure/rsl/src/3
+delight/ezeDocumentation/shadersDocumentationImages/ezeCover.jpg>]
+(D:\devStructure\rsl\src\3delight\ezeDocumentation\ezeShaderSuiteDocs.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 2.
+
+[2
+
+] [3])
+\tf@toc=\write3
+ [4]
+ 1.
+
+<shadersDocumentationImages/chinchilla_02.jpg, id=17, 1611.01875pt x 1177.39874
+pt>
+File: shadersDocumentationImages/chinchilla_02.jpg Graphic file (type jpg)
+ <use shadersDocumentationImages/chinchilla_02.jpg>
+Package pdftex.def Info: shadersDocumentationImages/chinchilla_02.jpg used on i
+nput line 23.
+(pdftex.def)             Requested size: 434.98088pt x 317.9019pt.
+ [5
+
+ <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationImages/
+chinchilla_02.jpg>]
+<shadersDocumentationImages/ezeWhatsAbout.jpg, id=21, 1505.625pt x 973.6375pt>
+File: shadersDocumentationImages/ezeWhatsAbout.jpg Graphic file (type jpg)
+
+<use shadersDocumentationImages/ezeWhatsAbout.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeWhatsAbout.jpg used on i
+nput line 34.
+(pdftex.def)             Requested size: 436.62007pt x 282.34764pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 47--53
+
+ []
+
+[6 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationImage
+s/ezeWhatsAbout.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 55--58
+
+ []
+
+[7]
+ 2.
+
+<shadersDocumentationImages/ezeHairParams.jpg, id=29, 1388.18625pt x 982.67125p
+t>
+File: shadersDocumentationImages/ezeHairParams.jpg Graphic file (type jpg)
+ <use shadersDocumentationImages/ezeHairParams.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeHairParams.jpg used on i
+nput line 64.
+(pdftex.def)             Requested size: 444.22868pt x 314.46123pt.
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ú in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ù in font cmr12!
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8
+
+ <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationImages/
+ezeHairParams.jpg>]
+<shadersDocumentationImages/ezeHairDiffuse.jpg, id=33, 1053.9375pt x 709.65125p
+t>
+File: shadersDocumentationImages/ezeHairDiffuse.jpg Graphic file (type jpg)
+ <use shadersDocumentationImages/ezeHairDiffuse.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeHairDiffuse.jpg used on 
+input line 89.
+(pdftex.def)             Requested size: 442.65074pt x 298.05148pt.
+ [9 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationImag
+es/ezeHairDiffuse.jpg>]
+<shadersDocumentationImages/ezeHairDarkening.jpg, id=37, 756.8275pt x 580.1675p
+t>
+File: shadersDocumentationImages/ezeHairDarkening.jpg Graphic file (type jpg)
+ <use shadersDocumentationImages/ezeHairDarkening.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeHairDarkening.jpg used o
+n input line 115.
+(pdftex.def)             Requested size: 401.11667pt x 307.48729pt.
+ [10]
+<shadersDocumentationImages/ezeHairAmbientMaps.jpg, id=41, 815.045pt x 469.755p
+t>
+File: shadersDocumentationImages/ezeHairAmbientMaps.jpg Graphic file (type jpg)
+
+ <use shadersDocumentationImages/ezeHairAmbientMaps.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeHairAmbientMaps.jpg used
+ on input line 131.
+(pdftex.def)             Requested size: 407.5215pt x 234.87692pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationIma
+ges/ezeHairDarkening.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 144--146
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--150
+
+ []
+
+
+<shadersDocumentationImages/ezeHairUseAmbientMapEnv.jpg, id=45, 301.125pt x 243
+.91125pt>
+File: shadersDocumentationImages/ezeHairUseAmbientMapEnv.jpg Graphic file (type
+ jpg)
+ <use shadersDocumentationImages/ezeHairUseAmbientMapEnv.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeHairUseAmbientMapEnv.jpg
+ used on input line 153.
+(pdftex.def)             Requested size: 150.56212pt x 121.95532pt.
+ [12 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationIma
+ges/ezeHairAmbientMaps.jpg>]
+<shadersDocumentationImages/ezeHairScatter.jpg, id=49, 1425.325pt x 483.8075pt>
+File: shadersDocumentationImages/ezeHairScatter.jpg Graphic file (type jpg)
+<use shadersDocumentationImages/ezeHairScatter.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeHairScatter.jpg used on 
+input line 163.
+(pdftex.def)             Requested size: 456.11333pt x 154.82156pt.
+ [13 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationIma
+ges/ezeHairUseAmbientMapEnv.jpg> <D:/devStructure/rsl/src/3delight/ezeDocumenta
+tion/shadersDocumentationImages/ezeHairScatter.jpg>]
+<shadersDocumentationImages/ezeHairSpecularWet.jpg, id=54, 1324.95pt x 1011.78p
+t>
+File: shadersDocumentationImages/ezeHairSpecularWet.jpg Graphic file (type jpg)
+
+ <use shadersDocumentationImages/ezeHairSpecularWet.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeHairSpecularWet.jpg used
+ on input line 180.
+(pdftex.def)             Requested size: 397.48807pt x 303.53633pt.
+ [14 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationIma
+ges/ezeHairSpecularWet.jpg>]
+<shadersDocumentationImages/ezeHairAlpha.jpg, id=58, 641.39626pt x 319.1925pt>
+File: shadersDocumentationImages/ezeHairAlpha.jpg Graphic file (type jpg)
+
+<use shadersDocumentationImages/ezeHairAlpha.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeHairAlpha.jpg used on in
+put line 215.
+(pdftex.def)             Requested size: 404.08177pt x 201.09233pt.
+ [15]
+<shadersDocumentationImages/ezeHairTranslucence.jpg, id=62, 1088.065pt x 835.12
+pt>
+File: shadersDocumentationImages/ezeHairTranslucence.jpg Graphic file (type jpg
+)
+ <use shadersDocumentationImages/ezeHairTranslucence.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeHairTranslucence.jpg use
+d on input line 226.
+(pdftex.def)             Requested size: 359.06256pt x 275.59044pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [16 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationIma
+ges/ezeHairAlpha.jpg>]
+<shadersDocumentationImages/ezeHairTranslucence2.jpg, id=66, 572.1375pt x 483.8
+075pt>
+File: shadersDocumentationImages/ezeHairTranslucence2.jpg Graphic file (type jp
+g)
+ <use shadersDocumentationImages/ezeHairTranslucence2.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeHairTranslucence2.jpg us
+ed on input line 233.
+(pdftex.def)             Requested size: 371.88496pt x 314.47115pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationIma
+ges/ezeHairTranslucence.jpg>] [18 <D:/devStructure/rsl/src/3delight/ezeDocument
+ation/shadersDocumentationImages/ezeHairTranslucence2.jpg>] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 292--300
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--300
+
+ []
+
+[20]
+ 3.
+
+<shadersDocumentationImages/ezeSurfaceParams.jpg, id=80, 923.45pt x 1089.06876p
+t>
+File: shadersDocumentationImages/ezeSurfaceParams.jpg Graphic file (type jpg)
+ <use shadersDocumentationImages/ezeSurfaceParams.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeSurfaceParams.jpg used o
+n input line 306.
+(pdftex.def)             Requested size: 295.51003pt x 348.50912pt.
+
+<shadersDocumentationImages/ezeSurfaceGnomoAovs.jpg, id=81, 1279.78125pt x 790.
+955pt>
+File: shadersDocumentationImages/ezeSurfaceGnomoAovs.jpg Graphic file (type jpg
+)
+ <use shadersDocumentationImages/ezeSurfaceGnomoAovs.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeSurfaceGnomoAovs.jpg use
+d on input line 314.
+(pdftex.def)             Requested size: 358.3363pt x 221.4659pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [21
+
+ <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationImages/
+ezeSurfaceParams.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 326--329
+
+ []
+
+
+Underfull \vbox (badness 4621) has occurred while \output is active []
+
+ [22 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationIma
+ges/ezeSurfaceGnomoAovs.jpg>]
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ú in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ù in font cmr12!
+
+<shadersDocumentationImages/ezeSurfaceDiffuse.jpg, id=88, 1318.9275pt x 1304.87
+5pt>
+File: shadersDocumentationImages/ezeSurfaceDiffuse.jpg Graphic file (type jpg)
+ <use shadersDocumentationImages/ezeSurfaceDiffuse.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeSurfaceDiffuse.jpg used 
+on input line 359.
+(pdftex.def)             Requested size: 395.6813pt x 391.46552pt.
+ [23]
+<shadersDocumentationImages/ezeSurfaceSpecular.jpg, id=92, 1318.9275pt x 942.52
+126pt>
+File: shadersDocumentationImages/ezeSurfaceSpecular.jpg Graphic file (type jpg)
+
+ <use shadersDocumentationImages/ezeSurfaceSpecular.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeSurfaceSpecular.jpg used
+ on input line 379.
+(pdftex.def)             Requested size: 395.6813pt x 282.75856pt.
+ [24 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationIma
+ges/ezeSurfaceDiffuse.jpg>]
+<shadersDocumentationImages/ezeSurfaceSpecularMask.jpg, id=96, 737.75626pt x 75
+2.8125pt>
+File: shadersDocumentationImages/ezeSurfaceSpecularMask.jpg Graphic file (type 
+jpg)
+ <use shadersDocumentationImages/ezeSurfaceSpecularMask.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeSurfaceSpecularMask.jpg 
+used on input line 390.
+(pdftex.def)             Requested size: 368.87723pt x 376.40532pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationIma
+ges/ezeSurfaceSpecular.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 395--398
+
+ []
+
+
+<shadersDocumentationImages/ezeSurfaceSpecularMaskDia.jpg, id=101, 849.1725pt x
+ 616.3025pt>
+File: shadersDocumentationImages/ezeSurfaceSpecularMaskDia.jpg Graphic file (ty
+pe jpg)
+ <use shadersDocumentationImages/ezeSurfaceSpecularMaskDia.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeSurfaceSpecularMaskDia.j
+pg used on input line 401.
+(pdftex.def)             Requested size: 424.5852pt x 308.1505pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [26 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationIma
+ges/ezeSurfaceSpecularMask.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 405--406
+
+ []
+
+[27 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationImag
+es/ezeSurfaceSpecularMaskDia.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 428--429
+
+ []
+
+[28] [29]
+ 4.
+
+<shadersDocumentationImages/ezeDisplace.jpg, id=114, 846.16125pt x 692.5875pt>
+File: shadersDocumentationImages/ezeDisplace.jpg Graphic file (type jpg)
+
+<use shadersDocumentationImages/ezeDisplace.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeDisplace.jpg used on inp
+ut line 459.
+(pdftex.def)             Requested size: 363.84225pt x 297.80681pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [30
+
+ <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationImages/
+ezeDisplace.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 480--485
+
+ []
+
+[31]
+ 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 506--511
+
+ []
+
+[32
+
+] [33]
+ 6.
+<shadersDocumentationImages/ezeUbberWide.jpg, id=131, 995.72pt x 646.415pt>
+File: shadersDocumentationImages/ezeUbberWide.jpg Graphic file (type jpg)
+
+<use shadersDocumentationImages/ezeUbberWide.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeUbberWide.jpg used on in
+put line 517.
+(pdftex.def)             Requested size: 428.15126pt x 277.95303pt.
+
+<shadersDocumentationImages/ezeUbberParameters.jpg, id=132, 1979.395pt x 1381.1
+6pt>
+File: shadersDocumentationImages/ezeUbberParameters.jpg Graphic file (type jpg)
+
+ <use shadersDocumentationImages/ezeUbberParameters.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeUbberParameters.jpg used
+ on input line 525.
+(pdftex.def)             Requested size: 395.872pt x 276.2271pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [34
+
+ <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationImages/
+ezeUbberWide.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 534--541
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 534--541
+
+ []
+
+[35 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationImag
+es/ezeUbberParameters.jpg>]
+Overfull \hbox (15.24023pt too wide) in paragraph at lines 564--567
+\OT1/cmr/m/n/12 the dis-tance at which the in-ci-dent en-ergy is ac-tu-ally equ
+al to in-ten-sity*lightcolor. 
+ []
+
+[36] [37] [38] [39] [40] [41] [42]
+ 7.
+[43
+
+]
+ 8.
+
+<shadersDocumentationImages/ezeEnvironmentFurBall.jpg, id=165, 1498.59875pt x 1
+237.62375pt>
+File: shadersDocumentationImages/ezeEnvironmentFurBall.jpg Graphic file (type j
+pg)
+ <use shadersDocumentationImages/ezeEnvironmentFurBall.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeEnvironmentFurBall.jpg u
+sed on input line 715.
+(pdftex.def)             Requested size: 359.67105pt x 297.03577pt.
+
+<shadersDocumentationImages/ezeEnvironmentHead.jpg, id=166, 725.71124pt x 939.5
+1pt>
+File: shadersDocumentationImages/ezeEnvironmentHead.jpg Graphic file (type jpg)
+
+ <use shadersDocumentationImages/ezeEnvironmentHead.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeEnvironmentHead.jpg used
+ on input line 722.
+(pdftex.def)             Requested size: 362.85474pt x 469.75385pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [44
+
+ <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationImages/
+ezeEnvironmentFurBall.jpg>]
+Underfull \vbox (badness 3746) has occurred while \output is active []
+
+ [45 <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationIma
+ges/ezeEnvironmentHead.jpg>] [46] [47]
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ú in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ù in font cmr12!
+ [48]
+ 9.
+
+<shadersDocumentationImages/ezeIndirect.jpg, id=182, 508.90125pt x 617.30624pt>
+File: shadersDocumentationImages/ezeIndirect.jpg Graphic file (type jpg)
+<use shadersDocumentationImages/ezeIndirect.jpg>
+Package pdftex.def Info: shadersDocumentationImages/ezeIndirect.jpg used on inp
+ut line 809.
+(pdftex.def)             Requested size: 264.63017pt x 321.0011pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [49
+
+ <D:/devStructure/rsl/src/3delight/ezeDocumentation/shadersDocumentationImages/
+ezeIndirect.jpg>] [50] [51] [52]
+ 10.
+[53
+
+] [54]
+ 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 955.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 955.
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ¢ in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ¢ in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 967--967
+
+ []
+
+
+Overfull \hbox (8.72548pt too wide) in paragraph at lines 955--971
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 979--979
+
+ []
+
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ¢ in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 992--992
+
+ []
+
+
+Overfull \hbox (47.05557pt too wide) in paragraph at lines 976--997
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [55
+
+]
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ¢ in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 1022--1022
+
+ []
+
+
+Overfull \hbox (47.05557pt too wide) in paragraph at lines 1004--1027
+[]
+ []
+
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ¢ in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ¢ in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ¢ in font cmr10!
+
+Overfull \hbox (36.19795pt too wide) in paragraph at lines 1032--1055
+[] 
+ []
+
+[56]
+ 12.
+
+Overfull \hbox (68.30652pt too wide) in paragraph at lines 1060--1062
+\OT1/cmr/m/n/10 http://www.creativecrash.com/maya/downloads/scripts-plugins/ren
+dering/renderman/c/uberlighthelper 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1066--1067
+
+ []
+
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ò in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ô in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ¢ in font cmr10!
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 1075
+.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
+File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 1075.
+
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ¢ in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ¢ in font cmr10!
+
+Overfull \hbox (108.57008pt too wide) in paragraph at lines 1068--1083
+[][] 
+ []
+
+[57
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 1088--1092
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1094--1095
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1095--1096
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1096--1099
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1100--1101
+
+ []
+
+[58
+
+] (D:\devStructure\rsl\src\3delight\ezeDocumentation\ezeShaderSuiteDocs.aux) ) 
+Here is how much of TeX's memory you used:
+ 1331 strings out of 494045
+ 22275 string characters out of 3145957
+ 69523 words of memory out of 3000000
+ 4634 multiletter control sequences out of 15000+200000
+ 8500 words of font info for 30 fonts, out of 3000000 for 9000
+ 715 hyphenation exceptions out of 8191
+ 27i,8n,21p,678b,161s stack positions out of 5000i,500n,10000p,200000b,50000s
+<
+C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:
+/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Fi
+les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files 
+(x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on ezeShaderSuiteDocs.pdf (58 pages, 3898871 bytes).
+PDF statistics:
+ 242 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 126 words of extra memory for PDF output out of 10000 (max. 10000000)
+
