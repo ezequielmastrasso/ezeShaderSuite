@@ -1,14 +1,18 @@
-ezeShaderSuite 3delight
-==============
+##ezeShaderSuite 3delight
+
 
 Please Read: 
----------------
+###
 
 ####Check the Develop Branch for the latests tested commits!
 
 Want to Contribute?
----------------
-Awesome! please do, get in contact with me for committing.
+###
+With code? Awesome! please do get in contact with me or branch out right away!
+
+With images? have a cool character or scene you wanna show? send it on.
+I would love to know how you getting with the shaders, and the images done with it!
+
 
 License
 ---------------
@@ -22,8 +26,8 @@ forum.
 
 changeLog
 ---------------
-### v1.XXX
-#### ezeSurface:<br />
+#### v1.XXX
+##### ezeSurface:<br />
   -energy conserving (diffuse, sss, spec, refl and refr balance)<br />
   -diffuse models simplified, only 1 diffuse model (cook torrance)<br />
   *-specular models simplified, only 2 models (cook torrance and ward)<br />
@@ -49,10 +53,10 @@ changeLog
   *-emision
   *-bounce factor
 
-#### ezeIndirect:<br />
+##### ezeIndirect:<br />
   -full raytrace solution if ptc based workflow is unchecked added<br />
 
-#### ezeCommon:
+##### ezeCommon:
   *-texture code calls improved and merged with ezeHair shader ones to standarize<br />
 
-### v1.21 
+#### v1.21 
