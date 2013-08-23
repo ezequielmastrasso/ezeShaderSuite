@@ -27,21 +27,32 @@ changeLog
   -energy conserving (diffuse, sss, spec, refl and refr balance)<br />
   -diffuse models simplified, only 1 diffuse model (cook torrance)<br />
   *-specular models simplified, only 2 models (cook torrance and ward)<br />
-  *-texture code calls improved and merged with ezeHair shader ones<br />
+  *-fresnel affects diffuse
   *-reflections performance improvements<br />
   *-more opacity controls<br />
   *-refractions<br />
-  *-ward anisotropy<br />
+  *-specular ward anisotropy parameter<br />
   *-specular reflections based on BRDF<br />
   *-reflection and refraccion end color<br />
   *-reflection and refraccion end color use environment map<br />
   **-back light<br />
-  *-
+  *-diffuse bump only check box
   **-diffuse/spec/reflection balance mode option<br />
   **-indirect spots to control indirect diffuse effects<br />
-  
+  *-sssCutOut (black and white map)<br />
+  *-sssThreshold<br />
+      ---if (sssMap>sssThreshold && sssCutOut>.5)<br />
+  *-indirect specular<br />
+  *-internal reflections on off<br />
+  *-reflection depth<br />
+  *-normal mapping<br />
+  *-emision
+  *-bounce factor
+
 #### ezeIndirect:<br />
-  *-full raytrace solution if ptc based workflow is unchecked added<br />
-  
+  -full raytrace solution if ptc based workflow is unchecked added<br />
+
+#### ezeCommon:
+  *-texture code calls improved and merged with ezeHair shader ones to standarize<br />
 
 ### v1.21 
