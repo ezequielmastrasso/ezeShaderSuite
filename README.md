@@ -1,13 +1,13 @@
 ##ezeShaderSuite 3delight
 
 
-Please Read: 
-####
+####Please Read: 
 
-###Check the Develop Branch for the latests tested commits!
 
-Want to Contribute?
-###
+#####Check the Develop Branch for the latests tested commits!
+
+###Want to Contribute?
+
 With code? Awesome! please do get in contact with me or branch out right away!
 
 With images? have a cool character or scene you wanna show? send it on.
