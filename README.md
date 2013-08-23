@@ -50,11 +50,11 @@ changeLog
   *-internal reflections on off<br />
   *-reflection depth<br />
   *-normal mapping<br />
-  *-emision
-  *-bounce factor
+  *-emision<br />
+  *-bounce factor<br />
 
 ##### ezeIndirect:<br />
-  -full raytrace solution if ptc based workflow is unchecked added<br />
+  -full raytrace solution if ptc based workflow is unchecked<br />
 
 ##### ezeHair:
   *-energy conserving<br />
