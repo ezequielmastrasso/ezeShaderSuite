@@ -1,4 +1,4 @@
-##ezeShaderSuite 3delight
+##ezeDelight Shader Suite
 
 
 ####Please Read: 
