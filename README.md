@@ -56,6 +56,11 @@ changeLog
 ##### ezeIndirect:<br />
   -full raytrace solution if ptc based workflow is unchecked added<br />
 
+##### ezeHair:
+  *-energy conserving<br />
+  *-varying variables optimizations<br />
+  *-needs better gi solution than using from P N_srf! (works for short hair but not for long
+
 ##### ezeCommon:
   *-texture code calls improved and merged with ezeHair shader ones to standarize<br />
 
