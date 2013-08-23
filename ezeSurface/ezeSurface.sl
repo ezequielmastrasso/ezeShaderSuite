@@ -1,32 +1,5 @@
 #include <../ezeInclude/ezeCommon.sl>
 
-    /*
-    TODO:
-
-
-    params to add:
-    --------------
-    fresnel affects diffuse
-    backlight
-    specular ward anisotropy parameter
-    diffuse bump only check box
-
-
-    features to add:
-    --------------
-    sssCutOut (black and white map)
-    sssThreshold
-      ---if (sssMap>sssThreshold && sssCutOut>.5)
-    indirect specular
-    internal reflection
-    reflection depth
-    reflection exit color or reflection environment map
-    normal mapping
-    emission
-    bounce factor
-
-
-    */
 
 
 surface ezeSurface (
