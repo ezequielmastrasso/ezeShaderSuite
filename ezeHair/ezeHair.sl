@@ -1,15 +1,21 @@
 #include <../ezeInclude/ezeCommonHair.sl>
 
-//TODO:replace uDim codes with functions from Common.h
-//TODO:replace common texture map calls with functions similar to 3delight as in:
-//texture(foo, "reverseT", True, "uDim", True, "returnLuminance", True)
-//TODO: Last todo will also allow to merge ezeCommon and ezeCommonHair headers
-//TODO:add uDim support for all maps (ambient and sss included)
-//TODO: Add baking attributes for when in pass:bakePass
-//TODO: Add sssCutOut If to skip sss with a threshold
 
-//TODO: envLight Cat treated as with the N_Surf from hair, this works for short hair but not for long
-//kajiya like normal blending might look like an option for envLights? this needs a bit testing though.
+//WARNING NOT TESTED YET
+//WARNING NOT TESTED YET
+//WARNING NOT TESTED YET
+//WARNING NOT TESTED YET
+//WARNING NOT TESTED YET
+//WARNING NOT TESTED YET
+//energy conserving code added, needs more testing
+//WARNING NOT TESTED YET
+//WARNING NOT TESTED YET
+//WARNING NOT TESTED YET
+//WARNING NOT TESTED YET
+//WARNING NOT TESTED YET
+//WARNING NOT TESTED YET
+
+
 
 surface ezeHair(
                       //-----------------------------------------------------------------//
@@ -1000,36 +1006,51 @@ aov_hair_total_scatter=hair_scatter;
       color white=1;
       color black=0;
 
-      //Ci=mix(aov_hair_ambient,aov_indirect,clamp(aov_indirect,black,white));
-      //Ci=mix(Ci,aov_hair_diffuse,clamp (aov_hair_diffuse,black,white));
-      //NO AMBIENT
-      //Ci=   aov_hair_diffuse;
+      //diffuse *= 1.0 - min(Cr, 1.0);
 
+      
       //WORKING
       if (ambientOccludeEnvLights==0){
           Ci=mix(aov_hair_diffuse,aov_hair_ambient,aov_hair_ambient);
           Ci=Ci+aov_hair_diffuse;
       }
+
       else{
           Ci=aov_hair_diffuse+aov_indirect;
       }
       Ci=   Ci * aov_hair_surfaceColor;
       //MIX AOV SUBSURFACE
+      Ci *= 1.0 - min(aov_hair_subsurface, 1.0);
+      /*
       Ci=   mix(  Ci,
                   aov_hair_subsurface,
                   clamp(aov_hair_subsurface,black,white));
-
+        */
       //MIX SPECULAR
+      Ci *= 1.0 - min(aov_hair_total_specular*Oi*overall_specular, 1.0);
+      /*
       Ci=   mix(  Ci,
                   aov_hair_total_specular*Oi*overall_specular,
                   aov_hair_total_specular*overall_specular);
-
+        */
       //MIX TRANSLUCENCE
+      Ci *= 1.0 - min(aov_hair_translucence, 1.0);
+      /*
       Ci=   mix(  Ci,
                   aov_hair_translucence,
                   aov_hair_translucence);
+       */
       //MIX SCATTER
-      Ci=mix(Ci,aov_hair_total_scatter*aov_hair_surfaceColor,aov_hair_total_scatter*aov_hair_surfaceColor);
+      Ci *= 1.0 - min(aov_hair_total_scatter*aov_hair_surfaceColor, 1.0);
+      //Ci=mix(Ci,aov_hair_total_scatter*aov_hair_surfaceColor,aov_hair_total_scatter*aov_hair_surfaceColor);
+      
+
+      Ci+=aov_hair_surfaceColor +
+            aov_hair_subsurface +
+            (aov_hair_total_specular*Oi*overall_specular) +
+            aov_hair_translucence +
+            aov_hair_total_scatter*aov_hair_surfaceColor;
+
 
       //OPACITY
 
