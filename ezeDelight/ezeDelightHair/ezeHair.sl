@@ -1,4 +1,4 @@
-#include <../ezeInclude/ezeCommonHair.sl>
+#include <../ezeDelightCommon/ezeDelightCommonHair.sl>
 
 
 //WARNING NOT TESTED YET

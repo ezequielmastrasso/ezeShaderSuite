@@ -1,4 +1,4 @@
-#include <../ezeInclude/ezeCommon.sl>
+#include <../ezeDelightCommon/ezeDelightCommon.sl>
 
 displacement
  ezeDisplacement(
