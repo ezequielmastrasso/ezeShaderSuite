@@ -24,6 +24,7 @@ surface ezeSurface (
     string diffuseFilter="gaussian";
     float gamma=0.454;
     float diffuseUseUdim=0;
+    float diffuseReverseT=0;
     float diffuseMaxU=2;
     float diffuseFramenumber=2;
     string diffuseTexName="";
@@ -65,6 +66,7 @@ surface ezeSurface (
     float bumpDepth=0;
 
     float bumpUseUdim=0;
+    float bumpReverseT=0;
     float bumpMaxU=2;
     float bumpFramenumber=2;
     string bumpTexName="";
@@ -131,6 +133,7 @@ surface ezeSurface (
     string specular="";
     string specularFilter="gaussian";
     float specularUseUdim=0;
+    float specularReverseT=0;
     float specularMaxU=2;
     float specularFramenumber=2;
     string specularTexName="";
@@ -144,6 +147,7 @@ surface ezeSurface (
     string OiColorMap="";
     string OiColorMapFilter="gaussian";
     float OiColorMapUseUdim=0;
+    float OiColorReverseT=0;
     float OiColorMapMaxU=2;
     float OiColorMapFramenumber=2;
     string OiColorMapTexName="";
@@ -178,6 +182,7 @@ surface ezeSurface (
     float sssThreshold=0.08;
     string sssFilter="gaussian";
     uniform float sssUseUdim=0;
+    float sssReverseT=0;
     uniform float sssMaxU=2;
     uniform float sssFramenumber=2;
     uniform string sssTexName="";
@@ -323,6 +328,7 @@ surface ezeSurface (
   color diffuseColor=getTexture(diffuse,
       diffuseFilter,
       diffuseUseUdim,
+      diffuseReverseT,
       diffuseMaxU,
       diffuseFramenumber,
       diffuseTexName,
@@ -338,6 +344,7 @@ surface ezeSurface (
   color specularColor=getTexture(specular,
         specularFilter,
         specularUseUdim,
+        specularReverseT,
         specularMaxU,
         specularFramenumber,
         specularTexName,
@@ -373,6 +380,7 @@ surface ezeSurface (
   else{
      if( bumpTexName != "" ){
          bumpValue=textureFloatUDim(bumpUseUdim,
+             bumpReverseT,
              bumpMaxU,
              bumpFramenumber,
              bumpTexName,
@@ -560,6 +568,7 @@ else {
     color sssColor=getTexture(sss,
             sssFilter,
             sssUseUdim,
+            sssReverseT,
             sssMaxU,
             sssFramenumber,
             sssTexName,

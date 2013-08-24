@@ -2,13 +2,9 @@
 #define SQR(X)  ( (X) * (X) )
 #endif
 
-
-
-//------------------------------------------------COLOR------------------------------------------------------
-//Changes to make to functions
-/*
 color textureUDim(
     float useUdim;
+    float reverset;
     float maxU;
     float framenumber;
     string texName;
@@ -17,65 +13,8 @@ color textureUDim(
     float useAnimMap;
     string fileExt;
     string filter;
--   float invertT;)
-[...]
-s=s - ss;
-if invertT{
-  t=((t - tt)*-1)+1;  
-}
-else {
-  t=t - tt; 
-}
-[...]
-return texture(texn, s, t ,"filter", filter);
-[...]
-
-
-....................................................................................
-color getTexture(
-    string file;
-    string filter;
-    float useUdim;
-    float maxU;
-    float framenumber;
-    string uDimFile;
-    float usevariant;
-    string varName;
-    float useAnimMap;
-    string fileExt;
--   float invertT;)
-[...]
-
-
-s=mod(s,1);
-if invertT{
-    t=(mod(t,1)*-1)+1
-}
-else{
-  t=mod(t,1)
-}
-
-[...]
-
-
-return texture ( file, s, t , "filter", filter);
-
-
-
-)
-*/
-color textureUDim(
-    float useUdim;
-    float maxU;
-    float framenumber;
-    string texName;
-    float usevariant;
-    string varName;
-    float useAnimMap;
-    string fileExt;
-    string filter;
-
 ){
+
     extern float s;
     extern float t;
     color pixel_color = color(0,0,0);
@@ -87,12 +26,15 @@ color textureUDim(
     uniform string frame = "";
     varying float udim = (abstt * maxU + ss + 1001);
     uniform float mapnumber = 1000;
+    
+    
     while( mapnumber < udim )
     {
       mapnumber += 1;
     }
     uDim = format("%04d" , mapnumber);
     frame = format("%04d", framenumber);
+    
     if(texName != "")
     {
       texn = texName;
@@ -102,54 +44,25 @@ color textureUDim(
         texn = concat(texn, ".", frame);
       texn = concat(texn, ".", uDim, ".", fileExt);
     }
-  return texture(texn, s - ss, t - tt,"filter", filter);
+  float sCoord=s - ss;
+  float tCoord;
+
+  if (reverset > 0)
+  { 
+          tCoord=abs((t - tt) - 1);
+   } else
+   {
+      tCoord=t - tt;
+   }
+   
+   return texture(texn, sCoord, tCoord,"filter", filter);
+ 
 }
-
-float textureFloatUDim(
-    float useUdim;
-    float maxU;
-    float framenumber;
-    string texName;
-    float usevariant;
-    string varName;
-    float useAnimMap;
-    string fileExt;
-    string filter;
-
-){
-    extern float s;
-    extern float t;
-    color pixel_color = color(0,0,0);
-    float ss = floor(s);
-    float tt = floor(t);
-    float abstt = abs(tt);
-    uniform string texn;
-    uniform string uDim = "1001";
-    uniform string frame = "";
-    varying float udim = (abstt * maxU + ss + 1001);
-    uniform float mapnumber = 1000;
-    while( mapnumber < udim )
-    {
-      mapnumber += 1;
-    }
-    uDim = format("%04d" , mapnumber);
-    frame = format("%04d", framenumber);
-    if(texName != "")
-    {
-      texn = texName;
-      if (usevariant > 0)
-        texn = concat(texn, "_", varName);
-      if (useAnimMap > 0)
-        texn = concat(texn, ".", frame);
-      texn = concat(texn, ".", uDim, ".", fileExt);
-    }
-  return texture(texn, s - ss, t - tt,"filter", filter);
-}
-
 color getTexture(
     string file;
     string filter;
     float useUdim;
+    float reverset;
     float maxU;
     float framenumber;
     string uDimFile;
@@ -159,9 +72,21 @@ color getTexture(
     string fileExt;)
 {
   extern float s,t;
+
   if (useUdim==0){
+    float sCoord=mod(s,1);
+    float tCoord;
+
+    if (reverset > 0)
+    { 
+            tCoord=abs((mod(t,1)) - 1);
+     } else
+     {
+        tCoord=mod(t,1);
+     }
+
     if( file != "" ){
-      return texture ( file, mod(s,1),mod(t,1), "filter", filter);
+      return texture ( file, sCoord,tCoord, "filter", filter);
 
     }
     else{
@@ -171,6 +96,7 @@ color getTexture(
   else if (useUdim==1){
     if( uDimFile != "" ){
         return textureUDim(useUdim,
+                   reverset,
                    maxU,
                    framenumber,
                    uDimFile,
@@ -187,10 +113,74 @@ color getTexture(
 
 }
 
+
+//------------------from hereBelow, they need fixing
+
+
+
+float textureFloatUDim(
+    float useUdim;
+    float reverset;
+    float maxU;
+    float framenumber;
+    string texName;
+    float usevariant;
+    string varName;
+    float useAnimMap;
+    string fileExt;
+    string filter;
+
+){
+    extern float s;
+    extern float t;
+    color pixel_color = color(0,0,0);
+    float ss = floor(s);
+    float tt = floor(t);
+    float abstt = abs(tt);
+    uniform string texn;
+    uniform string uDim = "1001";
+    uniform string frame = "";
+    varying float udim = (abstt * maxU + ss + 1001);
+    uniform float mapnumber = 1000;
+    
+    
+    while( mapnumber < udim )
+    {
+      mapnumber += 1;
+    }
+    uDim = format("%04d" , mapnumber);
+    frame = format("%04d", framenumber);
+    
+    if(texName != "")
+    {
+      texn = texName;
+      if (usevariant > 0)
+        texn = concat(texn, "_", varName);
+      if (useAnimMap > 0)
+        texn = concat(texn, ".", frame);
+      texn = concat(texn, ".", uDim, ".", fileExt);
+    }
+  float sCoord=s - ss;
+  float tCoord;
+
+  if (reverset > 0)
+  { 
+          tCoord=abs((t - tt) - 1);
+   } else
+   {
+      tCoord=t - tt;
+   }
+   
+   return texture(texn, sCoord, tCoord,"filter", filter);
+}
+
+
+
 float getFloatTexture(
     string file;
     string filter;
     float useUdim;
+    float reverset;
     float maxU;
     float framenumber;
     string uDimFile;
@@ -200,9 +190,22 @@ float getFloatTexture(
     string fileExt;)
 {
   extern float s,t;
+
   if (useUdim==0){
+    float sCoord=mod(s,1);
+    float tCoord;
+
+    if (reverset > 0)
+    { 
+            tCoord=abs((mod(t,1)) - 1);
+     } else
+     {
+        tCoord=mod(t,1);
+     }
+
     if( file != "" ){
-      return texture ( file, mod(s,1),mod(t,1), "filter", filter);
+      return texture ( file, sCoord,tCoord, "filter", filter);
+
     }
     else{
           return 1;
@@ -211,6 +214,7 @@ float getFloatTexture(
   else if (useUdim==1){
     if( uDimFile != "" ){
         return textureFloatUDim(useUdim,
+                   reverset,
                    maxU,
                    framenumber,
                    uDimFile,
@@ -226,6 +230,43 @@ float getFloatTexture(
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 color gamma(color rgb; float gamma;)
 {

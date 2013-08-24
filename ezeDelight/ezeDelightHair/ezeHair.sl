@@ -1,4 +1,4 @@
-#include <../ezeDelightCommon/ezeDelightCommonHair.sl>
+#include <../ezeDelightCommon/ezeDelightCommon.sl>
 
 
 //WARNING NOT TESTED YET
@@ -72,6 +72,7 @@ surface ezeHair(
                         #pragma annotation "grouping" "Diffuse/Udim/diffuseVarName;"
 
                        float diffuseUseUdim=0;
+                       
                        string rootDiffuseTexName = "";
                        string tipDiffuseTexName = "";
                        string diffuseFileExt = "tdl";
@@ -134,6 +135,7 @@ surface ezeHair(
                         string tipAmbientMapColor="";
 
                         float tipAmbientUseUdim=0;
+                        float tipReverseT=0;
                         string tipAmbientTexName = "";
                         string tipAmbientFileExt = "tdl";
                         float tipAmbientMaxU = 10;
@@ -148,6 +150,7 @@ surface ezeHair(
                         string rootAmbientMapColor="";
 
                         float rootAmbientUseUdim=0;
+                        float rootReverseT=0;
                         string rootAmbientTexName = "";
                         string rootAmbientFileExt = "tdl";
                         float rootAmbientMaxU = 10;
@@ -190,10 +193,11 @@ surface ezeHair(
                         #pragma annotation "grouping" "darkening/tip/Udim/tipDarkeningVarName;"
 
                        float tipDarkeningUseUdim=0;
+                       float tipDarkeningReverseT=0;
                        string tipDarkeningTexName = "";
                        string tipDarkeningFileExt = "tdl";
                        float tipDarkeningMaxU = 10;
-                       float tipDarkeningReverseT = 0;
+                       
                        float tipDarkeningUseAnimMap = 0;
                        float tipDarkeningFrameNumber = 0;
                        float tipDarkeningUseVariant = 0;
@@ -226,10 +230,11 @@ surface ezeHair(
                         #pragma annotation "grouping" "darkening/root/Udim/rootDarkeningVarName;"
 
                        float rootDarkeningUseUdim=0;
+                       float rootDarkeningReverseT=0;
                        string rootDarkeningTexName = "";
                        string rootDarkeningFileExt = "tdl";
                        float rootDarkeningMaxU = 10;
-                       float rootDarkeningReverseT = 0;
+                       
                        float rootDarkeningUseAnimMap = 0;
                        float rootDarkeningFrameNumber = 0;
                        float rootDarkeningUseVariant = 0;
@@ -313,10 +318,11 @@ surface ezeHair(
                       string specularMapColor="";
                       uniform float specularGamma=0.454;
                       float specularUseUdim=0;
+                      float specularReverseT=0;
                       string specularTexName = "";
                       string specularFileExt = "tdl";
                       float specularMaxU = 10;
-                      float specularReverseT = 0;
+                      
                       float specularUseAnimMap = 0;
                       float specularFrameNumber = 0;
                       float specularUseVariant = 0;
@@ -366,6 +372,7 @@ surface ezeHair(
                         string alphaFilter="gaussian";
                         uniform float alphaGamma=1;
                         uniform float alphaUseUdim=0;
+                        float alphaReverseT=0;
                         uniform float alphaMaxU=2;
                         uniform float alphaFrameNumber=2;
                         uniform string alphaTexName="";
@@ -447,6 +454,7 @@ surface ezeHair(
 
                       string sssFilter="gaussian";
                       uniform float sssUseUdim=0;
+                      float sssReverseT=0;
                       uniform float sssMaxU=2;
                       uniform float sssFramenumber=2;
                       uniform string sssTexName="";
@@ -546,6 +554,7 @@ color tipDiffuse=1;
 rootDiffuse=getTexture(rootDiffuseMapColor,
         "gaussian",
         diffuseUseUdim,
+        diffuseReverseT,
         diffuseMaxU,
         diffuseFrameNumber,
         rootDiffuseTexName,
@@ -558,6 +567,7 @@ rootDiffuse=getTexture(rootDiffuseMapColor,
 tipDiffuse=getTexture(tipDiffuseMapColor,
         "gaussian",
         diffuseUseUdim,
+        diffuseReverseT,
         diffuseMaxU,
         diffuseFrameNumber,
         tipDiffuseTexName,
@@ -595,6 +605,7 @@ if( tipAmbientMapColor != "" || tipAmbientUseUdim==1 ){
     tipAmbientMap=getTexture(tipAmbientMapColor,
             "gaussian",
             tipAmbientUseUdim,
+            tipAmbientReverseT,
             tipAmbientMaxU,
             tipAmbientFrameNumber,
             tipAmbientTexName,
@@ -617,6 +628,7 @@ if( rootAmbientMapColor != "" || rootAmbientUseUdim==1){
     rootAmbientMap=getTexture(rootAmbientMapColor,
                 "gaussian",
                 rootAmbientUseUdim,
+                rootAmbientReverseT,
                 rootAmbientMaxU,
                 rootAmbientFrameNumber,
                 rootAmbientTexName,
@@ -648,6 +660,7 @@ if (tipDarkeningColor!=1){
   tipDarkeningMap=getTexture(tipDarkeningMapMask,
               "gaussian",
               tipDarkeningUseUdim,
+              tipDarkeningReverseT,
               tipDarkeningMaxU,
               tipDarkeningFrameNumber,
               tipDarkeningTexName,
@@ -669,6 +682,7 @@ if (rootDarkeningColor!=1){
   rootDarkeningMap=getTexture(rootDarkeningMapMask,
                 "gaussian",
                 rootDarkeningUseUdim,
+                rootDarkeningReverseT,
                 rootDarkeningMaxU,
                 rootDarkeningFrameNumber,
                 rootDarkeningTexName,
@@ -699,6 +713,7 @@ if (linear==1){
 color alphaMap=getTexture(alpha,
         "gaussian",
         alphaUseUdim,
+        alphaReverseT,
         alphaMaxU,
         alphaFrameNumber,
         alphaTexName,
@@ -791,6 +806,7 @@ if(overall_specular != 0){
 aov_hair_specularMap=getTexture(specularMapColor,
         "gaussian",
         specularUseUdim,
+        specularReverseT,
         specularMaxU,
         specularFrameNumber,
         specularTexName,
@@ -973,6 +989,7 @@ aov_hair_total_scatter=hair_scatter;
       color sssColor=getTexture(sss,
                   sssFilter,
                   sssUseUdim,
+                  sssReverseT,
                   sssMaxU,
                   sssFramenumber,
                   sssTexName,
