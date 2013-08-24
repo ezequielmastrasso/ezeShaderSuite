@@ -15,7 +15,7 @@ surface ezeSurface (
     #pragma annotation "grouping" "bake/bakeSpace;"
     #pragma annotation "grouping" "bake/radiusscale;"
 
-    float invertNormals=1;
+    float mayaPreview=1;
     float Kd=1;
     float Kid=1;
     
@@ -52,6 +52,8 @@ surface ezeSurface (
     #pragma annotation "grouping" "Diffuse/maps/udim/diffuseTexName;"
     #pragma annotation "grouping" "Diffuse/maps/udim/diffuseUsevariant;"
     #pragma annotation diffuseUsevariant "gadgettype=checkbox:0:1=custom value;"
+    #pragma annotation "grouping" "Diffuse/maps/udim/diffuseReverseT;"
+    #pragma annotation diffuseReverseT "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "Diffuse/maps/udim/diffuseVarName;"
     #pragma annotation "grouping" "Diffuse/maps/udim/diffuseUseAnimMap;"
     #pragma annotation diffuseUseAnimMap "gadgettype=checkbox:0:1=custom value;"
@@ -86,6 +88,8 @@ surface ezeSurface (
     #pragma annotation "grouping" "bump/udim/bumpTexName;"
     #pragma annotation "grouping" "bump/udim/bumpUsevariant;"
     #pragma annotation bumpUsevariant "gadgettype=checkbox:0:1=custom value;"
+    #pragma annotation "grouping" "bump/udim/bumpReverseT;"
+    #pragma annotation bumpReverseT "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "bump/udim/bumpVarName;"
     #pragma annotation "grouping" "bump/udim/bumpUseAnimMap;"
     #pragma annotation bumpUseAnimMap "gadgettype=checkbox:0:1=custom value;"
@@ -122,6 +126,8 @@ surface ezeSurface (
     #pragma annotation "grouping" "Specular/maps/udim/specularTexName;"
     #pragma annotation "grouping" "Specular/maps/udim/specularUsevariant;"
     #pragma annotation specularUsevariant "gadgettype=checkbox:0:1=custom value;"
+    #pragma annotation "grouping" "Specular/maps/udim/specularReverseT;"
+    #pragma annotation specularReverseT "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "Specular/maps/udim/specularVarName;"
     #pragma annotation "grouping" "Specular/maps/udim/specularUseAnimMap;"
     #pragma annotation specularUseAnimMap "gadgettype=checkbox:0:1=custom value;"
@@ -167,6 +173,8 @@ surface ezeSurface (
     #pragma annotation "grouping" "Transparency/maps/udim/OiColorMapTexName;"
     #pragma annotation "grouping" "Transparency/maps/udim/OiColorMapUsevariant;"
     #pragma annotation OiColorMapUsevariant "gadgettype=checkbox:0:1=custom value;"
+    #pragma annotation "grouping" "Transparency/maps/udim/OiColorReverseT;"
+    #pragma annotation OiColor "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "Transparency/maps/udim/OiColorMapVarName;"
     #pragma annotation "grouping" "Transparency/maps/udim/OiColorMapUseAnimMap;"
     #pragma annotation OiColorMapUseAnimMap "gadgettype=checkbox:0:1=custom value;"
@@ -214,6 +222,8 @@ surface ezeSurface (
     #pragma annotation "grouping" "subsurface/maps/udim/sssTexName;"
     #pragma annotation "grouping" "subsurface/maps/udim/sssUsevariant;"
     #pragma annotation sssUsevariant "gadgettype=checkbox:0:1=custom value;"
+    #pragma annotation "grouping" "subsurface/maps/udim/sssReverseT;"
+    #pragma annotation sssReverseT "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "subsurface/maps/udim/sssVarName;"
     #pragma annotation "grouping" "subsurface/maps/udim/sssUseAnimMap;"
     #pragma annotation sssUseAnimMap "gadgettype=checkbox:0:1=custom value;"
@@ -301,7 +311,7 @@ surface ezeSurface (
 
 
 {
-  if (invertNormals==1){
+  if (mayaPreview==1){
                 N=-N;
                 }
   

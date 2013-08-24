@@ -9,6 +9,7 @@ displacement
     float layer1Offset=-0.05;
 
     float layer1UseUdim=0;
+    float layer1ReverseT=0;
     float layer1MaxU=2;
     float layer1Framenumber=2;
     string layer1TexName="";
@@ -42,6 +43,7 @@ displacement
     float layer2Multiplier=1;
 
     float layer2UseUdim=0;
+    float layer2ReverseT=0;
     float layer2MaxU=2;
     float layer2Framenumber=2;
     string layer2TexName="";
@@ -80,6 +82,7 @@ float bmp2=0;
 bmp1=getFloatTexture(layer1,
     "gaussian",
     layer1UseUdim,
+    layer1ReverseT,
     layer1MaxU,
     layer1Framenumber,
     layer1TexName,
@@ -92,6 +95,7 @@ bmp1=getFloatTexture(layer1,
 bmp2=getFloatTexture(layer2,
     "gaussian",
     layer2UseUdim,
+    layer2ReverseT,
     layer2MaxU,
     layer2Framenumber,
     layer2TexName,
