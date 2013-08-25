@@ -29,7 +29,7 @@ forum.
 
 changeLog
 ---------------
-#### v1.XXX
+#### v1.4
 ##### ezeSurface:<br />
   -energy conserving (diffuse, sss, spec, refl and refr balance)<br />
   -diffuse models simplified, only 1 diffuse model (cook torrance)<br />
