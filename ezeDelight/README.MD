@@ -33,6 +33,8 @@ changeLog
 ##### ezeSurface:<br />
   -energy conserving (diffuse, sss, spec, refl and refr balance)<br />
   -diffuse models simplified, only 1 diffuse model (cook torrance)<br />
+  -specular models simplified, only 2 models (cook torrance and ward)<br />
+  -more opacity controls<br />
 
 
 ##### ezeIndirect:<br />
@@ -50,10 +52,8 @@ changeLog
 Coming soon
 ---------------
 ##### ezeSurface:<br />
-  *-specular models simplified, only 2 models (cook torrance and ward)<br />
   *-fresnel affects diffuse
   *-reflections performance improvements<br />
-  *-more opacity controls<br />
   *-refractions<br />
   *-specular ward anisotropy parameter<br />
   *-specular reflections based on BRDF<br />
@@ -74,6 +74,5 @@ Coming soon
   *-bounce factor<br />
 
 ##### ezeHair:
-  -energy conserving<br />
   *-varying variables optimizations<br />
   *-needs better gi solution than using from P N_srf! (works for short hair but not for long

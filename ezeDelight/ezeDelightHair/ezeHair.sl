@@ -1,20 +1,6 @@
 #include <../ezeDelightCommon/ezeDelightCommon.sl>
 
 
-//WARNING NOT TESTED YET
-//WARNING NOT TESTED YET
-//WARNING NOT TESTED YET
-//WARNING NOT TESTED YET
-//WARNING NOT TESTED YET
-//WARNING NOT TESTED YET
-//energy conserving code added, needs more testing
-//WARNING NOT TESTED YET
-//WARNING NOT TESTED YET
-//WARNING NOT TESTED YET
-//WARNING NOT TESTED YET
-//WARNING NOT TESTED YET
-//WARNING NOT TESTED YET
-
 
 
 surface ezeHair(
@@ -1026,7 +1012,8 @@ aov_hair_total_scatter=hair_scatter;
       //diffuse *= 1.0 - min(Cr, 1.0);
 
       
-      //WORKING
+      /*
+
       if (ambientOccludeEnvLights==0){
           Ci=mix(aov_hair_diffuse,aov_hair_ambient,aov_hair_ambient);
           Ci=Ci+aov_hair_diffuse;
@@ -1035,39 +1022,35 @@ aov_hair_total_scatter=hair_scatter;
       else{
           Ci=aov_hair_diffuse+aov_indirect;
       }
-      Ci=   Ci * aov_hair_surfaceColor;
+      */
+      Ci=   aov_hair_diffuse * aov_hair_surfaceColor;
+      
       //MIX AOV SUBSURFACE
       Ci *= 1.0 - min(aov_hair_subsurface, 1.0);
-      /*
-      Ci=   mix(  Ci,
-                  aov_hair_subsurface,
-                  clamp(aov_hair_subsurface,black,white));
-        */
+      
       //MIX SPECULAR
       Ci *= 1.0 - min(aov_hair_total_specular*Oi*overall_specular, 1.0);
-      /*
-      Ci=   mix(  Ci,
-                  aov_hair_total_specular*Oi*overall_specular,
-                  aov_hair_total_specular*overall_specular);
-        */
+      
       //MIX TRANSLUCENCE
       Ci *= 1.0 - min(aov_hair_translucence, 1.0);
-      /*
-      Ci=   mix(  Ci,
-                  aov_hair_translucence,
-                  aov_hair_translucence);
-       */
-      //MIX SCATTER
-      Ci *= 1.0 - min(aov_hair_total_scatter*aov_hair_surfaceColor, 1.0);
-      //Ci=mix(Ci,aov_hair_total_scatter*aov_hair_surfaceColor,aov_hair_total_scatter*aov_hair_surfaceColor);
-      
+      //  aov_hair_translucence);
 
-      Ci+=aov_hair_surfaceColor +
+      //MIX SCATTER
+      //Ci *= 1.0 - min(aov_hair_total_scatter*aov_hair_surfaceColor, 1.0);
+      
+      /*Ci+=aov_hair_surfaceColor +
+            aov_hair_subsurface +
+            (aov_hair_total_specular*Oi*overall_specular) +
+            aov_hair_translucence +
+            aov_hair_total_scatter*aov_hair_surfaceColor; */
+
+      Ci+=
             aov_hair_subsurface +
             (aov_hair_total_specular*Oi*overall_specular) +
             aov_hair_translucence +
             aov_hair_total_scatter*aov_hair_surfaceColor;
 
+      
 
       //OPACITY
 

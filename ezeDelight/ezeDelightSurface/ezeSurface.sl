@@ -15,7 +15,8 @@ surface ezeSurface (
     #pragma annotation "grouping" "bake/bakeSpace;"
     #pragma annotation "grouping" "bake/radiusscale;"
 
-    float mayaPreview=1;
+
+
     float Kd=1;
     float Kid=1;
     
@@ -45,6 +46,8 @@ surface ezeSurface (
     #pragma annotation diffuseFilter "gadgettype=optionmenu:gaussian:box:triangle:catmull-rom:;"
     #pragma annotation "grouping" "Diffuse/maps/diffuseFilter;"
     #pragma annotation "grouping" "Diffuse/maps/gamma;"
+    #pragma annotation "grouping" "Diffuse/maps/diffuseReverseT;"
+    #pragma annotation diffuseReverseT "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "Diffuse/maps/diffuseUseUdim;"
     #pragma annotation diffuseUseUdim "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "Diffuse/maps/udim/diffuseMaxU;"
@@ -52,8 +55,7 @@ surface ezeSurface (
     #pragma annotation "grouping" "Diffuse/maps/udim/diffuseTexName;"
     #pragma annotation "grouping" "Diffuse/maps/udim/diffuseUsevariant;"
     #pragma annotation diffuseUsevariant "gadgettype=checkbox:0:1=custom value;"
-    #pragma annotation "grouping" "Diffuse/maps/udim/diffuseReverseT;"
-    #pragma annotation diffuseReverseT "gadgettype=checkbox:0:1=custom value;"
+    
     #pragma annotation "grouping" "Diffuse/maps/udim/diffuseVarName;"
     #pragma annotation "grouping" "Diffuse/maps/udim/diffuseUseAnimMap;"
     #pragma annotation diffuseUseAnimMap "gadgettype=checkbox:0:1=custom value;"
@@ -82,14 +84,16 @@ surface ezeSurface (
     #pragma annotation "grouping" "bump/bumpFilter;"
     #pragma annotation "grouping" "bump/bumpDepth;"
     #pragma annotation bumpUseUdim "gadgettype=checkbox:0:1=custom value;"
+     #pragma annotation "grouping" "bump/bumpReverseT;"
+    #pragma annotation bumpReverseT "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "bump/bumpUseUdim;"
+   
     #pragma annotation "grouping" "bump/udim/bumpMaxU;"
     #pragma annotation "grouping" "bump/udim/bumpFramenumber;"
     #pragma annotation "grouping" "bump/udim/bumpTexName;"
     #pragma annotation "grouping" "bump/udim/bumpUsevariant;"
     #pragma annotation bumpUsevariant "gadgettype=checkbox:0:1=custom value;"
-    #pragma annotation "grouping" "bump/udim/bumpReverseT;"
-    #pragma annotation bumpReverseT "gadgettype=checkbox:0:1=custom value;"
+    
     #pragma annotation "grouping" "bump/udim/bumpVarName;"
     #pragma annotation "grouping" "bump/udim/bumpUseAnimMap;"
     #pragma annotation bumpUseAnimMap "gadgettype=checkbox:0:1=custom value;"
@@ -119,6 +123,8 @@ surface ezeSurface (
     #pragma annotation "grouping" "Specular/maps/specular;"
     #pragma annotation specularFilter "gadgettype=optionmenu:gaussian:box:triangle:catmull-rom:;"
     #pragma annotation "grouping" "Specular/maps/specularFilter;"
+    #pragma annotation "grouping" "Specular/maps/specularReverseT;"
+    #pragma annotation specularReverseT "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "Specular/maps/specularUseUdim;"
     #pragma annotation specularUseUdim   "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "Specular/maps/udim/specularMaxU;"
@@ -126,8 +132,7 @@ surface ezeSurface (
     #pragma annotation "grouping" "Specular/maps/udim/specularTexName;"
     #pragma annotation "grouping" "Specular/maps/udim/specularUsevariant;"
     #pragma annotation specularUsevariant "gadgettype=checkbox:0:1=custom value;"
-    #pragma annotation "grouping" "Specular/maps/udim/specularReverseT;"
-    #pragma annotation specularReverseT "gadgettype=checkbox:0:1=custom value;"
+    
     #pragma annotation "grouping" "Specular/maps/udim/specularVarName;"
     #pragma annotation "grouping" "Specular/maps/udim/specularUseAnimMap;"
     #pragma annotation specularUseAnimMap "gadgettype=checkbox:0:1=custom value;"
@@ -166,6 +171,8 @@ surface ezeSurface (
     #pragma annotation OiColorMapFilter "gadgettype=optionmenu:gaussian:box:triangle:catmull-rom:;"
     #pragma annotation "grouping" "Transparency/maps/OiColorMapFilter;"
     #pragma annotation "grouping" "Transparency/maps/gamma;"
+    #pragma annotation "grouping" "Transparency/maps/OiColorReverseT;"
+    #pragma annotation OiColorReverseT "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "Transparency/maps/OiColorMapUseUdim;"
     #pragma annotation OiColorMapUseUdim "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "Transparency/maps/udim/OiColorMapMaxU;"
@@ -173,8 +180,7 @@ surface ezeSurface (
     #pragma annotation "grouping" "Transparency/maps/udim/OiColorMapTexName;"
     #pragma annotation "grouping" "Transparency/maps/udim/OiColorMapUsevariant;"
     #pragma annotation OiColorMapUsevariant "gadgettype=checkbox:0:1=custom value;"
-    #pragma annotation "grouping" "Transparency/maps/udim/OiColorReverseT;"
-    #pragma annotation OiColor "gadgettype=checkbox:0:1=custom value;"
+    
     #pragma annotation "grouping" "Transparency/maps/udim/OiColorMapVarName;"
     #pragma annotation "grouping" "Transparency/maps/udim/OiColorMapUseAnimMap;"
     #pragma annotation OiColorMapUseAnimMap "gadgettype=checkbox:0:1=custom value;"
@@ -216,14 +222,15 @@ surface ezeSurface (
     #pragma annotation "grouping" "subsurface/maps/sssFilter;"
     #pragma annotation bumpFilter "gadgettype=optionmenu:gaussian:box:triangle:catmull-rom:;"
     #pragma annotation sssUseUdim   "gadgettype=checkbox:0:1=custom value;"
+    #pragma annotation "grouping" "subsurface/maps/sssReverseT;"
+    #pragma annotation sssReverseT "gadgettype=checkbox:0:1=custom value;"
     #pragma annotation "grouping" "subsurface/maps/sssUseUdim;"
     #pragma annotation "grouping" "subsurface/maps/udim/sssMaxU;"
     #pragma annotation "grouping" "subsurface/maps/udim/sssFramenumber;"
     #pragma annotation "grouping" "subsurface/maps/udim/sssTexName;"
     #pragma annotation "grouping" "subsurface/maps/udim/sssUsevariant;"
     #pragma annotation sssUsevariant "gadgettype=checkbox:0:1=custom value;"
-    #pragma annotation "grouping" "subsurface/maps/udim/sssReverseT;"
-    #pragma annotation sssReverseT "gadgettype=checkbox:0:1=custom value;"
+    
     #pragma annotation "grouping" "subsurface/maps/udim/sssVarName;"
     #pragma annotation "grouping" "subsurface/maps/udim/sssUseAnimMap;"
     #pragma annotation sssUseAnimMap "gadgettype=checkbox:0:1=custom value;"
@@ -237,6 +244,11 @@ surface ezeSurface (
     #pragma annotation "grouping" "subsurface/sssCoordsystem;"
     #pragma annotation "grouping" "subsurface/sssSmooth;"
     #pragma annotation "grouping" "subsurface/sssGamma;"
+
+
+
+
+
 
     float useSpecularMask=0;
     float specularMaskRot = 0,    //Rotates the mapped specular highlight
@@ -279,6 +291,7 @@ surface ezeSurface (
     #pragma annotation "grouping" "reflection/Kr;"
     #pragma annotation "grouping" "reflection/samples;"
     #pragma annotation "grouping" "reflection/cone_angle;"
+    #pragma annotation "grouping" "reflection/maxdist;"
     #pragma annotation "grouping" "reflection/reflectionColor;"
     #pragma annotation "grouping" "reflection/traceSet;"
     #pragma annotation "grouping" "reflection/brdf_fresnel;"
@@ -288,6 +301,9 @@ surface ezeSurface (
     #pragma annotation "grouping" "reflection/brdf_curve;"
     #pragma annotation "grouping" "reflection/refraction_ior;"
 
+
+    float mayaPreview=1;
+    #pragma annotation "grouping" "extraParameters/mayaPreview;"
 
     #pragma annotation aov_specular "hide=true;"
     #pragma annotation aov_specular_shape "hide=true;"
