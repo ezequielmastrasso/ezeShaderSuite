@@ -75,4 +75,4 @@ Coming soon
 
 ##### ezeHair:
   *-varying variables optimizations<br />
-  *-needs better gi solution than using from P N_srf! (works for short hair but not for long
+  *-needs better gi solution (works well for short hair but not accurate for long)
