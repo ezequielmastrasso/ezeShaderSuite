@@ -302,7 +302,7 @@ surface ezeSurface (
     #pragma annotation "grouping" "reflection/refraction_ior;"
 
 
-    float mayaPreview=1;
+    float mayaPreview=0;
     #pragma annotation "grouping" "extraParameters/mayaPreview;"
 
     #pragma annotation aov_specular "hide=true;"
