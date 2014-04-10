@@ -8,11 +8,12 @@
 
 ###Want to Contribute?
 
-With code? Awesome! please do get in contact with me or branch out right away!
-
 With images? have a cool character or scene you wanna show? send it on.
 I would love to know how you getting with the shaders, and the images done with it!
 
+With code? Awesome! please do get in contact with me or branch out right away!
+
+Having a good or a bad experience? either way i want to hear from you.
 
 License
 ---------------
@@ -29,6 +30,17 @@ forum.
 
 changeLog
 ---------------
+#### v1.8
+##### all ezeShaders:<br />
+  -ezeEnv removed, update to 3delight Studio 11 just raytrace it!
+  -ezeBake removed, again.. raytracing is what the cool kids are doing now-a-days!
+  (tip: set the hair geometry to be opaque to all raytrace rays to avoid transparency
+  to make your rendertimes explode!!)
+  -ezeShave7 is now the current main shader, the <v7 shader was removed.
+
+  -<br />
+
+
 #### v1.4
 ##### ezeSurface:<br />
   -energy conserving (diffuse, sss, spec, refl and refr balance)<br />
