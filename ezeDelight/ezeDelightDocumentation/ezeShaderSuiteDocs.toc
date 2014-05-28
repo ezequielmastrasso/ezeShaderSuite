@@ -1,208 +1,114 @@
-\contentsline {chapter}{\numberline {1}What is this about?}{5}
-\contentsline {section}{\numberline {1.1}goals}{5}
-\contentsline {section}{\numberline {1.2}key features}{6}
-\contentsline {subsection}{\numberline {1.2.1}ezeHair key features}{6}
-\contentsline {subsection}{\numberline {1.2.2}ezeSurface key features}{7}
-\contentsline {chapter}{\numberline {2}ezeHair}{8}
-\contentsline {section}{\numberline {2.1}linear}{9}
-\contentsline {subsubsection}{on/off}{9}
-\contentsline {subsubsection}{gamma}{9}
-\contentsline {section}{\numberline {2.2}diffuse}{9}
-\contentsline {subsubsection}{Kd}{10}
-\contentsline {subsubsection}{Ki}{10}
-\contentsline {subsubsection}{Ka}{10}
-\contentsline {subsubsection}{Illum Wrap Angle }{10}
+\contentsline {chapter}{\numberline {1}What is this about?}{4}
+\contentsline {section}{\numberline {1.1}goals}{4}
+\contentsline {section}{\numberline {1.2}key features}{5}
+\contentsline {subsection}{\numberline {1.2.1}ezeHair key features}{5}
+\contentsline {section}{\numberline {1.3}compiling}{6}
+\contentsline {subsection}{\numberline {1.3.1}all platforms}{6}
+\contentsline {chapter}{\numberline {2}ezeHair}{7}
+\contentsline {section}{\numberline {2.1}linear}{8}
+\contentsline {subsubsection}{on/off}{8}
+\contentsline {subsubsection}{gamma}{8}
+\contentsline {section}{\numberline {2.2}diffuse}{8}
+\contentsline {subsubsection}{Kd}{9}
+\contentsline {subsubsection}{Ki}{9}
+\contentsline {subsubsection}{i\_color}{9}
+\contentsline {subsubsection}{i\_thickness}{9}
+\contentsline {subsubsection}{i\_tint}{9}
+\contentsline {subsubsection}{i\_samples}{9}
+\contentsline {subsubsection}{i\_xxx\_r (roughness)}{9}
+\contentsline {subsubsection}{i\_xxx\_tt (forward scattering)}{9}
+\contentsline {subsubsection}{i\_xxx\_r (TRT )}{10}
 \contentsline {subsubsection}{Tip and root Colors, multipliers, controls and masks}{10}
-\contentsline {section}{\numberline {2.3}ambient}{11}
-\contentsline {subsubsection}{Ambient tip root controls}{11}
-\contentsline {subsubsection}{Tip root Ambient Control maps}{11}
-\contentsline {subsubsection}{ambientGamma}{12}
-\contentsline {subsubsection}{darkening controls and darkening masks}{12}
-\contentsline {subsubsection}{ambientOccludeEnvLights}{12}
-\contentsline {section}{\numberline {2.4}scatter}{13}
-\contentsline {subsubsection}{settings}{13}
-\contentsline {section}{\numberline {2.5}specular}{14}
-\contentsline {subsubsection}{overall Specular}{14}
-\contentsline {subsubsection}{primary specular}{14}
-\contentsline {subsubsection}{primary specular roughness}{15}
-\contentsline {subsubsection}{primary specular Color}{15}
-\contentsline {subsubsection}{primary shift}{15}
-\contentsline {subsubsection}{Using Specular Shifts Maps}{15}
-\contentsline {section}{\numberline {2.6}alpha}{15}
-\contentsline {subsubsection}{Overriding shave Surface Oi}{15}
-\contentsline {subsubsection}{alphaMap}{15}
-\contentsline {section}{\numberline {2.7}translucense}{17}
-\contentsline {subsubsection}{Focus}{18}
-\contentsline {subsubsection}{translucence}{18}
-\contentsline {subsubsection}{translucence color}{18}
-\contentsline {subsubsection}{translucence map}{18}
-\contentsline {subsubsection}{gamma}{18}
-\contentsline {section}{\numberline {2.8}sss}{19}
-\contentsline {subsubsection}{maps}{19}
-\contentsline {section}{\numberline {2.9}AOVs}{19}
-\contentsline {subsection}{\numberline {2.9.1}output to standard aovs}{19}
-\contentsline {subsection}{\numberline {2.9.2}aov listing}{20}
-\contentsline {chapter}{\numberline {3}ezeSurface}{21}
-\contentsline {section}{\numberline {3.1}diffuse}{22}
-\contentsline {subsubsection}{fullPassName}{22}
-\contentsline {subsubsection}{bakePassName}{23}
-\contentsline {subsubsection}{Kd}{23}
-\contentsline {subsubsection}{Ki}{23}
-\contentsline {subsubsection}{Ka}{23}
-\contentsline {subsubsection}{KdColor}{23}
-\contentsline {subsubsection}{diffuse}{23}
-\contentsline {subsubsection}{Gamma }{23}
-\contentsline {subsection}{\numberline {3.1.1}diffuseModels}{24}
-\contentsline {section}{\numberline {3.2}bump}{24}
-\contentsline {subsubsection}{Map}{24}
-\contentsline {subsubsection}{Depth}{24}
-\contentsline {section}{\numberline {3.3}specular}{25}
-\contentsline {subsection}{\numberline {3.3.1}specularModels}{25}
-\contentsline {section}{\numberline {3.4}specularMaskShape}{26}
-\contentsline {subsubsection}{useSpecularMask}{27}
-\contentsline {subsubsection}{specularMaskRot}{27}
-\contentsline {subsubsection}{specularMaskScaleU}{27}
-\contentsline {subsubsection}{specularMaskScaleV}{28}
-\contentsline {subsubsection}{specularMaskSurfaceFalloff}{28}
-\contentsline {subsubsection}{specularMaskMap}{28}
-\contentsline {subsubsection}{specularMaskGloss}{28}
-\contentsline {subsubsection}{specularMaskSamples}{28}
-\contentsline {section}{\numberline {3.5}sss}{28}
-\contentsline {subsubsection}{cutout Threshold}{28}
-\contentsline {section}{\numberline {3.6}shaderParameters}{29}
-\contentsline {subsubsection}{Oi}{29}
-\contentsline {section}{\numberline {3.7}AOV}{29}
-\contentsline {subsection}{\numberline {3.7.1}AOV listing}{29}
-\contentsline {chapter}{\numberline {4}ezeDisplacement}{30}
-\contentsline {section}{\numberline {4.1}displace}{31}
-\contentsline {subsubsection}{displacement}{31}
-\contentsline {subsubsection}{textureName}{31}
-\contentsline {subsubsection}{offset}{31}
-\contentsline {subsubsection}{multiplier}{31}
-\contentsline {chapter}{\numberline {5}ezehairDisplacement}{32}
-\contentsline {section}{\numberline {5.1}hairDisplace (soon)}{32}
-\contentsline {subsubsection}{displacement}{32}
-\contentsline {subsubsection}{textureName}{32}
-\contentsline {subsubsection}{offset}{32}
-\contentsline {subsubsection}{multiplier}{33}
-\contentsline {chapter}{\numberline {6}ezeUbber}{34}
-\contentsline {section}{\numberline {6.1}Basic}{35}
-\contentsline {subsubsection}{lighttype}{35}
-\contentsline {subsubsection}{exposure}{36}
-\contentsline {subsubsection}{lightcolor}{36}
-\contentsline {section}{\numberline {6.2}Zshaping and Distance fallOff}{36}
-\contentsline {subsubsection}{cuton, cutoff }{36}
-\contentsline {subsubsection}{nearedge, faredge}{36}
-\contentsline {subsubsection}{falloff }{36}
-\contentsline {subsubsection}{falloffdist}{36}
-\contentsline {subsubsection}{maxintensity}{37}
-\contentsline {subsubsection}{parallelrays }{37}
-\contentsline {section}{\numberline {6.3}Zy Shaping}{37}
-\contentsline {subsubsection}{shearx, sheary}{37}
-\contentsline {subsubsection}{width, height}{37}
-\contentsline {subsubsection}{wedge, hedge}{37}
-\contentsline {subsubsection}{roundness}{37}
-\contentsline {subsubsection}{beamdistribution }{38}
-\contentsline {section}{\numberline {6.4}gobo}{38}
-\contentsline {subsubsection}{slidename}{38}
-\contentsline {section}{\numberline {6.5}Noise}{38}
-\contentsline {subsubsection}{Projected noise on the light}{38}
-\contentsline {subsubsection}{noiseamp}{38}
-\contentsline {subsubsection}{noisefreq }{38}
-\contentsline {subsubsection}{noiseoffset }{39}
-\contentsline {section}{\numberline {6.6}Shadow Mapped}{39}
-\contentsline {subsubsection}{shadowmap }{39}
-\contentsline {subsubsection}{shadowblur }{39}
-\contentsline {subsubsection}{shadowbias }{39}
-\contentsline {subsubsection}{shadownsamps }{39}
-\contentsline {section}{\numberline {6.7}RayTraced}{39}
-\contentsline {subsubsection}{Ray-traced shadows}{39}
-\contentsline {subsubsection}{shadowcheat}{40}
-\contentsline {section}{\numberline {6.8}fake Blocker Shadow}{40}
-\contentsline {subsubsection}{blockercoords}{40}
-\contentsline {subsubsection}{blockerwidth, blockerheight }{40}
-\contentsline {subsubsection}{blockerwedge, blockerhedge }{40}
-\contentsline {subsubsection}{blockerround}{40}
-\contentsline {subsubsection}{shadowcolor }{40}
-\contentsline {section}{\numberline {6.9}Contribution controls}{41}
-\contentsline {subsubsection}{\_\_nonspecular }{41}
-\contentsline {subsubsection}{\_\_nondiffuse }{41}
-\contentsline {subsubsection}{\_\_nonScatter}{41}
-\contentsline {subsubsection}{\_\_nonTransluncence}{42}
-\contentsline {subsubsection}{\_\_nonSubsurface}{42}
-\contentsline {subsubsection}{\_\_nonSpecularMask}{42}
-\contentsline {subsubsection}{\_\_foglight }{42}
-\contentsline {chapter}{\numberline {7}ezeBake}{43}
-\contentsline {section}{\numberline {7.1}Bake}{43}
-\contentsline {subsubsection}{PtcFile}{43}
-\contentsline {subsubsection}{bakeSpace}{43}
-\contentsline {subsubsection}{radius Scale}{43}
-\contentsline {chapter}{\numberline {8}ezeEnvironment}{44}
-\contentsline {section}{\numberline {8.1}Multipliers}{45}
-\contentsline {subsubsection}{Ligth Color}{45}
-\contentsline {subsubsection}{Saturation}{46}
-\contentsline {subsubsection}{KEnv}{46}
-\contentsline {section}{\numberline {8.2}maps}{46}
-\contentsline {subsubsection}{envMap}{46}
-\contentsline {subsubsection}{envSpace}{46}
-\contentsline {subsubsection}{samples}{46}
-\contentsline {subsubsection}{maxDist}{46}
-\contentsline {subsubsection}{bias}{46}
-\contentsline {subsubsection}{coordSyst}{46}
-\contentsline {section}{\numberline {8.3}occlusion}{46}
-\contentsline {subsubsection}{KOcc}{46}
-\contentsline {subsubsection}{Filename}{47}
-\contentsline {subsubsection}{hitSides}{47}
-\contentsline {subsubsection}{maxDist}{47}
-\contentsline {subsubsection}{int}{47}
-\contentsline {subsubsection}{coneAnle}{47}
-\contentsline {subsubsection}{falloff}{47}
-\contentsline {subsubsection}{falloffMode}{47}
-\contentsline {subsubsection}{bias}{47}
-\contentsline {subsubsection}{clamp}{47}
-\contentsline {subsubsection}{maxSolidAngle}{48}
-\contentsline {section}{\numberline {8.4}Category}{48}
-\contentsline {subsubsection}{\_\_category}{48}
-\contentsline {chapter}{\numberline {9}ezeIndirect}{49}
-\contentsline {section}{\numberline {9.1}baked}{50}
-\contentsline {subsubsection}{bakeWorkFlow}{50}
-\contentsline {subsubsection}{bakeIndirectPassName}{50}
-\contentsline {section}{\numberline {9.2}Main}{50}
-\contentsline {subsubsection}{Intensity}{50}
-\contentsline {subsubsection}{environmentFile}{50}
-\contentsline {section}{\numberline {9.3}Quality}{50}
-\contentsline {subsubsection}{Samples}{50}
-\contentsline {subsubsection}{ConeAngle}{50}
-\contentsline {subsubsection}{bias}{50}
-\contentsline {subsubsection}{maxDist}{51}
-\contentsline {subsubsection}{falloff}{51}
-\contentsline {subsubsection}{falloffExponent}{51}
-\contentsline {subsubsection}{hitSides}{51}
-\contentsline {subsubsection}{clamp}{51}
-\contentsline {subsubsection}{sortBleeding}{51}
-\contentsline {subsubsection}{maxSolidAngle}{51}
-\contentsline {section}{\numberline {9.4}PTC}{51}
-\contentsline {subsubsection}{scene Radiosity PTC}{51}
-\contentsline {subsubsection}{scene Indirect PTC}{52}
-\contentsline {subsubsection}{PTC coordinate system}{52}
-\contentsline {section}{\numberline {9.5}indirect Spots}{52}
-\contentsline {chapter}{\numberline {10}uDim reference}{53}
-\contentsline {section}{\numberline {10.1}parameters}{53}
-\contentsline {subsubsection}{on/off}{53}
-\contentsline {subsubsection}{texName}{53}
-\contentsline {subsubsection}{diffuse Maximun U}{53}
-\contentsline {subsubsection}{diffuse frame number}{53}
-\contentsline {subsubsection}{useVariant}{53}
-\contentsline {subsubsection}{variant name}{54}
-\contentsline {subsubsection}{useAnimMap}{54}
-\contentsline {subsubsection}{diffuseFileExt}{54}
-\contentsline {chapter}{\numberline {11}Maya quick start setup}{55}
-\contentsline {section}{\numberline {11.1}Passes}{55}
-\contentsline {subsubsection}{Shadow pass}{55}
-\contentsline {subsubsection}{Bake Pass}{56}
-\contentsline {subsubsection}{indirectBakePass}{56}
-\contentsline {subsubsection}{fullRendePass}{56}
-\contentsline {chapter}{\numberline {12}Maya tips}{57}
-\contentsline {section}{\numberline {12.1}ezeUber maya visualization plugin}{57}
-\contentsline {section}{\numberline {12.2}file path expressions}{57}
-\contentsline {subsubsection}{most used tokens}{57}
+\contentsline {section}{\numberline {2.3}legacy specular}{11}
+\contentsline {subsubsection}{Illum Wrap Angle }{11}
+\contentsline {subsubsection}{overall Specular}{11}
+\contentsline {subsubsection}{primary specular}{12}
+\contentsline {subsubsection}{primary specular roughness}{12}
+\contentsline {subsubsection}{primary specular Color}{12}
+\contentsline {subsubsection}{primary shift}{12}
+\contentsline {subsubsection}{Using Specular Shifts Maps}{12}
+\contentsline {section}{\numberline {2.4}alpha}{12}
+\contentsline {subsubsection}{Overriding shave Surface Oi}{12}
+\contentsline {subsubsection}{alphaMap}{13}
+\contentsline {section}{\numberline {2.5}AOVs}{13}
+\contentsline {subsection}{\numberline {2.5.1}output to standard aovs}{14}
+\contentsline {subsection}{\numberline {2.5.2}aov listing}{14}
+\contentsline {chapter}{\numberline {3}ezeDisplacement}{15}
+\contentsline {section}{\numberline {3.1}displace}{16}
+\contentsline {subsubsection}{displacement}{16}
+\contentsline {subsubsection}{textureName}{16}
+\contentsline {subsubsection}{offset}{16}
+\contentsline {subsubsection}{multiplier}{16}
+\contentsline {chapter}{\numberline {4}ezehairDisplacement}{17}
+\contentsline {section}{\numberline {4.1}hairDisplace (soon)}{17}
+\contentsline {subsubsection}{displacement}{17}
+\contentsline {subsubsection}{textureName}{17}
+\contentsline {subsubsection}{offset}{17}
+\contentsline {subsubsection}{multiplier}{18}
+\contentsline {chapter}{\numberline {5}ezeUbber}{19}
+\contentsline {section}{\numberline {5.1}Basic}{20}
+\contentsline {subsubsection}{lighttype}{20}
+\contentsline {subsubsection}{exposure}{21}
+\contentsline {subsubsection}{lightcolor}{21}
+\contentsline {section}{\numberline {5.2}Zshaping and Distance fallOff}{21}
+\contentsline {subsubsection}{cuton, cutoff }{21}
+\contentsline {subsubsection}{nearedge, faredge}{21}
+\contentsline {subsubsection}{falloff }{21}
+\contentsline {subsubsection}{falloffdist}{21}
+\contentsline {subsubsection}{maxintensity}{22}
+\contentsline {subsubsection}{parallelrays }{22}
+\contentsline {section}{\numberline {5.3}Zy Shaping}{22}
+\contentsline {subsubsection}{shearx, sheary}{22}
+\contentsline {subsubsection}{width, height}{22}
+\contentsline {subsubsection}{wedge, hedge}{22}
+\contentsline {subsubsection}{roundness}{22}
+\contentsline {subsubsection}{beamdistribution }{23}
+\contentsline {section}{\numberline {5.4}gobo}{23}
+\contentsline {subsubsection}{slidename}{23}
+\contentsline {section}{\numberline {5.5}Noise}{23}
+\contentsline {subsubsection}{Projected noise on the light}{23}
+\contentsline {subsubsection}{noiseamp}{23}
+\contentsline {subsubsection}{noisefreq }{23}
+\contentsline {subsubsection}{noiseoffset }{24}
+\contentsline {section}{\numberline {5.6}Shadow Mapped}{24}
+\contentsline {subsubsection}{shadowmap }{24}
+\contentsline {subsubsection}{shadowblur }{24}
+\contentsline {subsubsection}{shadowbias }{24}
+\contentsline {subsubsection}{shadownsamps }{24}
+\contentsline {section}{\numberline {5.7}RayTraced}{24}
+\contentsline {subsubsection}{Ray-traced shadows}{24}
+\contentsline {subsubsection}{shadowcheat}{25}
+\contentsline {section}{\numberline {5.8}fake Blocker Shadow}{25}
+\contentsline {subsubsection}{blockercoords}{25}
+\contentsline {subsubsection}{blockerwidth, blockerheight }{25}
+\contentsline {subsubsection}{blockerwedge, blockerhedge }{25}
+\contentsline {subsubsection}{blockerround}{25}
+\contentsline {subsubsection}{shadowcolor }{25}
+\contentsline {section}{\numberline {5.9}Contribution controls}{26}
+\contentsline {subsubsection}{\_\_nonspecular }{26}
+\contentsline {subsubsection}{\_\_nondiffuse }{26}
+\contentsline {subsubsection}{\_\_nonScatter}{26}
+\contentsline {subsubsection}{\_\_nonTransluncence}{27}
+\contentsline {subsubsection}{\_\_nonSubsurface}{27}
+\contentsline {subsubsection}{\_\_nonSpecularMask}{27}
+\contentsline {subsubsection}{\_\_foglight }{27}
+\contentsline {chapter}{\numberline {6}uDim reference}{28}
+\contentsline {section}{\numberline {6.1}parameters}{28}
+\contentsline {subsubsection}{on/off}{28}
+\contentsline {subsubsection}{texName}{28}
+\contentsline {subsubsection}{diffuse Maximun U}{28}
+\contentsline {subsubsection}{diffuse frame number}{28}
+\contentsline {subsubsection}{useVariant}{28}
+\contentsline {subsubsection}{variant name}{29}
+\contentsline {subsubsection}{useAnimMap}{29}
+\contentsline {subsubsection}{diffuseFileExt}{29}
+\contentsline {chapter}{\numberline {7}Maya quick start setup}{30}
+\contentsline {section}{\numberline {7.1}Passes}{30}
+\contentsline {subsubsection}{Shadow pass}{30}
+\contentsline {subsubsection}{Bake Pass}{31}
+\contentsline {subsubsection}{indirectBakePass}{31}
+\contentsline {subsubsection}{fullRendePass}{31}
+\contentsline {chapter}{\numberline {8}Maya tips}{32}
+\contentsline {section}{\numberline {8.1}ezeUber maya visualization plugin}{32}
+\contentsline {section}{\numberline {8.2}file path expressions}{32}
+\contentsline {subsubsection}{most used tokens}{32}

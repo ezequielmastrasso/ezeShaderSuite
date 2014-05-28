@@ -44,18 +44,18 @@ Bottom row: some of the many hair AOVs outputs
 
 \section{key features}
 \subsection{ezeHair key features}
+-Full raytrace shader\\
 -marchsner hair diffuse model\\
-\noindent -environmental lights, occlusion and indirect diffuse ready\\
-\noindent -baked maps capabilities to skip heavy lighting calculations\\
-\noindent -2 specular layers\\
+\noindent -3delight studio 11 raytrace environmental lights, occlusion and indirect diffuse ready\\
+\noindent -2 legacy specular layers (artist friendlier)\\
 \noindent -extensive root/tips controls including color, darkening, alpha and ambient and maps for each\\
 \noindent -all maps slots support uDim maps type\\
 
-\subsection{ezeSurface key features}
--multiple diffuse and specular colors\\
-\noindent -environmental lights, occlusion and indirect diffuse ready\\
-\noindent -specular mask shape for alpha masking the specular highlights\\
-
+\section{compiling}
+\subsection{all platforms}
+-shaderdl -I<directory> <shaderName>.sl \\
+\\
+In directory, supply your \$3DELIGHT/maya/rsl directory, where global\_illumination.h and fluid\_utils.h are found
 
 %--------------------------------------EZEHAIR--------------------------------------------
 \chapter{ezeHair}
@@ -94,18 +94,38 @@ If working In linear space and want to linearize your textures at render time, y
 Note: Diffuse AOV contains the contribution from all direct lights and ezeEnvironment/ezeIndirect
 
 \subsubsection {Kd}
-Kd is a diffuse lighting multiplier. This will of course affect all kind of lighting, except if using the Ambient override to use a prebaked map for fur.
+Kd is the direct lighting multiplier.
 \smallskip
 \subsubsection {Ki}
-is the indirect diffuse lighting multiplier (any light contributing to the indirectDiffuse ie ezeIndirect).
-Keep in mind There is also global multiplier on the ezeIndirect shader.
+the indirect diffuse lighting multiplier (any light contributing to the indirectDiffuse, and environments).
 \smallskip
-\subsubsection {Ka}
-Ka is an ambient multiplier
+
+
+\subsubsection {i\_color}
+XXX
 \smallskip
-\subsubsection {Illum Wrap Angle }
-Illum Wrap Angle refers to the light wrapping angle of the light on the hair strand as a cylinder. The bigger the angle the more illumination it will show from side and back lights
+\subsubsection {i\_thickness}
+hair thickness
 \smallskip
+\subsubsection {i\_tint}
+environment lighting tint
+\smallskip
+\subsubsection {i\_samples}
+trace samples for environment lighting
+\smallskip
+
+\subsubsection {i\_xxx\_r (roughness)}
+shift of the primary specular toward the the root.
+\smallskip
+\subsubsection {i\_xxx\_tt (forward scattering)}
+a strong forward scattering component from the light coloured hair. This causes blond, brown, gray and white hair to look very bright when lit from behind
+\smallskip
+\subsubsection {i\_xxx\_r (TRT )}
+-coloured secondary peak shifter toward the top from the white primary specular peak.
+In a head of hair this leads to the secondary highlight that is visible just above the primary, sometimes appearing more as a coloured fringe on the primary than a separate feature\\
+\smallskip
+
+
 \subsubsection {Tip and root Colors, multipliers, controls and masks}
 You can use tip and root colors by themselves. When adding a map, the map will be multiplied by the tip and root colors according with the root and tip position. 
 The position will control the ramp start and end points for the texture tip and root blend, saying that the hair strand root is 0 and the tip is 1.\\
@@ -118,64 +138,13 @@ If you want to use shaves root/tip colors,leave the maps blank, the colors to wh
 
 \noindent In Figure~{\ref{pic:ezeHairDarkening.jpg}}, ezeHair shader parameters.
 
-%-------------------------------------------------------------
-\section {ambient}
-\subsubsection {Ambient tip root controls}
-Control the ambient light fake for the tip and root using tipAmbientLightColor and rootAmbientLightColor.
-\smallskip
-\subsubsection {Tip root Ambient Control maps}
-If you want to avoid calculating occlusion on the fly or basically want to have different ambient values, you specify a map in here, and you will get the full control over tip bright/dark colors and root bright/dark colors according to the map!
-An extra color multiplier for the tip and the root with ramp start/end points control that can be mask with a image.
-
-\begin{picture}(0,255)
-\put(0,0){\includegraphics[scale=.5]{shadersDocumentationImages/ezeHairAmbientMaps.jpg}}
-\label{pic:ezeHairAmbientMaps}
-\end{picture}
-
-\noindent In Figure~{\ref{pic:ezeHairAmbientMaps}}, ezeHair fake ambient Map coloring.
-
-\smallskip
-\subsubsection {ambientGamma}
-Use this parameter to control the gamma of the texture Mask.\\
-The actual blended colors will retain the gamma value from the diffuse tab.
-
-\smallskip
-\subsubsection {darkening controls and darkening masks}
-Controls the root and tip darkening, start/end points of the darkening and an optional mask map for the effect.
-\\
-
-\subsubsection {ambientOccludeEnvLights}
-If On, ezeEnvironment light will skip occlusion calculation and use the ambient map instead to occlude the sampled environment map.
-This is handy to speed up renders by skipping occlusion on the hair, or to fake the occlusion with a baked map but with some drawbacks \& limitations, see below\\
-
-
-\begin{picture}(150,130)
-\put(0,0){\includegraphics[scale=.5]{shadersDocumentationImages/ezeHairUseAmbientMapEnv.jpg}}
-\label{pic:ezeHairUseAmbientMapEnv}
-\end{picture}
-
-\noindent In Figure~{\ref{pic:ezeHairUseAmbientMapEnv}}, As you can see on the comparison, the occlusion is lost on the tips as the Ambient map here was  calculated  from the geometry. A quick fix for this would be to bake the hair occlusion as described on Pixars paper on Ratatouille.
 
 %-------------------------------------------------------------
-\section {scatter}
-
-\begin{picture}(0,160)
-\put(0,0){\includegraphics[scale=.32]{shadersDocumentationImages/ezeHairScatter.jpg}}
-\label{pic:ezeHairScatter}
-\end{picture}
-
-\noindent In Figure~{\ref{pic:ezeHairScatter}}, ezeHair backScatter shader parameters.
-\subsubsection {settings}
--Forward scatter multiplier\\
--Scatter roughness\\
--Back scatter multiplier\\
--Seen width\\
--Scatter Color\\
--Scatter Map\\
+\section {legacy specular}
+\subsubsection {Illum Wrap Angle }
+Illum Wrap Angle refers to the light wrapping angle of the light on the hair strand as a cylinder. The bigger the angle the more illumination it will show from side and back lights
 \smallskip
-%-------------------------------------------------------------
-\section {specular}
-Get the maya sample scenes file from the website to get the shift map that you can use for the specular shift.
+Get the maya sample scenes file from the website to get the shift map that you can use for the specular shift.\\
 \begin{picture}(0,320)
 \put(0,0){\includegraphics[scale=.3]{shadersDocumentationImages/ezeHairSpecularWet.jpg}}
 \label{pic:ezeHairSpecularWet}
@@ -204,6 +173,7 @@ This map is included in the maya scene samples texture/ folder.
 \smallskip
 %-------------------------------------------------------------
 \section {alpha}
+If using full tracing, leave the default parameters (override geometry opacity On, and opacity 1 in root and tip for perfomance!!)\\
 Either you overriding the Oi, using shaves root/tip transparency, or using a map remember to check Use Surface Shaders in shadow pass!\\
 Note:ezeShaders will skip any lighting/sss calculation while not in "finalRenderPass".\\
 If you are using any other shaders you might need to use a shaderCollection override for the shadow pass to avoid unnecessary calculations.
@@ -220,51 +190,8 @@ this map will multiply the opacity values wether you use the Oi or the alpha ove
 
 
 \smallskip
-%-------------------------------------------------------------
-\section {translucense}
-\begin{picture}(0,270)
-\put(0,0){\includegraphics[scale=.33]{shadersDocumentationImages/ezeHairTranslucence.jpg}}
-\label{pic:ezeHairTranslucence}
-\end{picture}
 
-\noindent In Figure~{\ref{pic:ezeHairTranslucence}}, ezeHair shader AOV\_hair\_translucence.
-\\
-\begin{picture}(0,240)
-\put(0,0){\includegraphics[scale=.65]{shadersDocumentationImages/ezeHairTranslucence2.jpg}}
-\label{pic:ezeHairTranslucence2}
-\end{picture}
 
-\noindent In Figure~{\ref{pic:ezeHairTranslucence2}}, ezeHair shader AOV\_hair\_translucence.
-
-\subsubsection {Focus}
-depth of the translucence effect
-\smallskip
-\subsubsection {translucence}
-multiplier for the effect
-\smallskip
-\subsubsection {translucence color}
-multiplier (coming soon)
-\smallskip
-\subsubsection {translucence map}
-multiplier (coming soon)
-\smallskip
-\subsubsection {gamma}
-controls the gamma for the effect
-\smallskip
-%-------------------------------------------------------------
-\section {sss}
-For SSS to work under 3delight, attach a geometryAttr node to the hair and add the sss attributes and specify a group.
-The same group should be specified in the shader.\\
-Recommended parameters for the sss attributes:\\
--Hair does not need dicing, you can add a shading rate multiplier and set it to 20 and add a DiceHair attribute and check it on.\\
--If you are baking the hair on a separate pass to a ptc to later read, you can scale the dice size to get a smoother look (ezeBake shader includes this parameter!)
-\subsubsection {maps}
-\textbf{Cutout:} This map will control where to skip sss calculation. This will speed up your renders quite a lot by isolating the calculation of the effect. Pure black means skip (check the threshold parameter).
-It is recommended to use the color map IF using a color map, and theres no need for a custom cutout map (Still not implemented)\\
-\textbf{cutout Threshold}:\\
-Use to set the threshold for the sss skip.\\
-\textbf{color:} Multiplier for the sss color\\
-\smallskip
 %-------------------------------------------------------------
 \section {AOVs}
 If you plan to use a composition software as Nuke to make your final image, you might want to take advantage of the fact that the multipliers for each effect are not taken into account on the aovs outputs.
@@ -275,11 +202,6 @@ Shader).
 \subsection {aov listing}
 output varying color aov\_hair\_diffuse\\
 output varying color aov\_hair\_indirect\\
-output varying color aov\_hair\_totalscatter\\
-output varying color aov\_hair\_frontscatter\\
-output varying color aov\_hair\_backscatter\\
-output varying color aov\_hair\_ambient\\
-output varying color aov\_hair\_translucence\\
 output varying color aov\_hair\_surfaceColor\\
 output varying color aov\_hair\_totalspecular\\
 output varying color aov\_hair\_primaryspecular\\
@@ -289,7 +211,7 @@ output varying color aov\_hair\_v\\
 output varying color aov\_indirect\\
 \smallskip
 
-\noindent if output to standard aovs is checked, the shader will also contribute to the common ezeSurface aovs\\
+\noindent if output to standard aovs is checked, the shader will also contribute to the common aovs\\
 \\
     output varying color aov\_specular = aov\_hair\_totalSpecular\\
     output varying color aov\_diffuse = aov\_hair\_diffuse\\ 
@@ -300,159 +222,7 @@ output varying color aov\_indirect\\
 
 
 
-%--------------------------------------EZESurface-----------------------------------------
-\chapter{ezeSurface}
-\begin{picture}(0,320)
-\put(0,0){\includegraphics[scale=.32]{shadersDocumentationImages/ezeSurfaceParams.jpg}}
-\label{pic:ezeSurfaceWide}
-\end{picture}
 
-\noindent In Figure~{\ref{pic:ezeSurfaceWide}}, ezeSurface shader parameters
- Interface.
-
-\begin{picture}(0,250)
-\put(0,0){\includegraphics[scale=.28]{shadersDocumentationImages/ezeSurfaceGnomoAovs.jpg}}
-\label{pic:ezeSurfaceGnomoAovs}
-\end{picture}
-
-\noindent In Figure~{\ref{pic:ezeSurfaceGnomoAovs}}, ezeSurface finalRenderPass and some AOVs outputs
- 
-\section {diffuse}
-
-Passes configuration
-
-
-\subsubsection {fullPassName}
-This parameter is for specifying the pass name in which the beauty render takes place.
-In this particular pass everything is calculated and sampled. If not in this pass the subsurface, specular, indirect, and occlusion contributions are skipped (not needed for occlusion, or indirect lighting when baking ptc/bkm, etc.)\\
-For skipping occlusion/indirect lights It specifically skips the one belonging to \_cat: envLight.\\
-\subsubsection {bakePassName}
-In this section you can specify the bake pass and the target ptc file to avoid using a shader collection override on the objects at the bake pass.
-Use the same ptc file in several shaders and they will all concurrently write the information to the file.
-You can also leave this passName parameter blank nd use ezeBake in your bake pass instead.
-\smallskip
-\subsubsection {Kd}
-diffuse lighting multiplier 
-\smallskip
-\subsubsection {Ki}
-the indirect diffuse lighting multiplier any light contributing to the indirectDiffuse\_AOV, ie ezeIndirect.
-Theres also a multiplier in ezeIndirectShader
-\smallskip
-\subsubsection {Ka}
-ambient value (independent from the ambientLights on the scene
-\smallskip
-\subsubsection {KdColor}
-diffuse color to use if the map is not specified. If there is a map, the map will be multiplied by this color.
-\smallskip
-\subsubsection {diffuse}
-color map
-\smallskip
-\subsubsection {Gamma }
-Gamma for the diffuse map and the KdColor
-If working In linear space and want to linearize your textures at render time, you can set this to 0.454.\\
-NOTE!: it is recommended to linearize the textures before hand using tdlmake. You using tdl files? Why not linearizing the texture when converting them?
-Refer to 3delight help on “why not!” using this setting.
-
-\subsection{diffuseModels}
-Here you can choose between a variety of diffuse models for achieving different looks:\\
-\begin{picture}(0,290)
-\put(0,0){\includegraphics[scale=.30]{shadersDocumentationImages/ezeSurfaceDiffuse.jpg}}
-\label{pic:ezeSurfaceDiffuse.jpg}
-\end{picture}
-
-\noindent In Figure~{\ref{pic:ezeSurfaceDiffuse.jpg}}, ezeSurface diffuse shader parameters.
-
-\smallskip
-%-------------------------------------------------------------
-\section {bump}
-\subsubsection {Map}
-Map to use for the bump (normal map option coming soon)
-\smallskip
-\subsubsection {Depth}
-depth of the bump effect
-\smallskip
-%-------------------------------------------------------------
-\section {specular}
-\subsection{specularModels}
-Here you can choose between a variety of Specular models for achiving different looks\\
-\begin{picture}(0,290)
-\put(0,0){\includegraphics[scale=.30]{shadersDocumentationImages/ezeSurfaceSpecular.jpg}}
-\label{pic:ezeSurfaceSpecular.jpg}
-\end{picture}
-
-\noindent In Figure~{\ref{pic:ezeSurfaceSpecular.jpg}}, ezeSurface specular shader parameters.
-
-\noindent NOTE: Some of this specular models are intended to use the surface normals disregarding the bump.
-\smallskip
-%-------------------------------------------------------------
-\section {specularMaskShape}
-\begin{picture}(0,360)
-\put(0,0){\includegraphics[scale=.5]{shadersDocumentationImages/ezeSurfaceSpecularMask.jpg}}
-\label{pic:ezeSurfaceSpecularMask}
-\end{picture}
-\noindent In Figure~{\ref{pic:ezeSurfaceSpecularMask}}, ezeSurface specularMaskShape sample values.
-
-This parameter is used for masking specular highlights with a map. 
-The map is projected in 3d space from the light incident vector onto the surface to mask its specular contribution.\\\\
-For further control ezeUber light shader has a specular mask contribution slider to attenuate or disable this effect on any light.
-
-
-\begin{picture}(0,330)
-\put(0,0){\includegraphics[scale=.5]{shadersDocumentationImages/ezeSurfaceSpecularMaskDia.jpg}}
-\label{pic:ezeSurfaceSpecularMaskDia}
-\end{picture}
-
-\noindent In Figure~{\ref{pic:ezeSurfaceSpecularMaskDia}}, ezeSurface specularMaskShape demostrative diagram.\\
-
-\subsubsection {useSpecularMask}
-Turns on/off the masking
-\subsubsection {specularMaskRot}
-Rotates the map projection on the light incident axis
-\subsubsection {specularMaskScaleU}
-scales the projection width
-\subsubsection {specularMaskScaleV}
-scales the projection height
-\subsubsection {specularMaskSurfaceFalloff}
-Fades the maps over the surface glazing angle (from the light point of view that is)
-\subsubsection {specularMaskMap}
-Specify an rgb map here.
-\subsubsection {specularMaskGloss}
-Leave this at 0 to get the mask without blurring. \\
-Expect higher rendering times from this! This parameters uses the gather function, 
-\subsubsection {specularMaskSamples}
-Samples for the gloss setting
-
-
-%-------------------------------------------------------------
-\section {sss}
-For SSS to work under 3delight, attach a geometryAttr node to the hair and add the sss attributes and specify a group. The same group should be specified in the shader.\\
-
--If you are baking on a separate pass to a ptc to later read, you can scale the dice size to get a smoother look ( ezeBake shader includes this parameter) 
-\subsubsection {cutout Threshold}
-Use to set the threshold for the sss skip. This value compared against the texture value or the sss color if not texture is used. \\
-0.07 is a good start point as at that value the sss effect will probably go unnotice.\\
-\textbf{color}: Multiplier for the sss color
-
-%-------------------------------------------------------------
-\section {shaderParameters}
-\subsubsection {Oi}
-Surface Opacity multiplier (more parameters on transparency coming soon)
-\smallskip
-
-%-------------------------------------------------------------
-\section {AOV}
-If you plan to use a composition software as Nuke to make your final image, you might want to take advantage of the fact that the multipliers for each effect are not taken into account on the aovs outputs.
-For ie: Setting the translucence multiplier to 0.01, it will make it virtually invisible on the final render, but the aov will contain the proper values as calculated in the shader prior to the multiplication.
-
-\subsection {AOV listing}
-    output varying color aov\_specular\\
-    output varying color aov\_diffuse\\
-    output varying color aov\_ambient\\
-    output varying color aov\_surfaceColor\\
-    output varying color aov\_subsurface\\
-    output varying color aov\_indirect\\
-    output varying color aov\_refraction\\
-\smallskip
 
 \chapter{ezeDisplacement}
 \begin{picture}(0,290)
@@ -694,215 +464,8 @@ See ezeSurface Specular masks section for more information on this
 the "noisysmoke" shader distributed with BMRT will add  atmospheric scattering only for those lights that have this  parameter set to 1 (the default).  In other words, if you use  this light with noisysmoke, you can set this flag to 0 to  make a particular light *not* cause illumination in the fog.  Note that the noisysmoke shader is distributed with BMRT, but  will also work just fine with PRMan (3.7 or later).
 \smallskip
 
-%--------------------------------------EZEBake-----------------------------------------
-\chapter{ezeBake}
-Although ezeSurface contains all the baking parameters and handles the baking skipping complex lighting calculation, this shader is supplied for the sake of having a separated shader to fulfil all your baking needs.
-\section {Bake}
-\subsubsection {PtcFile}
-ptc file to bake
-\smallskip
-\subsubsection {bakeSpace}
-Coordinate System in which to bake the points. Refer to 3delight docs for coord system help.
-\smallskip
-\subsubsection {radius Scale}
-Scale multiplier for the microPolygon radii, usefull when baking lower shading rate ptcs. Refer to 3delight docs for more on this subject.
-\smallskip
 
 
-\chapter{ezeEnvironment}
-
-\begin{picture}(0,290)
-\put(0,0){\includegraphics[scale=.24]{shadersDocumentationImages/ezeEnvironmentFurBall.jpg}}
-\label{pic:ezeEnvironmentFurBall}
-\end{picture}
-
-\noindent In Figure~{\ref{pic:ezeEnvironmentFurBall}}, ezeHair hairBall and ezeSurface ball iluminated by 1 ezeEnvLight latitude longitude hdri map (notice the hair contributing to the occlusion).
-
-\begin{picture}(0,370)
-\put(0,0){\includegraphics[scale=.5]{shadersDocumentationImages/ezeEnvironmentHead.jpg}}
-\label{pic:ezeEnvironmentHead}
-\end{picture}
-
-\noindent In Figure~{\ref{pic:ezeEnvironmentHead}}, ezeSurface iluminated by a ezeEnvLight latitude longitude hdri map (generated with tdlmake default values) with occlusion shadows (ptc based), subsurface, ward anisotropic specs and 2 ezeUbbers.
-
-\section {Multipliers}
-%-------------------------------------------------------------
-\subsubsection {Ligth Color}
-Multiplier for the envMap 
-\smallskip
-\subsubsection {Saturation}
-saturation multiplier for the envMap
-\smallskip
-\subsubsection {KEnv}
-exposure control for the envMap
-\smallskip
-%-------------------------------------------------------------
-\section {maps}
-\subsubsection {envMap}
-is the map for the env, it should be a lat/long map in 32Bits float linear space.
-Please note that this map is necessary and if not supplied the light will not work.
-\smallskip
-\subsubsection {envSpace}
-world
-\smallskip
-\subsubsection {samples}
-number of samples for convultion, set to 0 to use ?????????
-\smallskip
-\subsubsection {maxDist}
-
-\smallskip
-\subsubsection {bias}
-
-\smallskip
-\subsubsection {coordSyst}
-Use World or Create a 3delight coordSystem and set the shape name here to be able to rotate the map.
-\smallskip
-
-%-------------------------------------------------------------
-\section {occlusion}
-\subsubsection {KOcc}
-turns on/off the occlusion calculation
-\smallskip
-\subsubsection {Filename}
-point to the scene ptc file for the occlusion
-\smallskip
-\subsubsection {hitSides}
-options: front/back/both, usually you want to keep this setting to both
-\smallskip
-\subsubsection {maxDist}
-maximum search distance for surrounding light occluding geometry, if greater than this distance the environment map kicks in
-\smallskip
-\subsubsection {int}
-intensity of the occlusion shadow, 0 means pure shadows are black, 0.5 means middle gray, and 1 is white (same effect as turning it off)
-\smallskip
-\subsubsection {coneAnle}
-the search cone angle from the sampled point
-\smallskip
-\subsubsection {falloff}
-0 or 1, turns it on and off
-\smallskip
-\subsubsection {falloffMode}
-1 linear, 2 quadratic., 3 square
-\smallskip
-\subsubsection {bias}
-offset the sample point from the geometry along the normal, usually helpful when using displacements
-\smallskip
-\subsubsection {clamp}
-this parameter should be on by default, avoids overshadowing.
-\smallskip
-\subsubsection {maxSolidAngle}
-a quality/speed parameter, 0.04 should be a good start point (0.2 will speed things up at quality expense, 0.01 will be better looking but slower)
-\smallskip
-
-%-------------------------------------------------------------
-\section {Category}
-\subsubsection {\_\_category}
-a string with the category name this light belongs to. “envLight”  is the default value as the hair shader will treat this lights differently and turns off occlusion (Kocc) when occlusion baked maps are used.
-\smallskip
-%-------------------------------------------------------------
-
-
-
-
-\chapter{ezeIndirect}
-\begin{picture}(0,280)
-\put(0,0){\includegraphics[scale=.52]{shadersDocumentationImages/ezeIndirect.jpg}}
-\label{pic:ezeIndirect}
-\end{picture}
-
-\noindent In Figure~{\ref{pic:ezeIndirect}}, ezeIndirect parameters
-
-\section {baked}
-%-------------------------------------------------------------
-\subsubsection {bakeWorkFlow}
-This is the Recommended way to do indirect Diffuse. If On, it will pre process a ptc file with indirect lighting information and sample the lighting from there in the final pass.
-If Off it will do oldSchool raytrace type indirect lighting, feeding from the Radiosity PTC file.
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {bakeIndirectPassName}
-If bakeWorkFlow is on, this passName will be compared to the current one to switch betweend baking and reading modes.
-\smallskip
-%-------------------------------------------------------------
-
-
-\section {Main}
-%-------------------------------------------------------------
-\subsubsection {Intensity}
-Intensity multiplier for the light effect, this multiplier does not affect the baked light intensity, only the readed from ptc and on the fly.
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {environmentFile}
-(this parameter is obsolete at this time and will be removed) to use as a background sample, leave this blank if using ezeEnvironment
-\smallskip
-%-------------------------------------------------------------
-
-
-\section {Quality}
-%-------------------------------------------------------------
-\subsubsection {Samples}
-turns on/off the occlusion calculation
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {ConeAngle}
-
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {bias}
-offset the sample point from the geometry along the normal, usually helpful when using displacements
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {maxDist}
-maximum search distance for surrounding light bleeding.
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {falloff}
-0 or 1, turns it on and off
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {falloffExponent}
-1 linear, 2 quadratic., 3 square
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {hitSides}
-options: front/back/both, usually you want to keep this setting to both
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {clamp}
-this parameter should be on by default, avoids overshadowing.
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {sortBleeding}
-Will sort geometry from the sampled point to calculate indirect light occlusion from other geometry.
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {maxSolidAngle}
-a quality/speed parameter, 0.04 should be a good start point (0.2 will speed things up at quality expense, 0.01 will be better looking but slower)
-\smallskip
-%-------------------------------------------------------------
-
-
-
-\section {PTC}
-Only used when bakedWorkFlow is selected
-%-------------------------------------------------------------
-\subsubsection {scene Radiosity PTC}
-Specify here the ptc contaning the micro polygon size/radiosity channels to use for indirect calculations.
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {scene Indirect PTC}
-If bakeWorkFlow is On, this file will be created when in the bakeIndirectPass name specified and read on the finalRenderPass.
-\smallskip
-%-------------------------------------------------------------
-\subsubsection {PTC coordinate system}
-world
-\smallskip
-%-------------------------------------------------------------
-
-\section {indirect Spots}
-%-------------------------------------------------------------
-Not implemented yet, This parameter actives the spotlight isolation for the indirect effect.
-\smallskip
-%-------------------------------------------------------------
 
 
 %--------------------------------------uDim--------------------------------------------
