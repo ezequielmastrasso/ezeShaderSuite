@@ -2,7 +2,7 @@
 #include <fluid_utils.h>
 #include <../ezeDelightCommon/ezeDelightCommon.sl>
 
-surface hairTrace(
+surface ezeHair(
 				//-----------------------------------------------------------------//
 				//LINEAR
 				//-----------------------------------------------------------------//
@@ -12,6 +12,7 @@ surface hairTrace(
 				
 				uniform float linear=1;
 				uniform float gamma=0.454;
+				color hair_id=1;
 				
 				
 				//-----------------------------------------------------------------//
@@ -319,7 +320,9 @@ surface hairTrace(
 						output varying color aov_hair_secondary_specular = 0;
 						output varying color aov_hair_specularMap = 0;
 						output varying color aov_hair_v=0;
+						output varying color aov_hair_id = 0;
 						output varying color aov_indirect = 0;
+						
 
 				
 )
@@ -670,7 +673,7 @@ aov_hair_total_specular = hair_specular*overall_specular;
 aov_hair_specularMap = 1;
 aov_hair_v=v;
 aov_indirect = indirect_lighting;
-
+aov_hair_id=hair_id;
 
 
 
