@@ -4,7 +4,6 @@
 ####Please Read: 
 
 
-#####Check the Develop Branch for the latests tested commits!
 
 ###Want to Contribute?
 
@@ -30,6 +29,12 @@ forum.
 
 changeLog
 ---------------
+#### v2.0
+##### big Changes!!!
+##### ezeHair re writtne as fully traced, working with 3delight studio 11 new raytracer
+##### Documentation updated to match the new shaders parameters
+##### ezeEnvironment removed ezeBake:<br />
+
 #### v1.8
 ##### all ezeShaders:<br />
   -ezeEnv removed, update to 3delight Studio 11 just raytrace it!
