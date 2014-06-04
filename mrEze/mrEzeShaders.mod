@@ -1,0 +1,4 @@
++ MAYAVERSION:2014 PLATFORM:win64 mrEzeShaders 1.00.00 build
+scripts: linux-2014
+MI_CUSTOM_SHADER_PATH+:=linux-2014
+SCRIPTS+:=linux-2014

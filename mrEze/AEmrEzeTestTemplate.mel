@@ -1,0 +1,22 @@
+global proc AEKSHairTemplate ( string $nodeName )
+{
+	AEswatchDisplay $nodeName;
+
+	editorTemplate -beginScrollLayout; 
+
+	editorTemplate -beginLayout "KSHair Attributes" -collapse 0 ;
+		editorTemplate -addControl "ambient";
+		editorTemplate -addControl "diffuse";
+		editorTemplate -addControl "specular";
+		editorTemplate -addControl "exponent";
+		editorTemplate -addControl "transparency";
+	editorTemplate -endLayout;	
+
+	editorTemplate -endScrollLayout;
+
+	editorTemplate -suppress "caching"; 
+	editorTemplate -suppress "nodeState";
+	editorTemplate -suppress "FrameBufferWriteOperation";
+	editorTemplate -suppress "FrameBufferWriteFlags";
+	editorTemplate -suppress "FrameBufferWriteFactor";
+}
