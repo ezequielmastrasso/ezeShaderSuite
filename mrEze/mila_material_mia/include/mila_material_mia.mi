@@ -8,6 +8,7 @@
 #	mia replacement using mila													#
 #	vaguely based on the mental ray for maya help mia replacement (legacy		# 
 #	code no longer working)														#
+#	except that the translucense is mixed with diffuse, not transmission		#
 #*******************************************************************************#
 # Updates:																		#
 #	-25/09/2015:	*															#
@@ -38,7 +39,6 @@ color
 	scalar 		"scatter_light_storage_gamma"	default 0.750,		#: min 0.05 max 1.8
 	scalar 		"scatter_scale_conversion"		default 1.0,		#: min 0.0 max 100
 	scalar 		"scatter_resolution"			default 1,			#: min 0.0 max 1.5
-	scalar 		"scatter_quality"				default 1,			#: min 0.0 max 1.5
 
 	boolean		"refl"							default off,
 	scalar		"refl_weight"					default 1.0,		#: min 0.0 softmax 1.0
@@ -58,6 +58,8 @@ color
     scalar  	"refl_exponent"           		default 5.0, 		#: min 0.1 softmax 25
 
 	boolean		"thin_walled"					default off,
+
+	scalar		"visibility"					default 1,
 
 	boolean		"transparency"					default off,
 	color		"transparency_color"			default 1 1 1,
@@ -92,7 +94,18 @@ color
 	vector 		"diffuse_bump"					,
 	vector 		"overall_bump"					,
 
-	scalar		"gamma"							default 0.454
+	scalar		"diffuse_gamma"					default 0.454,
+	scalar		"scatter_front_tint_gamma"		default 0.454,
+	scalar		"scatter_back_tint_gamma"		default 0.454,
+	scalar		"refl_color_gamma"				default 0.454,
+	scalar		"refl_falloff_color_gamma"		default 0.454,
+	scalar		"refr_color_gamma"				default 0.454,
+	scalar		"refr_falloff_color_gamma"		default 0.454,
+	scalar		"transparency_color_gamma"		default 0.454,
+	scalar		"refr_translucency_color_gamma"	default 0.454,
+
+	scalar		"emission_color_gamma"			default 0.454,
+
 
 	#
 	#Legacy parameters list
