@@ -1,0 +1,350 @@
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+// Dimming helper functions
+
+// Get the value of the attribute, and return true if the value indicates
+// that we should dim the control (ie. the value is not 1)
+// If $inv is true, invert the result
+global proc int AEmila_material_miaGetDimValue(string $node, string $attr, int $inv) {
+	string $fullAttr = $node + "." + $attr;
+	float $value = `getAttr $fullAttr`;
+	int $result = ($value != 1.0);
+	return ($inv ? !$result : $result);
+}
+
+// Dim the control associated with $affectAttr on $nodeName given the value
+// of the attribute $checkAttr on $nodeName (possibly invert the behaviour)
+global proc AEmila_material_miaDimControl(string $nodeName, string $affectAttr, string $checkAttr, int $inv) {
+	int $value = AEmila_material_miaGetDimValue($nodeName, $checkAttr, $inv);
+	editorTemplate -dimControl $nodeName $affectAttr $value;
+}
+
+// Dim the control associated with $affectAttr on $nodeName if ANY of the
+// attributes in $checkAttrs indicates that the control should be dimmed (with
+// possible inversion on a per checkAttr basis)
+global proc AEmila_material_miaDimControlMultiCond(string $nodeName, string $affectAttr, string $checkAttrs[], int $inv[]) {
+	int $total = (size($checkAttrs) > size($inv) ? size($inv) : size($checkAttrs));
+	for ($i=0; $i<$total; $i++) {
+		if (AEmila_material_miaGetDimValue($nodeName, $checkAttrs[$i], $inv[$i])) {
+			editorTemplate -dimControl $nodeName $affectAttr 1;
+			return;
+		}
+	}
+	editorTemplate -dimControl $nodeName $affectAttr 0;
+}
+
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+// Common attribute editor creation code, shared between mila_material_mia_material and mila_material_mia_material_x
+
+global proc AEmila_material_miaMaterialDiffuse() {
+	editorTemplate -beginLayout "diffuse" -collapse 0;
+		editorTemplate -label "diffuse"
+			-annotation "diffuse"
+			-addControl "diffuse";
+		editorTemplate -label "diffuse_weight"
+			-annotation "diffuse_weight"
+			-addControl "diffuse_weight";
+		editorTemplate -label "diffuse_roughness"
+			-annotation "diffuse_roughness"
+			-addControl "diffuse_roughness";
+	editorTemplate -endLayout;
+}
+
+//*********************************************************************************************************************
+global proc AEmila_material_miaCheckScatterl(string $nodeName) {
+	AEmila_material_miaDimControl($nodeName, "scatter_weight", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_front_tint", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_front_weight", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_front_radius", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_front_radius_mod", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_back_tint", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_back_weight", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_back_radius", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_back_radius_mod", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_back_depth", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_back_depth", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_sampling_radius_mult", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_light_storage_gamma", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_scale_conversion", "scatter", 0);
+	AEmila_material_miaDimControl($nodeName, "scatter_resolution", "scatter", 0);
+}
+global proc AEmila_material_miaMaterialScatter() {
+	editorTemplate -beginLayout "scatter" -collapse 0;
+		editorTemplate -label "scatter"
+			-annotation "scatter"
+			-addControl "scatter" "AEmila_material_miaCheckScatterl";
+		editorTemplate -label "scatter_weight"
+			-annotation "scatter_weight"
+			-addControl "scatter_weight";
+		editorTemplate -label "scatter_front_tint"
+			-annotation "scatter_front_tint"
+			-addControl "scatter_front_tint";
+		editorTemplate -label "scatter_front_weight"
+			-annotation "scatter_front_weight"
+			-addControl "scatter_front_weight";
+		editorTemplate -label "scatter_front_radius"
+			-annotation "scatter_front_radius"
+			-addControl "scatter_front_radius";
+		editorTemplate -label "scatter_front_radius_mod"
+			-annotation "scatter_front_radius_mod"
+			-addControl "scatter_front_radius_mod";
+		editorTemplate -label "scatter_back_tint"
+			-annotation "scatter_back_tint"
+			-addControl "scatter_back_tint";
+		editorTemplate -label "scatter_back_weight"
+			-annotation "scatter_back_weight"
+			-addControl "scatter_back_weight";
+		editorTemplate -label "scatter_back_radius"
+			-annotation "scatter_back_radius"
+			-addControl "scatter_back_radius";
+		editorTemplate -label "scatter_back_radius_mod"
+			-annotation "scatter_back_radius_mod"
+			-addControl "scatter_back_radius_mod";
+		editorTemplate -label "scatter_back_depth"
+			-annotation "scatter_back_depth"
+			-addControl "scatter_back_depth";
+		editorTemplate -label "scatter_sampling_radius_mult"
+			-annotation "scatter_sampling_radius_mult"
+			-addControl "scatter_sampling_radius_mult";		
+		editorTemplate -label "scatter_light_storage_gamma"
+			-annotation "scatter_light_storage_gamma"
+			-addControl "scatter_light_storage_gamma";	
+		editorTemplate -label "scatter_scale_conversion"
+			-annotation "scatter_scale_conversion"
+			-addControl "scatter_scale_conversion";	
+		editorTemplate -label "scatter_resolution"
+			-annotation "scatter_resolution"
+			-addControl "scatter_resolution";
+	editorTemplate -endLayout;
+}
+
+//*********************************************************************************************************************
+
+global proc AEmila_material_miaCheckRefl(string $nodeName) {
+	AEmila_material_miaDimControl($nodeName, "refl_weight", "refl", 0);
+	AEmila_material_miaDimControl($nodeName, "refl_color", "refl", 0);
+	AEmila_material_miaDimControl($nodeName, "refl_roughness", "refl", 0);
+}
+
+global proc AEmila_material_miaCheckRefl_falloff_on(string $nodeName) {
+	AEmila_material_miaDimControl($nodeName, "refl_falloff_dist", "refl_falloff_on", 0);
+	AEmila_material_miaDimControl($nodeName, "refl_falloff_color_on", "refl_falloff_on", 0);
+	AEmila_material_miaDimControlMultiCond($nodeName, "refl_falloff_color", {"refl_falloff_on", "refl_falloff_color_on"}, {0,0});
+}
+
+global proc AEmila_material_miaMaterialReflection() {
+	editorTemplate -beginLayout "refl" -collapse 0;
+		editorTemplate -label "refl"
+			-annotation "refl"
+			-addControl "refl" "AEmila_material_miaCheckRefl";
+		editorTemplate -label "refl_color"
+			-annotation "refl_color"
+			-addControl "refl_color";
+		editorTemplate -label "refl_weight"
+			-annotation "refl_weight"
+			-addControl "refl_weight" "AEmila_material_miaCheckRefl";
+		editorTemplate -label "refl_roughness"
+			-annotation "refl_roughness"
+			-addControl "refl_roughness";
+		// Advanced Reflection
+		editorTemplate -beginLayout "Advanced Reflection" -collapse 1;
+			editorTemplate -label "refl_falloff_on"
+				-annotation "refl_falloff_on"
+				-addControl "refl_falloff_on"
+				"AEmila_material_miaCheckRefl_falloff_on";
+			editorTemplate -label "refl_falloff_dist"
+				-annotation "refl_falloff_dist"
+				-addControl "refl_falloff_dist";
+			editorTemplate -label "refl_falloff_color_on"
+				-annotation "refl_falloff_color_on"
+				-addControl "refl_falloff_color_on"
+				"AEmila_material_miaCheckRefl_falloff_on";
+			editorTemplate -label "refl_falloff_color"
+				-annotation "refl_falloff_color"
+				-addControl "refl_falloff_color";
+			editorTemplate -endNoOptimize;
+		editorTemplate -endLayout;
+	editorTemplate -endLayout;
+}
+
+//*********************************************************************************************************************
+
+global proc AEmila_material_miaCheckRefractGlossiness(string $nodeName) {
+	AEmila_material_miaDimControl($nodeName, "refr_gloss_samples", "refr_gloss", 1);
+}
+
+global proc AEmila_material_miaCheckRefractFalloff(string $nodeName) {
+	AEmila_material_miaDimControl($nodeName, "refr_falloff_dist", "refr_falloff_on", 0);
+	AEmila_material_miaDimControl($nodeName, "refr_falloff_color_on", "refr_falloff_on", 0);
+	AEmila_material_miaDimControlMultiCond($nodeName, "refr_falloff_color", {"refr_falloff_on", "refr_falloff_color_on"}, {0,0});
+}
+
+global proc AEmila_material_miaMaterialRefraction(string $transCustomNew, string $transCustomReplace) {
+	editorTemplate -beginLayout (getPluginResource("Mayatomr", "kRefraction")) -collapse 0;
+		editorTemplate -label (getPluginResource("Mayatomr", "kIoR"))
+			-annotation (getPluginResource("Mayatomr", "kIoRAnn"))
+			-addControl "refr_ior";
+		editorTemplate -label (getPluginResource("Mayatomr", "kmila_material_miaMaterialFunctionsColor"))
+			-annotation (getPluginResource("Mayatomr", "kRefrColAnn"))
+			-addControl "refr_color";
+		editorTemplate -label (getPluginResource("Mayatomr", "kmila_material_miaMaterialFunctionsTransparency"))
+			-annotation (getPluginResource("Mayatomr", "kTransparencyAnn"))
+			-addControl "transparency";
+		editorTemplate -label (getPluginResource("Mayatomr", "kGlossiness"))
+			-annotation (getPluginResource("Mayatomr", "kRefrGlossinessAnn"))
+			-addControl "refr_gloss"
+			"AEmila_material_miaCheckRefractGlossiness";
+		editorTemplate -label (getPluginResource("Mayatomr", "kGlossSamp"))
+			-annotation (getPluginResource("Mayatomr", "kRefrGlossSampAnn"))
+			-addControl "refr_gloss_samples";
+		// Advanced Refraction
+		editorTemplate -beginLayout (getPluginResource("Mayatomr", "kAdvancedRefraction"))	-collapse 1;
+			editorTemplate -label (getPluginResource("Mayatomr", "kUseMaxDist"))
+				-annotation (getPluginResource("Mayatomr", "kRefrUseMaxDistAnn"))
+				-addControl "refr_falloff_on"
+				"AEmila_material_miaCheckRefractFalloff";
+			editorTemplate -label (getPluginResource("Mayatomr", "kMaxDist"))
+				-annotation ""
+				-addControl "refr_falloff_dist";
+			editorTemplate -label (getPluginResource("Mayatomr", "kUseColAtMaxDist"))
+				-annotation (getPluginResource("Mayatomr", "kUseColAtMaxDistAnn"))
+				-addControl "refr_falloff_color_on"
+				"AEmila_material_miaCheckRefractFalloff";
+			editorTemplate -label (getPluginResource("Mayatomr", "kColAtMaxDist"))
+				-annotation ""
+				-addControl "refr_falloff_color";
+			editorTemplate -addSeparator;
+			editorTemplate -label (getPluginResource("Mayatomr", "kMaxTraceDepth"))
+				-annotation (getPluginResource("Mayatomr", "kRefrMaxTraceDepthAnn"))
+				-addControl "refr_depth";
+			editorTemplate -label (getPluginResource("Mayatomr", "kCutoffThresh"))
+				-annotation (getPluginResource("Mayatomr", "kRefrCutoffThreshAnn"))
+				-addControl "refr_cutoff";
+			editorTemplate -callCustom $transCustomNew $transCustomReplace "thin_walled" "do_refractive_caustics";
+			editorTemplate -beginNoOptimize;
+			editorTemplate -label (getPluginResource("Mayatomr", "kBackCull"))
+				-annotation (getPluginResource("Mayatomr", "kBackCullAnn"))
+				-addControl "backface_cull";
+			editorTemplate -label (getPluginResource("Mayatomr", "kPropAlpha"))
+				-annotation (getPluginResource("Mayatomr", "kPropAlphaAnn"))
+				-addControl "propagate_alpha";
+			editorTemplate -endNoOptimize;
+		editorTemplate -endLayout;
+	editorTemplate -endLayout;
+}
+
+//*********************************************************************************************************************
+
+global proc AEmila_material_miaCheckAnisotropy(string $nodeName) {
+	AEmila_material_miaDimControl($nodeName, "anisotropy_rotation", "anisotropy", 1);
+	AEmila_material_miaDimControl($nodeName, "anisotropy_channel", "anisotropy", 1);
+}
+
+global proc AEmila_material_miaMaterialAnisotropy() {
+	editorTemplate -beginLayout "anisotropy" -collapse 1;
+		editorTemplate -label "anisotropy"
+			-annotation "anisotropy"
+			-addControl "anisotropy"
+			"AEmila_material_miaCheckAnisotropy";
+		editorTemplate -label "anisotropy_rotation"
+			-annotation "anisotropy_rotation"
+			-addControl "anisotropy_rotation";
+		editorTemplate -label "anisotropy_channel"
+			-annotation "anisotropy_channel"
+			-addControl "anisotropy_channel";
+	editorTemplate -endLayout;
+}
+
+//*********************************************************************************************************************
+
+global proc AEmila_material_miaCheckUseFresnel(string $nodeName) {
+	AEmila_material_miaDimControl($nodeName, "refl_directional_weight_mode", "refl_use_directional_weight", 0);
+	AEmila_material_miaDimControl($nodeName, "refl_ior", "refl_use_directional_weight", 0);
+	AEmila_material_miaDimControl($nodeName, "refl_normal_reflectivity", "refl_use_directional_weight", 0);
+	AEmila_material_miaDimControl($nodeName, "refl_normal_reflectivity", "refl_use_directional_weight", 0);
+	AEmila_material_miaDimControl($nodeName, "refl_grazing_reflectivity", "refl_use_directional_weight", 0);
+	AEmila_material_miaDimControl($nodeName, "refl_exponent", "refl_use_directional_weight", 0);
+}
+
+global proc AEmila_material_miaMaterialBrdf() {
+	editorTemplate -beginLayout "AEmila_material_miaMaterialBrdf" -collapse 1;
+		editorTemplate -label "refl_use_directional_weight"
+			-annotation "refl_use_directional_weight"
+			-addControl "refl_use_directional_weight"
+			"AEmila_material_miaCheckUseFresnel";
+		editorTemplate -label "refl_directional_weight_mode"
+			-annotation "refl_directional_weight_mode"
+			-addControl "refl_directional_weight_mode";
+		editorTemplate -label "refl_ior"
+			-annotation "refl_ior"
+			-addControl "refl_ior";
+		editorTemplate -label "refl_normal_reflectivity"
+			-annotation "refl_normal_reflectivity"
+			-addControl "refl_normal_reflectivity";
+		editorTemplate -label "refl_grazing_reflectivity"
+			-annotation "refl_grazing_reflectivity"
+			-addControl "refl_grazing_reflectivity";
+		editorTemplate -label "refl_exponent"
+			-annotation "refl_exponent"
+			-addControl "refl_exponent";
+	editorTemplate -endLayout;
+}
+
+//*********************************************************************************************************************
+
+global proc AEmila_material_miaCheckUseTranslucency(string $nodeName) {
+	AEmila_material_miaDimControl($nodeName, "refr_translucency_color", "refr_translucency", 0);
+	AEmila_material_miaDimControl($nodeName, "refr_translucency_weight", "refr_translucency", 0);
+}
+
+global proc AEmila_material_miaMaterialTranslucency() {
+	editorTemplate -beginLayout "Translucency" -collapse 1;
+		editorTemplate -label "refr_translucency"
+			-annotation "refr_translucency"
+			-addControl "refr_translucency"
+			"AEmila_material_miaCheckUseTranslucency";
+		editorTemplate -label "refr_translucency_color"
+			-annotation "refr_translucency_color"
+			-addControl "refr_translucency_color";
+		editorTemplate -label "refr_translucency_weight"
+			-annotation "refr_translucency_weight"
+			-addControl "refr_translucency_weight";
+	editorTemplate -endLayout;
+}
+
+
+//*********************************************************************************************************************
+
+global proc AEmila_material_miaMaterialBump() {
+	editorTemplate -label (getPluginResource("Mayatomr", "kNoDiffuseBump"))
+		-annotation ""
+		-addControl "no_diffuse_bump";
+}
+
+// This procedure is only used by the mila_material_mia_material_x* materials.  mila_material_mia_material doesn't have a 3 float bump parameter
+global proc AEcheckMiaBumpConnection(string $attr) {
+	// on disconnect, random values populate the attr, but it needs
+	// to be set to 0,0,0 if no bump node is connected
+	if (!`connectionInfo -id $attr`) {
+		setAttr $attr 0 0 0;
+	}
+}
+//*********************************************************************************************************************
+
+global proc AEmila_material_miaMaterialAdditional() {
+	editorTemplate -label (getPluginResource("Mayatomr", "kMentalRayBump"))
+		-annotation ""
+		-addControl "bump";
+	editorTemplate -label (getPluginResource("Mayatomr", "kSpecBal"))
+		-annotation ""
+		-addControl "hl_vs_refl_balance";
+	editorTemplate -label (getPluginResource("Mayatomr", "kCutOpacity"))
+		-annotation (getPluginResource("Mayatomr", "kCutOpacityAnn"))
+		-addControl "cutout_opacity";
+	editorTemplate -label (getPluginResource("Mayatomr", "kAddColor"))
+		-annotation (getPluginResource("Mayatomr", "kAddColorAnn"))
+		-addControl "additional_color";
+}
+
+//*********************************************************************************************************************
