@@ -1,18 +1,18 @@
-#*******************************************************************************#
-# Copyright www.EzequielM.com - Ezequiel Mastrasso.                             #
-#*******************************************************************************#
-# Created   : 20/10/2015                                                        #
-# Author    : Ezequiel Mastrasso                                                #
-# Module    : mila layering                                                     #
-# Description:                                                                  #
-#   mia replacement using mila                                                  #
-#   vaguely based on the mental ray for maya help mia replacement (legacy       # 
-#   code no longer working)                                                     #
-#   except that the translucense is mixed with diffuse, not transmission        #
-#*******************************************************************************#
-# Updates:                                                                      #
-#   -25/09/2015:    *                                                           #
-#*******************************************************************************#
+#########################################################################################
+# Copyright www.EzequielM.com - Ezequiel Mastrasso.                                     #
+#########################################################################################
+# Created   : 20/10/2015                                                                #
+# Author    : Ezequiel Mastrasso                                                        #
+# Module    : mila layering                                                             #
+# Description:                                                                          #
+#   mia replacement using mila                                                          #
+#   vaguely based on the mental ray for maya help mia replacement (legacy               # 
+#   code no longer working)                                                             #
+#   except that the translucense is mixed with diffuse, not transmission                #
+#########################################################################################
+# Updates:                                                                              #
+#   -25/09/2015:    *                                                                   #
+#########################################################################################
 
 $include        "layering.mi"
 $include        "layering_phen.mi"
@@ -23,6 +23,8 @@ color
     scalar      "diffuse_weight"                default 1.0,        #: min 0.0 softmax 1.0
     color       "diffuse"                       default .7 .7 .7,
     scalar      "diffuse_roughness"             default 0.0,        #: min 0.0 softmax 1.0
+    scalar      "diffuse_direct"             default 0.0,        #: min 0.0 softmax 1.0
+    scalar      "diffuse_indirect"             default 0.0,        #: min 0.0 softmax 1.0
 
     boolean     "scatter"                       default 0,          #: min 0.0 max 1.0
     scalar      "scatter_weight"                default 0,          #: min 0.0 max 1.0
@@ -40,10 +42,16 @@ color
     scalar      "scatter_scale_conversion"      default 1.0,        #: min 0.0 max 100
     scalar      "scatter_resolution"            default 1,          #: min 0.0 max 1.5
 
+    scalar      "scatter_direct"                default 1,          #: min 0.0 max 1.5
+    scalar      "scatter_indirect"              default 1,          #: min 0.0 max 1.5
+    scalar      "scatter_quality"               default 1,#: min 0.0 max 1.5
+
+
     boolean     "refl"                          default off,
     scalar      "refl_weight"                   default 1.0,        #: min 0.0 softmax 1.0
     color       "refl_color"                    default 1 1 1,
     scalar      "refl_roughness"                default 0.0,        #: min 0.0 softmax 1.0
+    scalar      "refl_roughness_quality"        default 1.0, #: min 0.0 softmax 1.5
 
     boolean     "refl_falloff_on"               default off,
     scalar      "refl_falloff_dist"             default 999999,
@@ -68,12 +76,14 @@ color
     boolean     "refr"                          default off,
     color       "refr_color"                    default 1 1 1,
     scalar      "refr_weight"                   default 1.0,        #: min 0.0 softmax 1.0
-    scalar      "refr_roughness"                default 0.0,        #: min 0.0 softmax 1.0
     scalar      "refr_ior"                      default 1.3,        #: min 0.8 max 1.6
+    scalar      "refr_roughness"                default 0.0,        #: min 0.0 softmax 1.0
+    scalar      "refr_roughness_quality"        default 1.0,        #: min 0.0 softmax 1.5
+    
 
     boolean     "refr_translucency"             default off,
     color       "refr_translucency_color"       default 1 1 1,
-    scalar      "refr_translucency_weight"      default 1.0,        #: min 0.0 softmax 1.0
+    scalar      "refr_translucency_diffuse_weight"      default 1.0,        #: min 0.0 softmax 1.0
 
     scalar      "anisotropy"                    default 1.0,        #: min 0.01 softmax 1.0
     scalar      "anisotropy_rotation"           default 0,          #: min 0.0 softmax 1.0
@@ -106,6 +116,14 @@ color
 
     scalar      "emission_color_gamma"          default 0.454,
 
+    scalar "diffuse_direct",                #:default 1
+    scalar "diffuse_indirect",              #:default 1
+    scalar "scatter_direct",                #:default 1
+    scalar "scatter_indirect",              #:default 1
+    scalar "refl_direct",                   #:default 1
+    scalar "refl_indirect",                 #:default 1
+    scalar "refr_direct",                   #:default 1
+    scalar "refr_indirect",                 #:default 1
 
     #
     #Legacy parameters list
@@ -154,16 +172,292 @@ color
     #
      
 )
-shader "mip_gamma_gain1"
+
+#########################################################################################
+#                                 GAMMA INPUTS                                          #
+#########################################################################################
+shader "diffuse_gamma"
 "mip_gamma_gain" (
-"input" 0. 0. 0. 1.,
-"gamma" 1.,
-"gain" 1.,
+"input" = interface "diffuse",
+"gamma" = interface "diffuse_gamma",
+"gain" = interface "diffuse_weight",
 "reverse" off
 )
 
+shader "scatter_front_tint_gamma"
+"mip_gamma_gain" (
+"input" = interface "scatter_front_tint",
+"gamma" = interface "scatter_front_tint_gamma",
+"gain" 1,
+"reverse" off
+)
+shader "scatter_back_tint_gamma"
+"mip_gamma_gain" (
+"input" = interface "scatter_back_tint",
+"gamma" = interface "scatter_back_tint_gamma",
+"gain" 1,
+"reverse" off
+)
+shader "refl_color_gamma"
+"mip_gamma_gain" (
+"input" = interface "refl_color",
+"gamma" = interface "refl_color_gamma",
+"gain" 1,
+"reverse" off
+)
+shader "refr_color_gamma"
+"mip_gamma_gain" (
+"input" = interface "refr_color",
+"gamma" = interface "refr_color_gamma",
+"gain" 1,
+"reverse" off
+)
+shader "transparency_color_gamma"
+"mip_gamma_gain" (
+"input" = interface "transparency_color",
+"gamma" = interface "transparency_color_gamma",
+"gain" 1,
+"reverse" off
+)
+shader "emission_color_gamma"
+"mip_gamma_gain" (
+"input" = interface "emission_color",
+"gamma" = interface "emission_color_gamma",
+"gain" 1,
+"reverse" off
+)
+
+
+#########################################################################################
+#                               DIFFUSE ELEMENTS                                        #
+#########################################################################################
+shader "scatter"
+"mila_scatter" (
+    "front_tint" = "scatter_front_tint_gamma",
+    "front_weight" = interface "scatter_front_weight",
+    "front_radius" = interface "scatter_front_radius",
+    "front_radius_mod" = interface "scatter_front_radius_mod",
+    "back_tint" = "scatter_back_tint_gamma",
+    "back_weight" = interface "scatter_back_weight",
+    "back_radius" = interface "scatter_back_radius",
+    "back_radius_mod" = interface "scatter_back_radius_mod",
+    "back_depth" = interface "scatter_back_depth",
+    "sampling_radius_mult" = interface "scatter_sampling_radius_mult",
+    "light_storage_gamma" = interface "scatter_light_storage_gamma",
+    "scale_conversion" = interface "scatter_scale_conversion",
+    "resolution" = interface "scatter_resolution",
+    "quality" 1,
+    "direct" = interface "scatter_direct",
+    "indirect" = interface "scatter_indirect"
+)
+
+shader "translucent"
+"mila_mix_translucent" (
+    "tint" = "diffuse_gamma",
+    "roughness" = interface "diffuse_roughness",
+    "diffuse_weight" = interface "refr_translucency_diffuse_weight",
+    "direct" = interface "diffuse_direct",
+    "indirect" = interface "diffuse_indirect"
+)
+
+shader "diffuse_direct"
+"mila_diffuse_reflection" (
+    "tint" = "diffuse_gamma",
+    "roughness"  = interface "diffuse_roughness",
+    "quality" 1,
+    "direct" = interface "diffuse_direct",
+    "indirect" = interface "diffuse_indirect"
+)
+
+
+
+#########################################################################################
+#                                 DIFFUSE MIX                                           #
+#########################################################################################
+shader "diffuse_mix"
+"mila_mix" (
+"clamp" off,
+"components" [
+    {
+        "shader" "scatter",
+        "on" = interface "scatter",
+        "weight" = interface "scatter_weight",
+        "weight_tint" 1. 1. 1. 1.,
+        "bump" = interface "diffuse_bump"
+    },
+    {
+        "shader" "translucent",
+        "on" = interface "refr_translucency",
+        "weight" = interface "refr_translucency_diffuse_weight",
+        "weight_tint" 1. 1. 1. 1.,
+        "bump" = interface "diffuse_bump"
+    },
+    {
+        "shader" "diffuse_direct",
+        "on" on,
+        "weight" 1.,
+        "weight_tint" 1. 1. 1. 1.,
+        "bump" = interface "diffuse_bump"
+    }
+]
+)
+
+#########################################################################################
+#                                 TRANSPARENCY                                          #
+#########################################################################################
+shader "transparency"
+"mila_transparency" (
+"transparency" = "transparency_color_gamma"
+)
+
+#########################################################################################
+#                                   EMISSION                                            #
+#########################################################################################
+shader "emission"
+"mila_emission" (
+"tint" = "emission_color_gamma",
+"intensity" = interface "emission_intensity"
+)
+
+
+#########################################################################################
+#                                  REFLECTION                                           #
+#########################################################################################
+shader "reflection"
+"mila_glossy_reflection" (
+"tint" = "refl_color_gamma",
+"roughness" = interface "refl_roughness",
+"quality" = interface "refl_roughness_quality",
+"anisotropy" = interface "anisotropy",
+"aniso_angle" = interface "anisotropy_rotation",
+"aniso_channel" = interface "anisotropy_channel",
+"use_max_dist" = interface "refl_falloff_on",
+"max_dist" = interface "refl_falloff_dist",
+"use_max_dist_color" = interface "refl_falloff_color_on",
+"max_dist_color" = interface "refl_falloff_color",
+"direct" = interface "refl_direct",
+"indirect" = interface "refl_indirect",
+)
+
+
+#########################################################################################
+#                                 TRANSMISSION                                          #
+#########################################################################################
+shader "transmission"
+"mila_glossy_transmission" (
+"tint" = interface "refr_color",
+"roughness" = interface "refr_roughness",
+"quality" = interface "refr_roughness_quality",
+"ior" = interface "refr_ior",
+"anisotropy" 1,
+"aniso_angle" 0,
+"aniso_channel" -1,
+"use_max_dist" = interface "refr_falloff_on",
+"max_dist" = interface "refr_falloff_dist",
+"use_max_dist_color" = interface "refr_falloff_color_on",
+"max_dist_color" = interface "refr_falloff_color",
+"direct" = interface "refr_direct",
+"indirect" = interface "refr_indirect",
+)
+
+
+#########################################################################################
+#                                   LAYERING                                            #
+#########################################################################################
+shader "layer"
+"mila_layer" (
+"layers" [
+    {
+    "shader" "transparency",
+    "on" = interface "transparency",
+    "weight" = interface "transparency_weight",
+    "weight_tint" = interface "transparency_color_gamma",
+    "use_directional_weight" off,
+    "directional_weight_mode" 0,
+    "ior" 1.2,
+    "normal_reflectivity" 0.05,
+    "grazing_reflectivity" 1.,
+    "exponent" 5.,
+    "bump" 0. 0. 0.
+    },
+    {
+    "shader" "emission",
+    "on" = interface "emission",
+    "weight" = interface "emission_weight",
+    "weight_tint" 1. 1. 1. 1.,
+    "use_directional_weight" off,
+    "directional_weight_mode" 0,
+    "ior" 1.2,
+    "normal_reflectivity" 0.05,
+    "grazing_reflectivity" 1.,
+    "exponent" 5.,
+    "bump" 0. 0. 0.
+    },
+    {
+    "shader" "reflection",
+    "on" = interface "refl",
+    "weight" = interface "reflectivity",
+    "weight_tint" 1. 1. 1. 1.,
+    "use_directional_weight" = interface "refl_use_directional_weight",
+    "directional_weight_mode" = interface "refl_directional_weight_mode",
+    "ior" = interface "refl_ior",
+    "normal_reflectivity" = interface "refl_normal_reflectivity",
+    "grazing_reflectivity" = interface "refl_grazing_reflectivity",
+    "exponent" = interface "refl_exponent",
+    "bump" 0. 0. 0.
+    },
+    {
+    "shader" "transmission",
+    "on" = interface "refr",
+    "weight" = interface "refr_weight",
+    "weight_tint" 1. 1. 1. 1.,
+    "use_directional_weight" off,
+    "directional_weight_mode" 0,
+    "ior" 1.2,
+    "normal_reflectivity" 0.05,
+    "grazing_reflectivity" 1.,
+    "exponent" 5.,
+    "bump" 0. 0. 0.
+    },
+    {
+    "shader" "diffuse_mix",
+    "on" on,
+    "weight" 1.,
+    "weight_tint" 1. 1. 1. 1.,
+    "use_directional_weight" off,
+    "directional_weight_mode" 0,
+    "ior" 1.2,
+    "normal_reflectivity" 0.05,
+    "grazing_reflectivity" 1.,
+    "exponent" 5.,
+    "bump" 0. 0. 0.
+    }
+]
+)
+
+
+#########################################################################################
+#                                     ROOT                                              #
+#########################################################################################
+
+
+shader "mila_material_miaShader"
+"mila_material" (
+"shader" "layer",
+"thin_walled" = interface "thin_walled",
+"visibility" = interface "visibility",
+"show_framebuffer" 0,
+"bump" = interface "overall_bump",
+
+
+"extra_color" [],
+"extra_vector" [],
+"extra_scalar" []
+)
+
 root
-= "mip_gamma_gain1"
+= "mila_material_miaShader"
+#: nodeid 1187392
 version 1
-apply material
+apply material,photon,shadow
 end declare
