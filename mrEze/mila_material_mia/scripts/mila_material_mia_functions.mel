@@ -35,9 +35,8 @@ global proc AEmila_material_miaDimControlMultiCond(string $nodeName, string $aff
 
 //*********************************************************************************************************************
 //*********************************************************************************************************************
-// Common attribute editor creation code, shared between mila_material_mia_material and mila_material_mia_material_x
 
-global proc AEmila_material_miaMaterialDiffuse() {
+global proc AEmila_material_miaDiffuse() {
 	editorTemplate -beginLayout "diffuse" -collapse 0;
 		editorTemplate -label "diffuse"
 			-annotation "diffuse"
@@ -69,7 +68,7 @@ global proc AEmila_material_miaCheckScatterl(string $nodeName) {
 	AEmila_material_miaDimControl($nodeName, "scatter_scale_conversion", "scatter", 0);
 	AEmila_material_miaDimControl($nodeName, "scatter_resolution", "scatter", 0);
 }
-global proc AEmila_material_miaMaterialScatter() {
+global proc AEmila_material_miaScatter() {
 	editorTemplate -beginLayout "scatter" -collapse 0;
 		editorTemplate -label "scatter"
 			-annotation "scatter"
@@ -133,8 +132,8 @@ global proc AEmila_material_miaCheckRefl_falloff_on(string $nodeName) {
 	AEmila_material_miaDimControlMultiCond($nodeName, "refl_falloff_color", {"refl_falloff_on", "refl_falloff_color_on"}, {0,0});
 }
 
-global proc AEmila_material_miaMaterialReflection() {
-	editorTemplate -beginLayout "refl" -collapse 0;
+global proc AEmila_material_miaReflection() {
+	editorTemplate -beginLayout "Reflection" -collapse 0;
 		editorTemplate -label "refl"
 			-annotation "refl"
 			-addControl "refl" "AEmila_material_miaCheckRefl";
@@ -170,65 +169,61 @@ global proc AEmila_material_miaMaterialReflection() {
 
 //*********************************************************************************************************************
 
+global proc AEmila_material_miaCheckRefr(string $nodeName) {
+	AEmila_material_miaDimControl($nodeName, "refr_ior", "refr", 0);
+	AEmila_material_miaDimControl($nodeName, "refr_weight", "refr", 0);
+	AEmila_material_miaDimControl($nodeName, "refr_color", "refr", 0);
+	AEmila_material_miaDimControl($nodeName, "refr_roughness", "refr", 0);
+	AEmila_material_miaDimControl($nodeName, "refr_falloff_on", "refr", 0);
+	AEmila_material_miaDimControl($nodeName, "refr_falloff_dist", "refr", 0);
+	AEmila_material_miaDimControl($nodeName, "refr_falloff_color_on", "refr", 0);
+	AEmila_material_miaDimControl($nodeName, "refr_falloff_color", "refr", 0);
+
+}
 global proc AEmila_material_miaCheckRefractGlossiness(string $nodeName) {
 	AEmila_material_miaDimControl($nodeName, "refr_gloss_samples", "refr_gloss", 1);
 }
-
 global proc AEmila_material_miaCheckRefractFalloff(string $nodeName) {
 	AEmila_material_miaDimControl($nodeName, "refr_falloff_dist", "refr_falloff_on", 0);
 	AEmila_material_miaDimControl($nodeName, "refr_falloff_color_on", "refr_falloff_on", 0);
 	AEmila_material_miaDimControlMultiCond($nodeName, "refr_falloff_color", {"refr_falloff_on", "refr_falloff_color_on"}, {0,0});
 }
 
-global proc AEmila_material_miaMaterialRefraction(string $transCustomNew, string $transCustomReplace) {
-	editorTemplate -beginLayout (getPluginResource("Mayatomr", "kRefraction")) -collapse 0;
-		editorTemplate -label (getPluginResource("Mayatomr", "kIoR"))
-			-annotation (getPluginResource("Mayatomr", "kIoRAnn"))
+global proc AEmila_material_miaRefraction() {
+	editorTemplate -beginLayout "Refraction" -collapse 0;
+	editorTemplate -label "refr"
+			-annotation "refr"
+			-addControl "refr" "AEmila_material_miaCheckRefr";
+		editorTemplate -label "refr_ior"
+			-annotation "refr_ior"
 			-addControl "refr_ior";
-		editorTemplate -label (getPluginResource("Mayatomr", "kmila_material_miaMaterialFunctionsColor"))
-			-annotation (getPluginResource("Mayatomr", "kRefrColAnn"))
+		editorTemplate -label "refr_weight"
+			-annotation "refr_weight"
+			-addControl "refr_weight";
+		editorTemplate -label "refr_color"
+			-annotation "refr_color"
 			-addControl "refr_color";
-		editorTemplate -label (getPluginResource("Mayatomr", "kmila_material_miaMaterialFunctionsTransparency"))
-			-annotation (getPluginResource("Mayatomr", "kTransparencyAnn"))
-			-addControl "transparency";
-		editorTemplate -label (getPluginResource("Mayatomr", "kGlossiness"))
-			-annotation (getPluginResource("Mayatomr", "kRefrGlossinessAnn"))
-			-addControl "refr_gloss"
-			"AEmila_material_miaCheckRefractGlossiness";
-		editorTemplate -label (getPluginResource("Mayatomr", "kGlossSamp"))
-			-annotation (getPluginResource("Mayatomr", "kRefrGlossSampAnn"))
-			-addControl "refr_gloss_samples";
+		editorTemplate -label "refr_roughness"
+			-annotation "refr_roughness"
+			-addControl "refr_roughness";
+
+
 		// Advanced Refraction
-		editorTemplate -beginLayout (getPluginResource("Mayatomr", "kAdvancedRefraction"))	-collapse 1;
-			editorTemplate -label (getPluginResource("Mayatomr", "kUseMaxDist"))
-				-annotation (getPluginResource("Mayatomr", "kRefrUseMaxDistAnn"))
+		editorTemplate -beginLayout "Advanced Refraction"	-collapse 1;
+			editorTemplate -label "refr_falloff_on"
+				-annotation "refr_falloff_on"
 				-addControl "refr_falloff_on"
 				"AEmila_material_miaCheckRefractFalloff";
-			editorTemplate -label (getPluginResource("Mayatomr", "kMaxDist"))
-				-annotation ""
+			editorTemplate -label "refr_falloff_dist"
+				-annotation "refr_falloff_dist"
 				-addControl "refr_falloff_dist";
-			editorTemplate -label (getPluginResource("Mayatomr", "kUseColAtMaxDist"))
-				-annotation (getPluginResource("Mayatomr", "kUseColAtMaxDistAnn"))
+			editorTemplate -label "refr_falloff_color_on"
+				-annotation "refr_falloff_color_on"
 				-addControl "refr_falloff_color_on"
 				"AEmila_material_miaCheckRefractFalloff";
-			editorTemplate -label (getPluginResource("Mayatomr", "kColAtMaxDist"))
-				-annotation ""
+			editorTemplate -label "refr_falloff_color"
+				-annotation "refr_falloff_color"
 				-addControl "refr_falloff_color";
-			editorTemplate -addSeparator;
-			editorTemplate -label (getPluginResource("Mayatomr", "kMaxTraceDepth"))
-				-annotation (getPluginResource("Mayatomr", "kRefrMaxTraceDepthAnn"))
-				-addControl "refr_depth";
-			editorTemplate -label (getPluginResource("Mayatomr", "kCutoffThresh"))
-				-annotation (getPluginResource("Mayatomr", "kRefrCutoffThreshAnn"))
-				-addControl "refr_cutoff";
-			editorTemplate -callCustom $transCustomNew $transCustomReplace "thin_walled" "do_refractive_caustics";
-			editorTemplate -beginNoOptimize;
-			editorTemplate -label (getPluginResource("Mayatomr", "kBackCull"))
-				-annotation (getPluginResource("Mayatomr", "kBackCullAnn"))
-				-addControl "backface_cull";
-			editorTemplate -label (getPluginResource("Mayatomr", "kPropAlpha"))
-				-annotation (getPluginResource("Mayatomr", "kPropAlphaAnn"))
-				-addControl "propagate_alpha";
 			editorTemplate -endNoOptimize;
 		editorTemplate -endLayout;
 	editorTemplate -endLayout;
@@ -241,7 +236,7 @@ global proc AEmila_material_miaCheckAnisotropy(string $nodeName) {
 	AEmila_material_miaDimControl($nodeName, "anisotropy_channel", "anisotropy", 1);
 }
 
-global proc AEmila_material_miaMaterialAnisotropy() {
+global proc AEmila_material_miaAnisotropy() {
 	editorTemplate -beginLayout "anisotropy" -collapse 1;
 		editorTemplate -label "anisotropy"
 			-annotation "anisotropy"
@@ -267,8 +262,8 @@ global proc AEmila_material_miaCheckUseFresnel(string $nodeName) {
 	AEmila_material_miaDimControl($nodeName, "refl_exponent", "refl_use_directional_weight", 0);
 }
 
-global proc AEmila_material_miaMaterialBrdf() {
-	editorTemplate -beginLayout "AEmila_material_miaMaterialBrdf" -collapse 1;
+global proc AEmila_material_miaReflDirWeigth() {
+	editorTemplate -beginLayout "Reflection Directional Weight" -collapse 1;
 		editorTemplate -label "refl_use_directional_weight"
 			-annotation "refl_use_directional_weight"
 			-addControl "refl_use_directional_weight"
@@ -298,7 +293,7 @@ global proc AEmila_material_miaCheckUseTranslucency(string $nodeName) {
 	AEmila_material_miaDimControl($nodeName, "refr_translucency_weight", "refr_translucency", 0);
 }
 
-global proc AEmila_material_miaMaterialTranslucency() {
+global proc AEmila_material_miaTranslucency() {
 	editorTemplate -beginLayout "Translucency" -collapse 1;
 		editorTemplate -label "refr_translucency"
 			-annotation "refr_translucency"
@@ -313,38 +308,131 @@ global proc AEmila_material_miaMaterialTranslucency() {
 	editorTemplate -endLayout;
 }
 
+//*********************************************************************************************************************
+
+global proc AEmila_material_miaCheckUseEmission(string $nodeName) {
+	AEmila_material_miaDimControl($nodeName, "emission_color", "emission", 0);
+	AEmila_material_miaDimControl($nodeName, "emission_weight", "emission", 0);
+	AEmila_material_miaDimControl($nodeName, "emission_intensity", "emission", 0);
+}
+
+global proc AEmila_material_miaEmission() {
+	editorTemplate -beginLayout "Emission" -collapse 1;
+		editorTemplate -label "emission"
+			-annotation "emission"
+			-addControl "emission"
+			"AEmila_material_miaCheckUseEmission";
+		editorTemplate -label "emission_color"
+			-annotation "emission_color"
+			-addControl "emission_color";
+		editorTemplate -label "emission_weight"
+			-annotation "emission_weight"
+			-addControl "emission_weight";
+		editorTemplate -label "emission_intensity"
+			-annotation "emission_intensity"
+			-addControl "emission_intensity";
+	editorTemplate -endLayout;
+}
+
 
 //*********************************************************************************************************************
 
-global proc AEmila_material_miaMaterialBump() {
-	editorTemplate -label (getPluginResource("Mayatomr", "kNoDiffuseBump"))
-		-annotation ""
-		-addControl "no_diffuse_bump";
-}
-
-// This procedure is only used by the mila_material_mia_material_x* materials.  mila_material_mia_material doesn't have a 3 float bump parameter
-global proc AEcheckMiaBumpConnection(string $attr) {
-	// on disconnect, random values populate the attr, but it needs
-	// to be set to 0,0,0 if no bump node is connected
-	if (!`connectionInfo -id $attr`) {
-		setAttr $attr 0 0 0;
-	}
-}
-//*********************************************************************************************************************
-
-global proc AEmila_material_miaMaterialAdditional() {
-	editorTemplate -label (getPluginResource("Mayatomr", "kMentalRayBump"))
-		-annotation ""
-		-addControl "bump";
-	editorTemplate -label (getPluginResource("Mayatomr", "kSpecBal"))
-		-annotation ""
-		-addControl "hl_vs_refl_balance";
-	editorTemplate -label (getPluginResource("Mayatomr", "kCutOpacity"))
-		-annotation (getPluginResource("Mayatomr", "kCutOpacityAnn"))
-		-addControl "cutout_opacity";
-	editorTemplate -label (getPluginResource("Mayatomr", "kAddColor"))
-		-annotation (getPluginResource("Mayatomr", "kAddColorAnn"))
-		-addControl "additional_color";
+global proc AEmila_material_miaAdditional() {
+	editorTemplate -label "visibility"
+		-annotation "visibility"
+		-addControl "visibility";
 }
 
 //*********************************************************************************************************************
+
+global proc AEmila_material_miaGamma() {
+	editorTemplate -beginLayout "gamma" -collapse 0;
+		editorTemplate -label "use_diffuse_gamma"
+			-annotation "use_diffuse_gamma"
+			-addControl "use_diffuse_gamma";
+		editorTemplate -label "diffuse_gamma"
+			-annotation "diffuse_gamma"
+			-addControl "diffuse_gamma";
+		editorTemplate -label "scatter_front_tint_gamma"
+			-annotation "scatter_front_tint_gamma"
+			-addControl "scatter_front_tint_gamma";
+		editorTemplate -label "scatter_back_tint_gamma"
+			-annotation "scatter_back_tint_gamma"
+			-addControl "scatter_back_tint_gamma";
+		editorTemplate -label "refl_color_gamma"
+			-annotation "refl_color_gamma"
+			-addControl "refl_color_gamma";
+		editorTemplate -label "refl_falloff_color_gamma"
+			-annotation "refl_falloff_color_gamma"
+			-addControl "refl_falloff_color_gamma";
+		editorTemplate -label "refr_color_gamma"
+			-annotation "refr_color_gamma"
+			-addControl "refr_color_gamma";
+		editorTemplate -label "refr_falloff_color_gamma"
+			-annotation "refr_falloff_color_gamma"
+			-addControl "refr_falloff_color_gamma";
+		editorTemplate -label "transparency_color_gamma"
+			-annotation "transparency_color_gamma"
+			-addControl "transparency_color_gamma";
+		editorTemplate -label "refr_translucency_color_gamma"
+			-annotation "refr_translucency_color_gamma"
+			-addControl "refr_translucency_color_gamma";
+		editorTemplate -label "emission_color_gamma"
+			-annotation "emission_color_gamma"
+			-addControl "emission_color_gamma";
+	editorTemplate -endLayout;
+}
+
+global proc AEmila_material_miaReplaceStringTools()
+{
+	//When refreshing the template for a new node, the controls do not exist yet!
+	//need to catch the error if they dont exist when deleting
+    if ( catch( `deleteUI -layout AEmila_material_miaStringOptionsToolsLayout1` ) ) {
+      print "Could not rebuild layout element AEmila_material_miaStringOptionsToolsLayout1\n";
+    }
+    
+	//creates the controls again...
+	AEmila_material_miaCreateStringTools();
+}
+
+global proc AEmila_material_miaCreateStringTools()
+{
+	
+		rowColumnLayout -numberOfColumns 3
+						-columnWidth 1 125
+				        -columnWidth 2 125
+				        -columnWidth 3 125 AEmila_material_miaStringOptionsToolsLayout1;			
+			global string $currentPresetLabelPath;
+			$currentPresetLabelPath=`text -label ("visibleAreaLights: " + "null") "visibleAreaLights"`;
+			$currentPresetLabelPath2=`text -label ("areaLightsOverride: " + "null") "areaLightsOverride"`;
+			$currentPresetLabelPath3=`text -label ("shapeIntensity: " + "null") "shapeIntensity"`;
+
+			$currentPresetLabelPath=`text -label ("value: " + "null") "value1"`;
+			$currentPresetLabelPath2=`text -label ("value: " + "null") "value2"`;
+			$currentPresetLabelPath3=`text -label ("value: " + "null") "value3"`;
+
+			button -l "set Option" -c ("");
+			button -l "set Option" -c ("");
+			button -l "set Option" -c ("");
+
+			$currentPresetLabelPath2=`text -label ("milaClamp: " + "null") "milaClamp"`;
+			$currentPresetLabelPath2=`text -label ("milaClampValue: " + "null") "milaClampValue"`;
+			$currentPresetLabelPath2=`text -label ("milaClampValue2: " + "null") "milaClampValue2"`;
+
+			$currentPresetLabelPath=`text -label ("value: " + "null") "ads"`;
+			$currentPresetLabelPath2=`text -label ("value: " + "null") "adsdsa"`;
+			$currentPresetLabelPath3=`text -label ("value: " + "null") "adsasa"`;
+
+			button -l "set Option" -c ("");
+			button -l "set Option" -c ("");
+			button -l "set Option" -c ("");
+		setParent ..;
+		setParent ..;
+	
+
+}
+
+
+global proc AEmila_material_miaStringOptions() {
+	editorTemplate -ccu "AEmila_material_miaCreateStringTools" "AEmila_material_miaReplaceStringTools";
+}

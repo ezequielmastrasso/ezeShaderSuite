@@ -1,0 +1,26 @@
+source "mila_material_mia_functions.mel";
+
+
+global proc AEmila_material_miaTemplate(string $nodeName)  {
+
+	AEswatchDisplay $nodeName;
+	editorTemplate -beginScrollLayout;
+
+	AEmila_material_miaDiffuse;
+	AEmila_material_miaScatter;
+	AEmila_material_miaReflection;
+	AEmila_material_miaRefraction();
+	AEmila_material_miaReflDirWeigth;
+	AEmila_material_miaAnisotropy;
+	AEmila_material_miaTranslucency;
+	AEmila_material_miaEmission;
+	AEmila_material_miaStringOptions;
+
+	AEmila_material_miaGamma;
+
+	AEmentalrayCommonMaterialTemplate($nodeName, 1, "diffuse");
+
+	editorTemplate -endScrollLayout;
+	editorTemplate -suppress "caching"; 
+	editorTemplate -suppress "nodeState"; 
+}
