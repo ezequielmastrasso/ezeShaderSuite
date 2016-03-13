@@ -1,10 +1,11 @@
-ezeShaderSuite
+ezeShaderSuite (discontinued)
 ==============
 
-ezeShaderSuite 3delight
+Update: Sadly (or... luckily!) the lastest versions of most renderers come with ready to use out of the box shaders for skin and hair. So there is little point to continue maintaining or developing more features.
 
 ##ezeDelight Shader Suite
 
+![My image](https://raw.githubusercontent.com/ezequielmastrasso/ezeShaderSuite/master/ezeDelight/ezeDelightDocumentation/shadersDocumentationImages/douceNuit_01.jpg)
 
 ####Please Read: 
 
