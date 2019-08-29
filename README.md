@@ -8,7 +8,7 @@ Update: Sadly (or... luckily!) the lastest versions of most renderers come with 
 ![My image](https://raw.githubusercontent.com/ezequielmastrasso/ezeShaderSuite/master/ezeDelight/ezeDelightDocumentation/shadersDocumentationImages/douceNuit_01.jpg)
 
 ##### Documentation
-[ddocumentation](https://github.com/ezequielmastrasso/ezeShaderSuite/raw/master/ezeDelight/ezeDelightDocumentation/ezeShaderSuiteDocs.pdf)
+[documentation](https://github.com/ezequielmastrasso/ezeShaderSuite/raw/master/ezeDelight/ezeDelightDocumentation/ezeShaderSuiteDocs.pdf)
 
 
 ####Please Read: 
