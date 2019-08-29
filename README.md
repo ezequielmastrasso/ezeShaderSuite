@@ -3,13 +3,17 @@ ezeShaderSuite (discontinued)
 
 Update: Sadly (or... luckily!) the lastest versions of most renderers come with ready to use out of the box shaders for skin and hair. So there is little point to continue maintaining or developing more features.
 
-##ezeDelight Shader Suite (fur and skin shaders)
+## ezeDelight Shader Suite (fur and skin shaders)
 
 ![My image](https://raw.githubusercontent.com/ezequielmastrasso/ezeShaderSuite/master/ezeDelight/ezeDelightDocumentation/shadersDocumentationImages/douceNuit_01.jpg)
 
+##### Documentation
+[ddocumentation](https://github.com/ezequielmastrasso/ezeShaderSuite/raw/master/ezeDelight/ezeDelightDocumentation/ezeShaderSuiteDocs.pdf)
+
+
 ####Please Read: 
 
-###Want to Contribute?
+### Want to Contribute?
 
 With images? have a cool character or scene you wanna show? send it on.
 I would love to know how you getting with the shaders, and the images done with it!
